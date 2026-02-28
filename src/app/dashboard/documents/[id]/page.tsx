@@ -7,6 +7,7 @@ import PdfViewer from "@/components/pdf-viewer";
 import ReprocessButton from "@/components/reprocess-button";
 import DeleteDocumentButton from "@/components/delete-document-button";
 import RenameTitle from "@/components/rename-title";
+import AutoRefresh from "@/components/auto-refresh";
 
 export default async function DocumentPage({
   params,
@@ -124,9 +125,11 @@ export default async function DocumentPage({
             </div>
           )}
 
+          <AutoRefresh active={doc.status === "pending" || doc.status === "processing"} />
+
           {doc.status === "processing" && (
             <div className="p-3 bg-blue-50 border border-blue-200 rounded-md text-sm text-blue-700">
-              Processing… refresh in a moment to see keywords and summary.
+              Processing… keywords and summary will appear shortly.
             </div>
           )}
 
