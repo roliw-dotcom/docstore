@@ -1,6 +1,41 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { filename } = await request.json();
+  if (!filename || typeof filename !== "string" || !filename.trim()) {
+    return NextResponse.json({ error: "Invalid filename" }, { status: 400 });
+  }
+
+  const { data, error } = await supabase
+    .from("documents")
+    .update({ filename: filename.trim() })
+    .eq("id", id)
+    .eq("user_id", user.id)
+    .select("id, filename")
+    .single();
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ document: data });
+}
+
 export async function DELETE(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

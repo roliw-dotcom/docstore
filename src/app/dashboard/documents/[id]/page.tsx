@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import PdfViewer from "@/components/pdf-viewer";
 import ReprocessButton from "@/components/reprocess-button";
 import DeleteDocumentButton from "@/components/delete-document-button";
+import RenameTitle from "@/components/rename-title";
 
 export default async function DocumentPage({
   params,
@@ -23,10 +24,15 @@ export default async function DocumentPage({
 
   if (!doc) notFound();
 
-  // Create a short-lived signed URL (60 minutes) so the browser can load the PDF
-  const { data: signedUrl } = await supabase.storage
+  // Signed URL for viewing (inline)
+  const { data: viewUrl } = await supabase.storage
     .from("documents")
     .createSignedUrl(doc.storage_path, 3600);
+
+  // Signed URL for downloading (forces Content-Disposition: attachment)
+  const { data: downloadUrl } = await supabase.storage
+    .from("documents")
+    .createSignedUrl(doc.storage_path, 3600, { download: doc.filename });
 
   const meta = doc.doc_metadata;
 
@@ -34,8 +40,8 @@ export default async function DocumentPage({
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
-        <div className="space-y-1 min-w-0">
-          <h1 className="text-xl font-bold text-gray-900 truncate">{doc.filename}</h1>
+        <div className="space-y-1 min-w-0 flex-1">
+          <RenameTitle docId={doc.id} filename={doc.filename} />
           <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
             <span>{new Date(doc.created_at).toLocaleDateString()}</span>
             {meta?.page_count && <span>· {meta.page_count} pages</span>}
@@ -52,18 +58,27 @@ export default async function DocumentPage({
             </Badge>
           </div>
         </div>
-        <Link href="/dashboard">
-          <Button variant="outline" size="sm">
-            ← Back
-          </Button>
-        </Link>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          {downloadUrl?.signedUrl && (
+            <a href={downloadUrl.signedUrl} download={doc.filename}>
+              <Button variant="outline" size="sm">
+                Download
+              </Button>
+            </a>
+          )}
+          <Link href="/dashboard">
+            <Button variant="outline" size="sm">
+              ← Back
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* PDF Viewer */}
         <div className="lg:col-span-2">
-          {signedUrl?.signedUrl ? (
-            <PdfViewer url={signedUrl.signedUrl} />
+          {viewUrl?.signedUrl ? (
+            <PdfViewer url={viewUrl.signedUrl} />
           ) : (
             <div className="flex items-center justify-center h-64 bg-gray-100 rounded-lg text-gray-400">
               Could not load PDF.
