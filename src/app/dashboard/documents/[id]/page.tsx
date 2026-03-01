@@ -8,6 +8,7 @@ import ReprocessButton from "@/components/reprocess-button";
 import DeleteDocumentButton from "@/components/delete-document-button";
 import RenameTitle from "@/components/rename-title";
 import AutoRefresh from "@/components/auto-refresh";
+import FollowUpList from "@/components/follow-up-list";
 
 export default async function DocumentPage({
   params,
@@ -22,6 +23,12 @@ export default async function DocumentPage({
     .select(`*, doc_metadata(*)`)
     .eq("id", id)
     .single();
+
+  const { data: followUps } = await supabase
+    .from("follow_ups")
+    .select("*")
+    .eq("doc_id", id)
+    .order("due_date", { ascending: true, nullsFirst: false });
 
   if (!doc) notFound();
 
@@ -122,6 +129,13 @@ export default async function DocumentPage({
                   </span>
                 ))}
               </div>
+            </div>
+          )}
+
+          {followUps && followUps.length > 0 && (
+            <div>
+              <h2 className="text-sm font-semibold text-gray-700 mb-2">Follow-ups</h2>
+              <FollowUpList followUps={followUps} />
             </div>
           )}
 

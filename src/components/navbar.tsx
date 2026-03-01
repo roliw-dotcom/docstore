@@ -32,6 +32,12 @@ export default function Navbar({ user }: { user: User }) {
                 Documents
               </Link>
               <Link
+                href="/dashboard/follow-ups"
+                className="text-sm text-gray-600 hover:text-gray-900"
+              >
+                Follow-ups
+              </Link>
+              <Link
                 href="/dashboard/upload"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >

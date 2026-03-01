@@ -11,10 +11,17 @@ const pdfParse = require("pdf-parse") as (
   buffer: Buffer
 ) => Promise<{ text: string; numpages: number }>;
 
+interface FollowUpItem {
+  title: string;
+  description?: string;
+  due_date?: string | null;
+}
+
 interface ClaudeMetadata {
   keywords: string[];
   categories: string[];
   summary: string;
+  follow_ups: FollowUpItem[];
 }
 
 export async function POST(
@@ -80,7 +87,7 @@ export async function POST(
     // ── 3. Call Claude API ─────────────────────────────────────────────────
     const message = await anthropic.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 1024,
+      max_tokens: 2048,
       messages: [
         {
           role: "user",
@@ -88,6 +95,10 @@ export async function POST(
 - "keywords": array of 5–15 important keywords or key phrases
 - "categories": array of 1–3 category labels (e.g. Finance, Legal, Technical, Medical, HR, Research, Contract, Invoice, Report)
 - "summary": 2–3 sentence plain-language summary
+- "follow_ups": array of objects representing concrete obligations, deadlines, payments, signatures, or renewals found in the document. Each object has:
+  - "title": short action title (e.g. "Sign NDA", "Pay invoice", "Renew subscription")
+  - "description": optional brief details or context
+  - "due_date": ISO date string (YYYY-MM-DD) if a specific date is mentioned, otherwise null
 
 Return ONLY the raw JSON object — no markdown fences, no explanation.
 
@@ -125,7 +136,24 @@ ${text}`,
 
     if (metaError) throw new Error(`Metadata save failed: ${metaError.message}`);
 
-    // ── 6. Mark document as ready ──────────────────────────────────────────
+    // ── 6. Persist follow-ups (delete existing, then insert fresh) ─────────
+    await supabase.from("follow_ups").delete().eq("doc_id", id);
+
+    const followUps = Array.isArray(metadata.follow_ups) ? metadata.follow_ups : [];
+    if (followUps.length > 0) {
+      const rows = followUps.map((fu) => ({
+        doc_id: id,
+        user_id: doc.user_id,
+        title: fu.title,
+        description: fu.description ?? null,
+        due_date: fu.due_date ?? null,
+      }));
+
+      const { error: fuError } = await supabase.from("follow_ups").insert(rows);
+      if (fuError) throw new Error(`Follow-ups save failed: ${fuError.message}`);
+    }
+
+    // ── 7. Mark document as ready ──────────────────────────────────────────
     await supabase
       .from("documents")
       .update({ status: "ready" })
