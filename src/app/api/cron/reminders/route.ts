@@ -19,7 +19,10 @@ export async function POST(request: NextRequest) {
   const provided = authHeader?.replace("Bearer ", "") ?? querySecret;
 
   if (!cronSecret || provided !== cronSecret) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({
+      error: "Unauthorized",
+      debug: { secretSet: !!cronSecret, secretLen: cronSecret?.length, providedLen: provided?.length },
+    }, { status: 401 });
   }
 
   // Use service-role client for all DB operations (no user session in cron context)
