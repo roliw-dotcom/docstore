@@ -1,9 +1,8 @@
-import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 import { sendReminderEmail } from "@/lib/send-reminder-email";
 
-// Service-role client to read auth.users emails
+// Service-role client — bypasses RLS, can read auth.users
 function createServiceClient() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -13,15 +12,17 @@ function createServiceClient() {
 }
 
 export async function POST(request: NextRequest) {
-  // Verify cron secret
-  const authHeader = request.headers.get("authorization");
+  // Verify cron secret — accept Authorization header or ?secret= query param
   const cronSecret = process.env.CRON_SECRET;
+  const authHeader = request.headers.get("authorization");
+  const querySecret = new URL(request.url).searchParams.get("secret");
+  const provided = authHeader?.replace("Bearer ", "") ?? querySecret;
 
-  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+  if (!cronSecret || provided !== cronSecret) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const supabase = await createServerClient();
+  // Use service-role client for all DB operations (no user session in cron context)
   const serviceClient = createServiceClient();
 
   // Find all incomplete, unreminded follow-ups due within the next 5 days
@@ -30,7 +31,7 @@ export async function POST(request: NextRequest) {
   in5Days.setDate(today.getDate() + 5);
   const cutoff = in5Days.toISOString().split("T")[0];
 
-  const { data: followUps, error } = await supabase
+  const { data: followUps, error } = await serviceClient
     .from("follow_ups")
     .select(`*, documents(filename)`)
     .eq("completed", false)
@@ -71,7 +72,7 @@ export async function POST(request: NextRequest) {
       });
 
       // Mark as reminded
-      await supabase
+      await serviceClient
         .from("follow_ups")
         .update({ reminded: true })
         .eq("id", fu.id);
