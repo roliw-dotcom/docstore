@@ -153,9 +153,7 @@ export default async function DocumentPage({
             </div>
           )}
 
-          {(doc.status === "error" || doc.status === "pending" || !meta) && (
-            <ReprocessButton docId={doc.id} />
-          )}
+          <ReprocessButton docId={doc.id} />
 
           <div className="pt-2 border-t border-gray-100">
             <DeleteDocumentButton docId={doc.id} filename={doc.filename} />
