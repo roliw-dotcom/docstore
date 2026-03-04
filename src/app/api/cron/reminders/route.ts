@@ -21,7 +21,13 @@ export async function POST(request: NextRequest) {
   if (!cronSecret || provided !== cronSecret) {
     return NextResponse.json({
       error: "Unauthorized",
-      debug: { secretSet: !!cronSecret, secretLen: cronSecret?.length, providedLen: provided?.length },
+      debug: {
+        secretSet: !!cronSecret,
+        secretLen: cronSecret?.length,
+        providedLen: provided?.length,
+        hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+        hasServiceRole: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      },
     }, { status: 401 });
   }
 
