@@ -15,9 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Folio — Every document, accounted for.",
+  title: "Docket — Your AI that reads the fine print.",
   description:
-    "Folio reads your PDFs so you don't have to. AI extracts summaries, keywords, and action items — automatically.",
+    "Docket reads your PDFs so you don't have to. AI extracts every deadline, obligation, and action item — and reminds you before anything is due.",
 };
 
 export default function RootLayout({
