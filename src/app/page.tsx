@@ -14,112 +14,141 @@ export default async function RootPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#FAFAF7] text-[#1C2333]">
+
       {/* Nav */}
-      <header className="border-b border-gray-100">
+      <header className="border-b border-stone-200">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="text-xl font-bold text-gray-900">DocStore</span>
+          <span className="font-serif text-2xl tracking-tight">folio</span>
           <div className="flex items-center gap-3">
             <Link href="/login">
-              <Button variant="ghost" size="sm">Sign in</Button>
+              <Button variant="ghost" size="sm" className="text-stone-500 hover:text-[#1C2333]">
+                Sign in
+              </Button>
             </Link>
             <Link href="/signup">
-              <Button size="sm">Get started</Button>
+              <Button size="sm" className="bg-amber-600 hover:bg-amber-700 text-white border-0">
+                Get started
+              </Button>
             </Link>
           </div>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="max-w-5xl mx-auto px-6 py-24 text-center">
-        <h1 className="text-5xl font-bold text-gray-900 tracking-tight leading-tight">
-          Your documents,<br />intelligently organised
+      <section className="max-w-5xl mx-auto px-6 pt-28 pb-24 text-center">
+        <p className="text-xs uppercase tracking-widest text-amber-600 font-sans mb-6">
+          by folio-ai
+        </p>
+        <h1 className="font-serif text-6xl md:text-7xl tracking-tight leading-tight text-[#1C2333]">
+          Every document,<br />
+          <em>accounted for.</em>
         </h1>
-        <p className="mt-6 text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-          Upload PDFs and let AI extract keywords, summaries, and action items automatically.
-          Never miss a deadline buried in a contract again.
+        <p className="mt-8 text-lg text-stone-500 max-w-xl mx-auto leading-relaxed font-sans">
+          Folio reads your PDFs so you don&apos;t have to. AI extracts summaries,
+          keywords, and every obligation with a due date — automatically.
         </p>
         <div className="mt-10 flex items-center justify-center gap-4">
           <Link href="/signup">
-            <Button size="lg" className="px-8">Start for free</Button>
+            <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white border-0 px-8 text-base">
+              Start your folio
+            </Button>
           </Link>
           <Link href="/login">
-            <Button size="lg" variant="outline" className="px-8">Sign in</Button>
+            <Button size="lg" variant="ghost" className="text-stone-500 hover:text-[#1C2333] px-8 text-base">
+              Sign in →
+            </Button>
           </Link>
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="h-px bg-stone-200" />
+      </div>
+
       {/* Features */}
-      <section className="border-t border-gray-100 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-6 py-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div>
-              <div className="text-2xl mb-3">📄</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Smart upload</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Drag and drop multiple PDFs at once. Each document is processed in parallel and stored securely in your private vault.
-              </p>
-            </div>
-            <div>
-              <div className="text-2xl mb-3">🤖</div>
-              <h3 className="font-semibold text-gray-900 mb-2">AI extraction</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Claude AI reads every document and pulls out keywords, categories, and a plain-language summary — automatically.
-              </p>
-            </div>
-            <div>
-              <div className="text-2xl mb-3">✅</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Follow-up tracking</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Deadlines, signatures, payments — AI spots every obligation and turns them into trackable action items with due dates.
-              </p>
-            </div>
-            <div>
-              <div className="text-2xl mb-3">🔔</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Email reminders</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Get an email reminder 5 days before any deadline so nothing slips through the cracks.
-              </p>
-            </div>
-            <div>
-              <div className="text-2xl mb-3">🔍</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Instant search</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Search by keyword or filter by category across your entire document library in milliseconds.
-              </p>
-            </div>
-            <div>
-              <div className="text-2xl mb-3">🔒</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Private by default</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Every document is stored privately. Only you can access your files — enforced at the database level.
-              </p>
-            </div>
+      <section className="max-w-5xl mx-auto px-6 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-12">
+          <div>
+            <div className="w-8 h-px bg-amber-600 mb-4" />
+            <h3 className="font-serif text-lg text-[#1C2333] mb-2">Smart upload</h3>
+            <p className="text-sm text-stone-500 leading-relaxed font-sans">
+              Drag and drop multiple PDFs at once. Each is processed in parallel
+              and stored privately in your vault.
+            </p>
+          </div>
+          <div>
+            <div className="w-8 h-px bg-amber-600 mb-4" />
+            <h3 className="font-serif text-lg text-[#1C2333] mb-2">AI extraction</h3>
+            <p className="text-sm text-stone-500 leading-relaxed font-sans">
+              Claude AI reads every document and surfaces keywords, categories,
+              and a plain-language summary — instantly.
+            </p>
+          </div>
+          <div>
+            <div className="w-8 h-px bg-amber-600 mb-4" />
+            <h3 className="font-serif text-lg text-[#1C2333] mb-2">Follow-up tracking</h3>
+            <p className="text-sm text-stone-500 leading-relaxed font-sans">
+              Deadlines, signatures, payments — Folio spots every obligation and
+              turns them into trackable action items with due dates.
+            </p>
+          </div>
+          <div>
+            <div className="w-8 h-px bg-amber-600 mb-4" />
+            <h3 className="font-serif text-lg text-[#1C2333] mb-2">Email reminders</h3>
+            <p className="text-sm text-stone-500 leading-relaxed font-sans">
+              Get an email reminder 5 days before any deadline so nothing slips
+              through the cracks.
+            </p>
+          </div>
+          <div>
+            <div className="w-8 h-px bg-amber-600 mb-4" />
+            <h3 className="font-serif text-lg text-[#1C2333] mb-2">Instant search</h3>
+            <p className="text-sm text-stone-500 leading-relaxed font-sans">
+              Search by keyword or filter by category across your entire document
+              library in milliseconds.
+            </p>
+          </div>
+          <div>
+            <div className="w-8 h-px bg-amber-600 mb-4" />
+            <h3 className="font-serif text-lg text-[#1C2333] mb-2">Private by default</h3>
+            <p className="text-sm text-stone-500 leading-relaxed font-sans">
+              Every document is stored privately. Only you can access your files —
+              enforced at the database level.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="max-w-5xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-3xl font-bold text-gray-900">Ready to get organised?</h2>
-        <p className="mt-4 text-gray-500">Create a free account and upload your first document in minutes.</p>
-        <div className="mt-8">
-          <Link href="/signup">
-            <Button size="lg" className="px-10">Create free account</Button>
+      {/* CTA band */}
+      <section className="border-t border-stone-200">
+        <div className="max-w-5xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h2 className="font-serif text-3xl text-[#1C2333]">Ready to get organised?</h2>
+            <p className="mt-2 text-stone-500 font-sans text-sm">
+              Create a free account and upload your first document in minutes.
+            </p>
+          </div>
+          <Link href="/signup" className="flex-shrink-0">
+            <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white border-0 px-10 text-base">
+              Start your folio
+            </Button>
           </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-100 py-8">
-        <div className="max-w-5xl mx-auto px-6 flex items-center justify-between text-sm text-gray-400">
-          <span>© {new Date().getFullYear()} DocStore</span>
+      <footer className="border-t border-stone-200 py-8">
+        <div className="max-w-5xl mx-auto px-6 flex items-center justify-between text-xs text-stone-400 font-sans">
+          <span>© {new Date().getFullYear()} folio-ai</span>
           <div className="flex gap-6">
-            <Link href="/login" className="hover:text-gray-600">Sign in</Link>
-            <Link href="/signup" className="hover:text-gray-600">Sign up</Link>
+            <Link href="/login" className="hover:text-stone-600">Sign in</Link>
+            <Link href="/signup" className="hover:text-stone-600">Sign up</Link>
           </div>
         </div>
       </footer>
+
     </div>
   );
 }
