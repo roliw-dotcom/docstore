@@ -71,27 +71,10 @@ export async function POST(
 
     const buffer = Buffer.from(await fileBlob.arrayBuffer());
 
-    // ── 2. Extract text ────────────────────────────────────────────────────
-    const pdf = await pdfParse(buffer);
-    const pageCount = pdf.numpages;
+    const isImage = doc.mime_type?.startsWith("image/");
 
-    // Trim to ~40 000 chars to stay well within token limits
-    const text = pdf.text.slice(0, 40000).trim();
-
-    if (!text) {
-      throw new Error(
-        "No text could be extracted — the PDF may be scanned or image-only."
-      );
-    }
-
-    // ── 3. Call Claude API ─────────────────────────────────────────────────
-    const message = await anthropic.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 2048,
-      messages: [
-        {
-          role: "user",
-          content: `Analyze the document below and return a single JSON object with these exact fields:
+    // ── 2. Extract content and call Claude ────────────────────────────────
+    const PROMPT = `Analyze the document and return a single JSON object with these exact fields:
 - "keywords": array of 5–15 important keywords or key phrases
 - "categories": array of 1–3 category labels (e.g. Finance, Legal, Technical, Medical, HR, Research, Contract, Invoice, Report)
 - "summary": 2–3 sentence plain-language summary
@@ -100,13 +83,58 @@ export async function POST(
   - "description": optional brief details or context
   - "due_date": ISO date string (YYYY-MM-DD) if a specific date is mentioned, otherwise null
 
-Return ONLY the raw JSON object — no markdown fences, no explanation.
+Return ONLY the raw JSON object — no markdown fences, no explanation.`;
 
-Document:
-${text}`,
-        },
-      ],
-    });
+    let pageCount = 1;
+    let message;
+
+    if (isImage) {
+      // ── 2a. Image: send directly to Claude Vision ──────────────────────
+      const validImageTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"] as const;
+      type ValidImageType = typeof validImageTypes[number];
+      const mediaType: ValidImageType = validImageTypes.includes(doc.mime_type as ValidImageType)
+        ? (doc.mime_type as ValidImageType)
+        : "image/jpeg";
+
+      message = await anthropic.messages.create({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 2048,
+        messages: [
+          {
+            role: "user",
+            content: [
+              {
+                type: "image",
+                source: { type: "base64", media_type: mediaType, data: buffer.toString("base64") },
+              },
+              { type: "text", text: PROMPT },
+            ],
+          },
+        ],
+      });
+    } else {
+      // ── 2b. PDF: extract text with pdf-parse ────────────────────────────
+      const pdf = await pdfParse(buffer);
+      pageCount = pdf.numpages;
+      const text = pdf.text.slice(0, 40000).trim();
+
+      if (!text) {
+        throw new Error(
+          "No text could be extracted — the PDF may be scanned or image-only."
+        );
+      }
+
+      message = await anthropic.messages.create({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 2048,
+        messages: [
+          {
+            role: "user",
+            content: `${PROMPT}\n\nDocument:\n${text}`,
+          },
+        ],
+      });
+    }
 
     const responseBlock = message.content[0];
     if (responseBlock.type !== "text") {

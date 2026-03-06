@@ -83,13 +83,24 @@ export default async function DocumentPage({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* PDF Viewer */}
+        {/* Document Viewer */}
         <div className="lg:col-span-2">
           {viewUrl?.signedUrl ? (
-            <PdfViewer url={viewUrl.signedUrl} />
+            doc.mime_type?.startsWith("image/") ? (
+              <div className="rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={viewUrl.signedUrl}
+                  alt={doc.filename}
+                  className="w-full h-auto"
+                />
+              </div>
+            ) : (
+              <PdfViewer url={viewUrl.signedUrl} />
+            )
           ) : (
             <div className="flex items-center justify-center h-64 bg-gray-100 rounded-lg text-gray-400">
-              Could not load PDF.
+              Could not load document.
             </div>
           )}
         </div>

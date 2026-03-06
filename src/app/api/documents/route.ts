@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { docId, filename, storagePath, fileSize } = body;
+  const { docId, filename, storagePath, fileSize, mimeType } = body;
 
   if (!docId || !filename || !storagePath) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
       filename,
       storage_path: storagePath,
       file_size: fileSize ?? null,
+      mime_type: mimeType ?? null,
       status: "pending",
     })
     .select()

@@ -18,6 +18,14 @@ interface FileItem {
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
 
+const ACCEPTED_MIME_TYPES = new Set([
+  "application/pdf",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+]);
+
 async function uploadOne(
   supabase: ReturnType<typeof createClient>,
   userId: string,
@@ -46,6 +54,7 @@ async function uploadOne(
       filename: item.file.name,
       storagePath,
       fileSize: item.file.size,
+      mimeType: item.file.type,
     }),
   });
 
@@ -76,14 +85,12 @@ export default function UploadPage() {
   }
 
   const onDrop = useCallback((accepted: File[]) => {
-    const valid = accepted.filter((f) => {
-      if (f.type !== "application/pdf") return false;
-      if (f.size > MAX_FILE_SIZE) return false;
-      return true;
-    });
+    const valid = accepted.filter(
+      (f) => ACCEPTED_MIME_TYPES.has(f.type) && f.size <= MAX_FILE_SIZE
+    );
 
     const rejected = accepted.filter(
-      (f) => f.type !== "application/pdf" || f.size > MAX_FILE_SIZE
+      (f) => !ACCEPTED_MIME_TYPES.has(f.type) || f.size > MAX_FILE_SIZE
     );
 
     const newItems: FileItem[] = valid.map((f) => ({
@@ -96,10 +103,9 @@ export default function UploadPage() {
       id: crypto.randomUUID(),
       file: f,
       status: "error",
-      error:
-        f.type !== "application/pdf"
-          ? "Not a PDF"
-          : "Exceeds 20 MB limit",
+      error: !ACCEPTED_MIME_TYPES.has(f.type)
+        ? "Unsupported file type"
+        : "Exceeds 20 MB limit",
     }));
 
     setFiles((prev) => [...prev, ...newItems, ...errorItems]);
@@ -107,7 +113,13 @@ export default function UploadPage() {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { "application/pdf": [".pdf"] },
+    accept: {
+      "application/pdf": [".pdf"],
+      "image/jpeg": [".jpg", ".jpeg"],
+      "image/png": [".png"],
+      "image/webp": [".webp"],
+      "image/gif": [".gif"],
+    },
     disabled: running,
   });
 
@@ -155,7 +167,7 @@ export default function UploadPage() {
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Upload Documents</h1>
-        <p className="text-sm text-gray-500 mt-1">PDF files up to 20 MB · multiple files supported</p>
+        <p className="text-sm text-gray-500 mt-1">PDF or image files up to 20 MB · multiple files supported</p>
       </div>
 
       {/* Drop zone — always visible unless all done */}
@@ -172,9 +184,9 @@ export default function UploadPage() {
           <div className="space-y-2">
             <div className="text-4xl">📄</div>
             <p className="text-base font-medium text-gray-700">
-              {isDragActive ? "Drop PDFs here" : "Drag & drop PDFs here"}
+              {isDragActive ? "Drop files here" : "Drag & drop PDFs or images here"}
             </p>
-            <p className="text-sm text-gray-400">or click to browse · you can add more files anytime</p>
+            <p className="text-sm text-gray-400">PDF, JPG, PNG, WEBP, GIF · or click to browse</p>
           </div>
         </div>
       )}
