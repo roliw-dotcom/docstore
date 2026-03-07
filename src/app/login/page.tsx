@@ -38,7 +38,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#FAFAF7]">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="font-serif text-2xl font-normal">bainder</CardTitle>
+          <CardTitle className="font-serif text-2xl font-normal">b<span className="font-sans font-bold">AI</span>nder</CardTitle>
           <CardDescription>Sign in to your account</CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
