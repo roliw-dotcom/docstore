@@ -110,7 +110,7 @@ export default async function RootPage() {
       {/* Nav */}
       <header className="border-b border-stone-200">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-serif text-2xl tracking-tight">docket</span>
+          <span className="font-serif text-2xl tracking-tight">bainder</span>
           <div className="flex items-center gap-3">
             <Link href="/pricing">
               <Button variant="ghost" size="sm" className="text-stone-500 hover:text-[#1C2333]">
@@ -136,20 +136,20 @@ export default async function RootPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <p className="text-xs uppercase tracking-widest text-amber-600 font-sans mb-6">
-              by docket-ai
+              by bainder
             </p>
             <h1 className="font-serif text-6xl md:text-7xl tracking-tight leading-tight text-[#1C2333]">
               Your AI that reads<br />
               <em>the fine print.</em>
             </h1>
             <p className="mt-8 text-lg text-stone-500 max-w-xl leading-relaxed font-sans">
-              Upload any document. Docket&apos;s AI extracts every deadline, obligation,
+              Upload any document. Bainder&apos;s AI extracts every deadline, obligation,
               and action item — and reminds you before anything is due.
             </p>
             <div className="mt-10 flex items-center gap-4">
               <Link href="/signup">
                 <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white border-0 px-8 text-base">
-                  Clear the docket
+                  Get started free
                 </Button>
               </Link>
               <Link href="/login">
@@ -204,7 +204,7 @@ export default async function RootPage() {
             <div className="w-8 h-px bg-amber-600 mb-4" />
             <h3 className="font-serif text-lg text-[#1C2333] mb-2">Smart upload</h3>
             <p className="text-sm text-stone-500 leading-relaxed font-sans">
-              Drag and drop PDFs or photos of documents. Docket reads scanned
+              Drag and drop PDFs or photos of documents. Bainder reads scanned
               pages, printed contracts, and handwritten notes alike.
             </p>
           </div>
@@ -238,7 +238,7 @@ export default async function RootPage() {
           </div>
           <Link href="/signup" className="flex-shrink-0">
             <Button size="lg" className="bg-amber-600 hover:bg-amber-700 text-white border-0 px-10 text-base">
-              Clear the docket
+              Get started free
             </Button>
           </Link>
         </div>
@@ -247,7 +247,7 @@ export default async function RootPage() {
       {/* Footer */}
       <footer className="border-t border-stone-200 py-8">
         <div className="max-w-5xl mx-auto px-6 flex items-center justify-between text-xs text-stone-400 font-sans">
-          <span>© {new Date().getFullYear()} docket-ai</span>
+          <span>© {new Date().getFullYear()} bainder</span>
           <div className="flex gap-6">
             <Link href="/pricing" className="hover:text-stone-600">Pricing</Link>
             <Link href="/login" className="hover:text-stone-600">Sign in</Link>

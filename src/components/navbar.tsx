@@ -22,7 +22,7 @@ export default function Navbar({ user }: { user: User }) {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-8">
             <Link href="/dashboard" className="font-serif text-2xl tracking-tight text-[#1C2333]">
-              docket
+              bainder
             </Link>
             <div className="flex gap-4">
               <Link

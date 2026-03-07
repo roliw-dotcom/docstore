@@ -18,7 +18,7 @@ export default function PricingPage() {
       {/* Nav */}
       <header className="border-b border-stone-200">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="font-serif text-2xl tracking-tight">docket</Link>
+          <Link href="/" className="font-serif text-2xl tracking-tight">bainder</Link>
           <div className="flex items-center gap-3">
             <Link href="/login">
               <Button variant="ghost" size="sm" className="text-stone-500 hover:text-[#1C2333]">

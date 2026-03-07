@@ -15,9 +15,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Docket — Your AI that reads the fine print.",
+  title: "Bainder — Your AI that reads the fine print.",
   description:
-    "Docket reads your PDFs so you don't have to. AI extracts every deadline, obligation, and action item — and reminds you before anything is due.",
+    "Bainder reads your PDFs so you don't have to. AI extracts every deadline, obligation, and action item — and reminds you before anything is due.",
 };
 
 export default function RootLayout({
