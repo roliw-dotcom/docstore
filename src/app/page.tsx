@@ -3,66 +3,83 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 
-function DocumentVisual() {
+function Ring() {
   return (
-    <div className="relative max-w-[340px] select-none" aria-hidden="true">
-      {/* Main document card */}
-      <div className="bg-white rounded-xl border border-stone-200 shadow-[0_8px_40px_-8px_rgba(0,0,0,0.14)] p-5">
-        {/* Header */}
-        <p className="text-[8px] uppercase tracking-[0.22em] text-stone-400">SERVICE AGREEMENT</p>
-        <p className="text-[8px] text-stone-300">Effective January 1, 2025 · Confidential</p>
-        <div className="h-px bg-stone-100 mt-3 mb-3" />
+    <div className="w-4 h-4 rounded-full border-[2.5px] border-amber-300 bg-amber-400 shadow-inner" />
+  );
+}
 
-        {/* Body */}
-        <div className="font-mono text-[9px] leading-[1.65] text-stone-400 space-y-2.5">
-          <p>
-            This Agreement is entered into as of the date first written above between the parties
-            identified herein and shall govern all services rendered thereunder.
-          </p>
+function BinderVisual() {
+  return (
+    <div className="relative w-[300px] h-[340px] select-none" aria-hidden="true">
 
-          {/* Highlight 1 — Payment */}
-          <div className="-mx-1.5 px-2.5 py-2 bg-amber-50 border-l-[2.5px] border-amber-400 rounded-r">
-            <p className="text-[7px] uppercase tracking-[0.2em] text-amber-500 font-semibold mb-0.5">§ 4.1 · Payment</p>
-            <p className="text-stone-600">
-              Client shall remit payment of $4,200 no later than{" "}
-              <span className="font-bold">March 15, 2025</span>. Late payments
-              accrue interest at 1.5% per month.
-            </p>
+      {/* Binder 3 — back */}
+      <div className="absolute" style={{ left: 32, top: 40, transform: "rotate(-9deg)", transformOrigin: "bottom center", zIndex: 1 }}>
+        <div className="flex h-[248px] w-[196px] rounded-r-xl overflow-hidden shadow-md opacity-50">
+          <div className="w-6 flex-shrink-0 bg-stone-300 flex flex-col items-center justify-center gap-5" />
+          <div className="flex-1 bg-stone-100 border border-l-0 border-stone-200 rounded-r-xl" />
+        </div>
+      </div>
+
+      {/* Binder 2 — middle */}
+      <div className="absolute" style={{ left: 20, top: 22, transform: "rotate(-4deg)", transformOrigin: "bottom center", zIndex: 2 }}>
+        <div className="flex h-[256px] w-[196px] rounded-r-xl overflow-hidden shadow-md">
+          <div className="w-6 flex-shrink-0 bg-stone-400 flex flex-col items-center justify-center gap-5">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="w-3.5 h-3.5 rounded-full border-2 border-stone-300 bg-stone-350" />
+            ))}
           </div>
-
-          <p>
-            Either party may renegotiate the terms of this Agreement upon 30 days written notice
-            prior to the commencement of any renewal period.
-          </p>
-
-          {/* Highlight 2 — Renewal */}
-          <div className="-mx-1.5 px-2.5 py-2 bg-amber-50 border-l-[2.5px] border-amber-400 rounded-r">
-            <p className="text-[7px] uppercase tracking-[0.2em] text-amber-500 font-semibold mb-0.5">§ 7.2 · Renewal</p>
-            <p className="text-stone-600">
-              This Agreement auto-renews for successive one-year terms unless
-              cancelled in writing by{" "}
-              <span className="font-bold">June 1, 2025</span>.
-            </p>
+          <div className="flex-1 bg-white border border-l-0 border-stone-200 rounded-r-xl p-3">
+            <p className="text-[7px] uppercase tracking-widest text-stone-300 mb-2">Lease 2025</p>
+            <div className="space-y-1.5 mt-4">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="h-px bg-stone-100" />
+              ))}
+            </div>
           </div>
+        </div>
+      </div>
 
-          <p>
-            All representations and warranties shall survive termination of this Agreement
-            and remain in full force for a period of two (2) years thereafter.
-          </p>
-
-          {/* Highlight 3 — Execution */}
-          <div className="-mx-1.5 px-2.5 py-2 bg-amber-50 border-l-[2.5px] border-amber-400 rounded-r">
-            <p className="text-[7px] uppercase tracking-[0.2em] text-amber-500 font-semibold mb-0.5">§ 9.1 · Execution</p>
-            <p className="text-stone-600">
-              Both parties must execute and return signed counterparts no later than{" "}
-              <span className="font-bold">April 3, 2025</span>.
-            </p>
+      {/* Binder 1 — front (amber, main) */}
+      <div className="absolute" style={{ left: 4, top: 0, zIndex: 3 }}>
+        <div className="flex h-[280px] w-[200px] rounded-r-xl shadow-[0_12px_48px_-8px_rgba(0,0,0,0.18)]">
+          {/* Spine */}
+          <div className="w-7 flex-shrink-0 bg-amber-500 rounded-l-sm flex flex-col items-center justify-center gap-5">
+            <Ring /><Ring /><Ring />
+          </div>
+          {/* Cover */}
+          <div className="flex-1 bg-white border border-l-0 border-stone-200 rounded-r-xl p-4 flex flex-col gap-3">
+            <div>
+              <p className="text-[7px] uppercase tracking-[0.2em] text-stone-300">Service Agreement</p>
+              <p className="text-[7px] text-stone-300 mt-0.5">Jan 1, 2025 · Confidential</p>
+            </div>
+            <div className="h-px bg-stone-100" />
+            {/* AI-extracted items */}
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-1.5 bg-amber-50 border-l-2 border-amber-400 rounded-r px-2 py-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" />
+                <span className="text-[8px] text-stone-700 font-medium font-sans">Pay $4,200 · Mar 15</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-stone-50 border-l-2 border-stone-300 rounded-r px-2 py-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-stone-400 flex-shrink-0" />
+                <span className="text-[8px] text-stone-500 font-sans">Sign contract · Apr 3</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-stone-50 border-l-2 border-stone-200 rounded-r px-2 py-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-stone-300 flex-shrink-0" />
+                <span className="text-[8px] text-stone-400 font-sans">Renew agreement · Jun 1</span>
+              </div>
+            </div>
+            <div className="space-y-1.5 mt-auto">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-px bg-stone-100" />
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Floating card 1 — Pay $4,200 */}
-      <div className="absolute -right-6 top-8 w-[156px] bg-white rounded-lg border border-stone-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)] p-3">
+      <div className="absolute -right-2 top-10 w-[148px] bg-white rounded-lg border border-stone-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)] p-3 z-10">
         <div className="flex items-center gap-1.5 mb-1">
           <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" />
           <span className="text-[10px] font-semibold text-stone-700 font-sans">Pay $4,200</span>
@@ -71,18 +88,8 @@ function DocumentVisual() {
         <span className="inline-block text-[8px] font-medium bg-amber-50 text-amber-700 rounded px-1.5 py-0.5 font-sans">9 days left</span>
       </div>
 
-      {/* Floating card 2 — Sign contract */}
-      <div className="absolute -right-4 bottom-16 w-[156px] bg-white rounded-lg border border-stone-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)] p-3">
-        <div className="flex items-center gap-1.5 mb-1">
-          <span className="w-2 h-2 rounded-full bg-stone-400 flex-shrink-0" />
-          <span className="text-[10px] font-semibold text-stone-700 font-sans">Sign contract</span>
-        </div>
-        <p className="text-[9px] text-stone-400 font-sans mb-1.5">Due Apr 3</p>
-        <span className="inline-block text-[8px] font-medium bg-stone-100 text-stone-500 rounded px-1.5 py-0.5 font-sans">28 days left</span>
-      </div>
-
-      {/* Floating card 3 — Renew agreement */}
-      <div className="absolute -left-8 bottom-4 w-[156px] bg-white rounded-lg border border-stone-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)] p-3">
+      {/* Floating card 2 — Renew agreement */}
+      <div className="absolute -right-4 bottom-10 w-[148px] bg-white rounded-lg border border-stone-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)] p-3 z-10">
         <div className="flex items-center gap-1.5 mb-1">
           <span className="w-2 h-2 rounded-full bg-stone-300 flex-shrink-0" />
           <span className="text-[10px] font-semibold text-stone-700 font-sans">Renew agreement</span>
@@ -90,6 +97,7 @@ function DocumentVisual() {
         <p className="text-[9px] text-stone-400 font-sans mb-1.5">Due Jun 1</p>
         <span className="inline-block text-[8px] font-medium bg-stone-100 text-stone-500 rounded px-1.5 py-0.5 font-sans">77 days left</span>
       </div>
+
     </div>
   );
 }
@@ -163,7 +171,7 @@ export default async function RootPage() {
             </p>
           </div>
           <div className="hidden lg:flex justify-center">
-            <DocumentVisual />
+            <BinderVisual />
           </div>
         </div>
       </section>
