@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
+import { getUserTier } from "@/lib/get-user-tier";
 
 export async function POST(request: NextRequest) {
   const supabase = await createClient();
@@ -10,6 +11,21 @@ export async function POST(request: NextRequest) {
 
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Enforce free-tier document limit
+  const tier = await getUserTier(user.id, supabase);
+  if (tier === "free") {
+    const { count } = await supabase
+      .from("documents")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", user.id);
+    if ((count ?? 0) >= 10) {
+      return NextResponse.json(
+        { error: "Free plan limit reached (10 documents). Upgrade to Pro." },
+        { status: 403 }
+      );
+    }
   }
 
   const body = await request.json();

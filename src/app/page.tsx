@@ -112,6 +112,11 @@ export default async function RootPage() {
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-serif text-2xl tracking-tight">docket</span>
           <div className="flex items-center gap-3">
+            <Link href="/pricing">
+              <Button variant="ghost" size="sm" className="text-stone-500 hover:text-[#1C2333]">
+                Pricing
+              </Button>
+            </Link>
             <Link href="/login">
               <Button variant="ghost" size="sm" className="text-stone-500 hover:text-[#1C2333]">
                 Sign in
@@ -153,6 +158,9 @@ export default async function RootPage() {
                 </Button>
               </Link>
             </div>
+            <p className="mt-4 text-xs text-stone-400 font-sans">
+              Free for 10 documents · No credit card required
+            </p>
           </div>
           <div className="hidden lg:flex justify-center">
             <DocumentVisual />
@@ -241,6 +249,7 @@ export default async function RootPage() {
         <div className="max-w-5xl mx-auto px-6 flex items-center justify-between text-xs text-stone-400 font-sans">
           <span>© {new Date().getFullYear()} docket-ai</span>
           <div className="flex gap-6">
+            <Link href="/pricing" className="hover:text-stone-600">Pricing</Link>
             <Link href="/login" className="hover:text-stone-600">Sign in</Link>
             <Link href="/signup" className="hover:text-stone-600">Sign up</Link>
           </div>

@@ -48,10 +48,26 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ sent: 0 });
   }
 
+  // Collect unique user IDs and fetch their profiles
+  const userIds = [...new Set(followUps.map((fu) => fu.user_id))];
+  const { data: profiles } = await serviceClient
+    .from("profiles")
+    .select("id, tier, subscription_status")
+    .in("id", userIds);
+
+  const proUserIds = new Set(
+    (profiles ?? [])
+      .filter((p) => p.tier === "pro" && p.subscription_status === "active")
+      .map((p) => p.id)
+  );
+
   let sent = 0;
   const errors: string[] = [];
 
   for (const fu of followUps) {
+    // Skip free-tier users — email reminders are Pro-only
+    if (!proUserIds.has(fu.user_id)) continue;
+
     try {
       // Get user email via service role
       const { data: userData, error: userError } = await serviceClient.auth.admin.getUserById(fu.user_id);

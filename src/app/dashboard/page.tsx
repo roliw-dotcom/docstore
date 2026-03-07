@@ -3,18 +3,28 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import DocumentList from "@/components/document-list";
 import AutoRefresh from "@/components/auto-refresh";
+import UpgradeBanner from "@/components/upgrade-banner";
+import { getUserTier } from "@/lib/get-user-tier";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   const { data: documents } = await supabase
     .from("documents")
     .select(`*, doc_metadata(keywords, categories, summary)`)
     .order("created_at", { ascending: false });
 
+  const docCount = (documents ?? []).length;
   const hasProcessing = (documents ?? []).some(
     (d) => d.status === "pending" || d.status === "processing"
   );
+
+  const tier = user ? await getUserTier(user.id, supabase) : "free";
+  const showBanner = tier === "free" && docCount >= 8;
 
   return (
     <div className="space-y-6">
@@ -24,6 +34,8 @@ export default async function DashboardPage() {
           <Button>Upload Document</Button>
         </Link>
       </div>
+
+      {showBanner && <UpgradeBanner docCount={docCount} />}
 
       <AutoRefresh active={hasProcessing} />
 

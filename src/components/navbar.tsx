@@ -43,6 +43,12 @@ export default function Navbar({ user }: { user: User }) {
               >
                 Upload
               </Link>
+              <Link
+                href="/dashboard/settings/billing"
+                className="text-sm text-gray-600 hover:text-gray-900"
+              >
+                Billing
+              </Link>
             </div>
           </div>
           <div className="flex items-center gap-4">
