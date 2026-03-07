@@ -33,30 +33,27 @@ export default function Navbar({ user }: { user: User }) {
               b<span className="font-sans font-bold">AI</span>nder
             </Link>
             <div className="flex gap-4">
-              <Link
-                href="/dashboard"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
-                {t("documents")}
-              </Link>
-              <Link
-                href="/dashboard/follow-ups"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
-                {t("followUps")}
-              </Link>
-              <Link
-                href="/dashboard/upload"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
-                {t("upload")}
-              </Link>
-              <Link
-                href="/dashboard/settings/billing"
-                className="text-sm text-gray-600 hover:text-gray-900"
-              >
-                {t("billing")}
-              </Link>
+              {[
+                { href: "/dashboard", label: t("documents"), exact: true },
+                { href: "/dashboard/follow-ups", label: t("followUps"), exact: false },
+                { href: "/dashboard/upload", label: t("upload"), exact: false },
+                { href: "/dashboard/settings/billing", label: t("billing"), exact: false },
+              ].map(({ href, label, exact }) => {
+                const active = exact ? pathname === href : pathname.startsWith(href);
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={`text-sm transition-colors ${
+                      active
+                        ? "text-gray-900 font-semibold border-b-2 border-amber-500 pb-0.5"
+                        : "text-gray-500 hover:text-gray-900"
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
           <div className="flex items-center gap-3">
