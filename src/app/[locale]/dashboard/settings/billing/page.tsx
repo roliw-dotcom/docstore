@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 interface Profile {
   tier: "free" | "pro";
@@ -15,6 +16,7 @@ export default function BillingPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const success = searchParams.get("success") === "1";
+  const t = useTranslations("billing");
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -41,7 +43,7 @@ export default function BillingPage() {
   }
 
   const renewalDate = profile?.current_period_end
-    ? new Date(profile.current_period_end).toLocaleDateString("en-US", {
+    ? new Date(profile.current_period_end).toLocaleDateString(undefined, {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -51,23 +53,23 @@ export default function BillingPage() {
   return (
     <div className="max-w-xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Billing</h1>
-        <p className="text-sm text-stone-500 mt-1">Manage your subscription and plan.</p>
+        <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
+        <p className="text-sm text-stone-500 mt-1">{t("subtitle")}</p>
       </div>
 
       {success && (
         <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
-          Subscription activated — welcome to Pro!
+          {t("subscriptionActivated")}
         </div>
       )}
 
       <div className="rounded-xl border border-stone-200 bg-white p-6 space-y-4">
         {loading ? (
-          <p className="text-sm text-stone-400">Loading…</p>
+          <p className="text-sm text-stone-400">{t("loading")}</p>
         ) : (
           <>
             <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-stone-700">Current plan</span>
+              <span className="text-sm font-medium text-stone-700">{t("currentPlan")}</span>
               <span
                 className={`text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full ${
                   profile?.tier === "pro"
@@ -81,7 +83,7 @@ export default function BillingPage() {
 
             {profile?.tier === "pro" && renewalDate && (
               <p className="text-sm text-stone-500">
-                Renews on <strong>{renewalDate}</strong>
+                {t("renewsOn", { date: renewalDate })}
               </p>
             )}
 
@@ -91,20 +93,16 @@ export default function BillingPage() {
                   onClick={handleUpgrade}
                   className="bg-amber-600 hover:bg-amber-700 text-white border-0"
                 >
-                  Upgrade to Pro — $9/month
+                  {t("upgradeToPro")}
                 </Button>
-                <p className="mt-2 text-xs text-stone-400">
-                  Unlimited documents + email reminders.
-                </p>
+                <p className="mt-2 text-xs text-stone-400">{t("unlimitedDocs")}</p>
               </div>
             ) : (
               <div className="pt-2">
                 <Button variant="outline" onClick={handlePortal}>
-                  Manage billing
+                  {t("manageBilling")}
                 </Button>
-                <p className="mt-2 text-xs text-stone-400">
-                  Update payment method, view invoices, or cancel.
-                </p>
+                <p className="mt-2 text-xs text-stone-400">{t("updatePayment")}</p>
               </div>
             )}
           </>
@@ -112,7 +110,7 @@ export default function BillingPage() {
       </div>
 
       <Link href="/dashboard" className="text-sm text-stone-500 hover:text-stone-700">
-        ← Back to documents
+        {t("backToDocuments")}
       </Link>
     </div>
   );

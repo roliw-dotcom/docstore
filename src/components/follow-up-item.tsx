@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Bell } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useTranslations, useLocale } from "next-intl";
 
 interface FollowUp {
   id: string;
@@ -13,7 +14,10 @@ interface FollowUp {
   reminded: boolean;
 }
 
-function dueDatePill(dueDate: string | null | undefined) {
+function DueDatePill({ dueDate }: { dueDate: string | null | undefined }) {
+  const t = useTranslations("followUpItem");
+  const locale = useLocale();
+
   if (!dueDate) return null;
 
   const today = new Date();
@@ -22,7 +26,7 @@ function dueDatePill(dueDate: string | null | undefined) {
   due.setHours(0, 0, 0, 0);
   const diffDays = Math.ceil((due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-  const formatted = due.toLocaleDateString("en-US", {
+  const formatted = due.toLocaleDateString(locale === "de" ? "de-DE" : "en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -31,20 +35,20 @@ function dueDatePill(dueDate: string | null | undefined) {
   if (diffDays < 0) {
     return (
       <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-medium">
-        Overdue · {formatted}
+        {t("overdue", { date: formatted })}
       </span>
     );
   }
   if (diffDays <= 5) {
     return (
       <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 font-medium">
-        Due soon · {formatted}
+        {t("dueSoon", { date: formatted })}
       </span>
     );
   }
   return (
     <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
-      Due {formatted}
+      {t("dueDate", { date: formatted })}
     </span>
   );
 }
@@ -54,7 +58,6 @@ export default function FollowUpItem({ followUp }: { followUp: FollowUp }) {
   const [loading, setLoading] = useState(false);
 
   async function handleCheck(checked: boolean) {
-    // Optimistic update
     setCompleted(checked);
     setLoading(true);
 
@@ -66,7 +69,6 @@ export default function FollowUpItem({ followUp }: { followUp: FollowUp }) {
       });
 
       if (!res.ok) {
-        // Revert on error
         setCompleted(!checked);
       }
     } catch {
@@ -92,7 +94,7 @@ export default function FollowUpItem({ followUp }: { followUp: FollowUp }) {
           {followUp.reminded && (
             <Bell className="w-3 h-3 text-gray-400 flex-shrink-0" />
           )}
-          {dueDatePill(followUp.due_date)}
+          <DueDatePill dueDate={followUp.due_date} />
         </div>
         {followUp.description && (
           <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{followUp.description}</p>

@@ -1,0 +1,183 @@
+{
+  "nav": {
+    "documents": "Dokumente",
+    "followUps": "Aufgaben",
+    "upload": "Upload",
+    "billing": "Abrechnung",
+    "signOut": "Abmelden"
+  },
+  "landing": {
+    "pricing": "Preise",
+    "signIn": "Anmelden",
+    "getStarted": "Loslegen",
+    "heroTagline": "von bainder",
+    "heroTitle": "Deine KI, die das Kleingedruckte liest.",
+    "heroDesc": "Lade ein Dokument hoch. Bainders KI extrahiert jede Frist, Verpflichtung und Aufgabe — und erinnert dich, bevor etwas fällig wird.",
+    "getStartedFree": "Kostenlos starten",
+    "signInArrow": "Anmelden →",
+    "freeNote": "Kostenlos für 10 Dokumente · Keine Kreditkarte erforderlich",
+    "featureExtractTitle": "Extrahieren",
+    "featureExtractDesc": "KI liest jeden Abschnitt, damit du es nicht musst. Lade eine PDF oder ein Foto hoch und erhalte sofort Schlagwörter, Kategorien und eine verständliche Zusammenfassung.",
+    "featureTrackTitle": "Verfolgen",
+    "featureTrackDesc": "Jede Verpflichtung — Unterschriften, Zahlungen, Verlängerungen, Fristen — wird automatisch zu einer verfolgbaren Aufgabe mit Fälligkeitsdatum.",
+    "featureRemindTitle": "Erinnern",
+    "featureRemindDesc": "Erhalte 5 Tage vor jeder Frist eine E-Mail-Erinnerung. Nichts, das in einem Vertrag vergraben ist, geht mehr durch die Lappen.",
+    "featureUploadTitle": "Intelligenter Upload",
+    "featureUploadDesc": "Drag & Drop von PDFs oder Fotos von Dokumenten. Bainder liest gescannte Seiten, gedruckte Verträge und handgeschriebene Notizen.",
+    "featureSearchTitle": "Sofortsuche",
+    "featureSearchDesc": "Suche nach Schlagwörtern oder filtere nach Kategorien in deiner gesamten Dokumentenbibliothek in Millisekunden.",
+    "featurePrivateTitle": "Standardmäßig privat",
+    "featurePrivateDesc": "Jedes Dokument wird privat gespeichert. Nur du kannst auf deine Dateien zugreifen — auf Datenbankebene erzwungen, nicht nur in der Benutzeroberfläche.",
+    "ctaTitle": "Nichts vergraben. Nichts verpasst.",
+    "ctaDesc": "Erstelle ein kostenloses Konto und lade dein erstes Dokument in Minuten hoch.",
+    "footerSignUp": "Registrieren"
+  },
+  "login": {
+    "description": "Bei deinem Konto anmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "emailPlaceholder": "du@example.com",
+    "passwordPlaceholder": "••••••••",
+    "signingIn": "Anmeldung läuft...",
+    "signIn": "Anmelden",
+    "noAccount": "Kein Konto?",
+    "createOne": "Erstelle eines"
+  },
+  "signup": {
+    "description": "Konto erstellen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "emailPlaceholder": "du@example.com",
+    "passwordPlaceholder": "Mindestens 6 Zeichen",
+    "creatingAccount": "Konto wird erstellt...",
+    "createAccount": "Konto erstellen",
+    "alreadyHaveAccount": "Hast du schon ein Konto?",
+    "signIn": "Anmelden",
+    "checkEmailTitle": "Überprüfe deine E-Mails",
+    "checkEmailDesc": "Wir haben einen Bestätigungslink an {email} gesendet. Klicke darauf, um dein Konto zu aktivieren.",
+    "backToSignIn": "Zurück zur Anmeldung"
+  },
+  "pricing": {
+    "title": "Einfache Preise",
+    "subtitle": "Kostenlos starten. Upgrade wenn du mehr brauchst.",
+    "signIn": "Anmelden",
+    "getStarted": "Loslegen",
+    "freePlan": "Kostenlos",
+    "perMonth": "/Monat",
+    "freeFeature1": "10 Dokumente (lebenslang)",
+    "freeFeature2": "KI-Extraktion (Schlagwörter, Zusammenfassung, Aufgaben)",
+    "freeFeatureNo": "E-Mail-Erinnerungen",
+    "getStartedFree": "Kostenlos starten",
+    "proPlan": "Pro",
+    "mostPopular": "Beliebteste",
+    "proFeature1": "Unbegrenzte Dokumente",
+    "proFeature2": "KI-Extraktion (Schlagwörter, Zusammenfassung, Aufgaben)",
+    "proFeature3": "E-Mail-Erinnerungen 5 Tage vor Fristen",
+    "upgradeToPro": "Zu Pro wechseln"
+  },
+  "dashboard": {
+    "myDocuments": "Meine Dokumente",
+    "uploadDocument": "Dokument hochladen"
+  },
+  "upload": {
+    "title": "Dokumente hochladen",
+    "subtitle": "PDF oder Bilddateien bis 20 MB · mehrere Dateien unterstützt",
+    "dropHere": "Dateien hier ablegen",
+    "dragDrop": "PDFs oder Bilder hier hineinziehen",
+    "fileTypes": "PDF, JPG, PNG, WEBP, GIF · oder zum Durchsuchen klicken",
+    "uploading": "Lädt hoch…",
+    "uploadFiles": "{count, plural, one {# Datei hochladen} other {# Dateien hochladen}}",
+    "viewDocuments": "Dokumente ansehen →",
+    "uploadMore": "Weitere hochladen",
+    "clearAll": "Alle löschen",
+    "uploadedSuccess": "{count, plural, one {✓ # Datei erfolgreich hochgeladen.} other {✓ # Dateien erfolgreich hochgeladen.}}",
+    "uploadedFailed": "{count, plural, one {✗ # Datei fehlgeschlagen.} other {✗ # Dateien fehlgeschlagen.}}",
+    "processingNote": "Schlagwörter und Zusammenfassungen erscheinen in Kürze auf der Dokumentenseite.",
+    "uploadingStatus": "Lädt hoch…",
+    "uploadedStatus": "Hochgeladen · Verarbeitung im Hintergrund",
+    "unsupportedType": "Nicht unterstützter Dateityp",
+    "exceedsLimit": "Überschreitet das 20-MB-Limit",
+    "notLoggedIn": "Nicht angemeldet"
+  },
+  "followUps": {
+    "title": "Aufgaben",
+    "subtitle": "Aktionspunkte und Fristen aus deinen Dokumenten extrahiert",
+    "noFollowUps": "Noch keine Aufgaben.",
+    "noFollowUpsHint": "Lade Dokumente hoch und verarbeite sie, um automatisch Aktionspunkte zu extrahieren.",
+    "pending": "Ausstehend",
+    "completed": "Abgeschlossen",
+    "allCaughtUp": "Alles erledigt!"
+  },
+  "billing": {
+    "title": "Abrechnung",
+    "subtitle": "Verwalte dein Abonnement und deinen Plan.",
+    "subscriptionActivated": "Abonnement aktiviert — Willkommen bei Pro!",
+    "loading": "Lädt…",
+    "currentPlan": "Aktueller Plan",
+    "renewsOn": "Verlängert am {date}",
+    "upgradeToPro": "Zu Pro wechseln — 9 $/Monat",
+    "unlimitedDocs": "Unbegrenzte Dokumente + E-Mail-Erinnerungen.",
+    "manageBilling": "Abrechnung verwalten",
+    "updatePayment": "Zahlungsmethode aktualisieren, Rechnungen anzeigen oder kündigen.",
+    "backToDocuments": "← Zurück zu Dokumenten"
+  },
+  "documents": {
+    "download": "Herunterladen",
+    "back": "← Zurück",
+    "pages": "· {count} Seiten",
+    "summary": "Zusammenfassung",
+    "categories": "Kategorien",
+    "keywords": "Schlagwörter",
+    "followUps": "Aufgaben",
+    "processing": "Verarbeitung… Schlagwörter und Zusammenfassung erscheinen in Kürze.",
+    "processingError": "Verarbeitung fehlgeschlagen. Das PDF ist möglicherweise gescannt oder verschlüsselt.",
+    "couldNotLoad": "Dokument konnte nicht geladen werden."
+  },
+  "documentCard": {
+    "ready": "Bereit",
+    "processing": "Wird verarbeitet…",
+    "pending": "Ausstehend",
+    "error": "Fehler"
+  },
+  "documentList": {
+    "noDocuments": "Noch keine Dokumente",
+    "noDocumentsHint": "Lade dein erstes PDF hoch, um loszulegen.",
+    "searchPlaceholder": "Nach Dateiname, Schlagwort, Kategorie oder Zusammenfassung suchen…",
+    "all": "Alle",
+    "resultsCount": "{filtered} von {total} Dokumenten",
+    "noResults": "Keine Dokumente entsprechen deiner Suche."
+  },
+  "followUpItem": {
+    "overdue": "Überfällig · {date}",
+    "dueSoon": "Bald fällig · {date}",
+    "dueDate": "Fällig {date}"
+  },
+  "followUpList": {
+    "defaultEmpty": "Keine Aufgaben gefunden.",
+    "from": "Von: {filename}"
+  },
+  "followUpsFilter": {
+    "all": "Alle",
+    "pendingOnly": "Nur ausstehende"
+  },
+  "upgradeBanner": {
+    "message": "Du hast {count} von 10 kostenlosen Dokumenten verwendet. Wechsle zu Pro für unbegrenzte Dokumente und E-Mail-Erinnerungen.",
+    "upgradeToPro": "Zu Pro wechseln"
+  },
+  "deleteDocument": {
+    "deleteButton": "Dokument löschen",
+    "deleting": "Wird gelöscht…",
+    "confirmTitle": "Dokument löschen?",
+    "confirmDesc": "{filename} wird dauerhaft zusammen mit seinen Schlagwörtern und der Zusammenfassung gelöscht. Dies kann nicht rückgängig gemacht werden.",
+    "cancel": "Abbrechen",
+    "delete": "Löschen"
+  },
+  "renameTitle": {
+    "saveHint": "Enter zum Speichern · Esc zum Abbrechen",
+    "clickToRename": "Zum Umbenennen klicken"
+  },
+  "reprocessButton": {
+    "reprocess": "Dokument neu verarbeiten",
+    "processing": "Wird verarbeitet…"
+  }
+}

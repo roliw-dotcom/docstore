@@ -1,0 +1,183 @@
+{
+  "nav": {
+    "documents": "Documents",
+    "followUps": "Follow-ups",
+    "upload": "Upload",
+    "billing": "Billing",
+    "signOut": "Sign out"
+  },
+  "landing": {
+    "pricing": "Pricing",
+    "signIn": "Sign in",
+    "getStarted": "Get started",
+    "heroTagline": "by bainder",
+    "heroTitle": "Your AI that reads the fine print.",
+    "heroDesc": "Upload any document. Bainder's AI extracts every deadline, obligation, and action item — and reminds you before anything is due.",
+    "getStartedFree": "Get started free",
+    "signInArrow": "Sign in →",
+    "freeNote": "Free for 10 documents · No credit card required",
+    "featureExtractTitle": "Extract",
+    "featureExtractDesc": "AI reads every clause so you don't have to. Upload a PDF or photo and get keywords, categories, and a plain-language summary instantly.",
+    "featureTrackTitle": "Track",
+    "featureTrackDesc": "Every obligation — signatures, payments, renewals, deadlines — becomes a trackable action item with a due date, automatically.",
+    "featureRemindTitle": "Remind",
+    "featureRemindDesc": "Get an email reminder 5 days before any deadline. Nothing buried in a contract will ever slip through the cracks again.",
+    "featureUploadTitle": "Smart upload",
+    "featureUploadDesc": "Drag and drop PDFs or photos of documents. Bainder reads scanned pages, printed contracts, and handwritten notes alike.",
+    "featureSearchTitle": "Instant search",
+    "featureSearchDesc": "Search by keyword or filter by category across your entire document library in milliseconds.",
+    "featurePrivateTitle": "Private by default",
+    "featurePrivateDesc": "Every document is stored privately. Only you can access your files — enforced at the database level, not just the UI.",
+    "ctaTitle": "Nothing buried. Nothing missed.",
+    "ctaDesc": "Create a free account and upload your first document in minutes.",
+    "footerSignUp": "Sign up"
+  },
+  "login": {
+    "description": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "signingIn": "Signing in...",
+    "signIn": "Sign in",
+    "noAccount": "No account?",
+    "createOne": "Create one"
+  },
+  "signup": {
+    "description": "Create your account",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "Min. 6 characters",
+    "creatingAccount": "Creating account...",
+    "createAccount": "Create account",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "checkEmailTitle": "Check your email",
+    "checkEmailDesc": "We sent a confirmation link to {email}. Click it to activate your account.",
+    "backToSignIn": "Back to sign in"
+  },
+  "pricing": {
+    "title": "Simple pricing",
+    "subtitle": "Start free. Upgrade when you need more.",
+    "signIn": "Sign in",
+    "getStarted": "Get started",
+    "freePlan": "Free",
+    "perMonth": "/month",
+    "freeFeature1": "10 documents (lifetime)",
+    "freeFeature2": "AI extraction (keywords, summary, follow-ups)",
+    "freeFeatureNo": "Email reminders",
+    "getStartedFree": "Get started free",
+    "proPlan": "Pro",
+    "mostPopular": "Most popular",
+    "proFeature1": "Unlimited documents",
+    "proFeature2": "AI extraction (keywords, summary, follow-ups)",
+    "proFeature3": "Email reminders 5 days before deadlines",
+    "upgradeToPro": "Upgrade to Pro"
+  },
+  "dashboard": {
+    "myDocuments": "My Documents",
+    "uploadDocument": "Upload Document"
+  },
+  "upload": {
+    "title": "Upload Documents",
+    "subtitle": "PDF or image files up to 20 MB · multiple files supported",
+    "dropHere": "Drop files here",
+    "dragDrop": "Drag & drop PDFs or images here",
+    "fileTypes": "PDF, JPG, PNG, WEBP, GIF · or click to browse",
+    "uploading": "Uploading…",
+    "uploadFiles": "{count, plural, one {Upload # file} other {Upload # files}}",
+    "viewDocuments": "View documents →",
+    "uploadMore": "Upload more",
+    "clearAll": "Clear all",
+    "uploadedSuccess": "{count, plural, one {✓ # file uploaded successfully.} other {✓ # files uploaded successfully.}}",
+    "uploadedFailed": "{count, plural, one {✗ # file failed.} other {✗ # files failed.}}",
+    "processingNote": "Keywords and summaries will appear on the documents page shortly.",
+    "uploadingStatus": "Uploading…",
+    "uploadedStatus": "Uploaded · processing in background",
+    "unsupportedType": "Unsupported file type",
+    "exceedsLimit": "Exceeds 20 MB limit",
+    "notLoggedIn": "Not logged in"
+  },
+  "followUps": {
+    "title": "Follow-ups",
+    "subtitle": "Action items and deadlines extracted from your documents",
+    "noFollowUps": "No follow-ups yet.",
+    "noFollowUpsHint": "Upload and process documents to automatically extract action items.",
+    "pending": "Pending",
+    "completed": "Completed",
+    "allCaughtUp": "All caught up!"
+  },
+  "billing": {
+    "title": "Billing",
+    "subtitle": "Manage your subscription and plan.",
+    "subscriptionActivated": "Subscription activated — welcome to Pro!",
+    "loading": "Loading…",
+    "currentPlan": "Current plan",
+    "renewsOn": "Renews on {date}",
+    "upgradeToPro": "Upgrade to Pro — $9/month",
+    "unlimitedDocs": "Unlimited documents + email reminders.",
+    "manageBilling": "Manage billing",
+    "updatePayment": "Update payment method, view invoices, or cancel.",
+    "backToDocuments": "← Back to documents"
+  },
+  "documents": {
+    "download": "Download",
+    "back": "← Back",
+    "pages": "· {count} pages",
+    "summary": "Summary",
+    "categories": "Categories",
+    "keywords": "Keywords",
+    "followUps": "Follow-ups",
+    "processing": "Processing… keywords and summary will appear shortly.",
+    "processingError": "Processing failed. The PDF may be scanned or encrypted.",
+    "couldNotLoad": "Could not load document."
+  },
+  "documentCard": {
+    "ready": "Ready",
+    "processing": "Processing…",
+    "pending": "Pending",
+    "error": "Error"
+  },
+  "documentList": {
+    "noDocuments": "No documents yet",
+    "noDocumentsHint": "Upload your first PDF to get started.",
+    "searchPlaceholder": "Search by filename, keyword, category or summary…",
+    "all": "All",
+    "resultsCount": "{filtered} of {total} documents",
+    "noResults": "No documents match your search."
+  },
+  "followUpItem": {
+    "overdue": "Overdue · {date}",
+    "dueSoon": "Due soon · {date}",
+    "dueDate": "Due {date}"
+  },
+  "followUpList": {
+    "defaultEmpty": "No follow-ups found.",
+    "from": "From: {filename}"
+  },
+  "followUpsFilter": {
+    "all": "All",
+    "pendingOnly": "Pending only"
+  },
+  "upgradeBanner": {
+    "message": "You've used {count} of 10 free documents. Upgrade to Pro for unlimited documents and email reminders.",
+    "upgradeToPro": "Upgrade to Pro"
+  },
+  "deleteDocument": {
+    "deleteButton": "Delete document",
+    "deleting": "Deleting…",
+    "confirmTitle": "Delete document?",
+    "confirmDesc": "{filename} will be permanently deleted along with its keywords and summary. This cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "renameTitle": {
+    "saveHint": "Enter to save · Esc to cancel",
+    "clickToRename": "Click to rename"
+  },
+  "reprocessButton": {
+    "reprocess": "Reprocess document",
+    "processing": "Processing…"
+  }
+}

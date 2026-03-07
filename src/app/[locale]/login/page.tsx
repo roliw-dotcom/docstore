@@ -1,59 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "@/navigation";
+import { Link } from "@/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
-export default function SignupPage() {
+export default function LoginPage() {
+  const router = useRouter();
   const supabase = createClient();
+  const t = useTranslations("login");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  async function handleSignup(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
-    });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
       setError(error.message);
       setLoading(false);
     } else {
-      setSuccess(true);
+      router.push("/dashboard");
+      router.refresh();
     }
-  }
-
-  if (success) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAFAF7]">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Check your email</CardTitle>
-            <CardDescription>
-              We sent a confirmation link to <strong>{email}</strong>. Click it to activate your account.
-            </CardDescription>
-          </CardHeader>
-          <CardFooter>
-            <Link href="/login" className="text-sm text-blue-600 hover:underline">
-              Back to sign in
-            </Link>
-          </CardFooter>
-        </Card>
-      </div>
-    );
   }
 
   return (
@@ -61,9 +41,9 @@ export default function SignupPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="font-serif text-2xl font-normal">b<span className="font-sans font-bold">AI</span>nder</CardTitle>
-          <CardDescription>Create your account</CardDescription>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleLogin}>
           <CardContent className="space-y-4">
             {error && (
               <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">
@@ -71,37 +51,36 @@ export default function SignupPage() {
               </div>
             )}
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("email")}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t("emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t("password")}</Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="Min. 6 characters"
+                placeholder={t("passwordPlaceholder")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                minLength={6}
                 required
               />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-3">
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Creating account..." : "Create account"}
+              {loading ? t("signingIn") : t("signIn")}
             </Button>
             <p className="text-sm text-center text-gray-600">
-              Already have an account?{" "}
-              <Link href="/login" className="text-blue-600 hover:underline">
-                Sign in
+              {t("noAccount")}{" "}
+              <Link href="/signup" className="text-blue-600 hover:underline">
+                {t("createOne")}
               </Link>
             </p>
           </CardFooter>

@@ -1,19 +1,27 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link, useRouter, usePathname } from "@/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar({ user }: { user: User }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = useLocale();
   const supabase = createClient();
+  const t = useTranslations("nav");
 
   async function handleSignOut() {
     await supabase.auth.signOut();
     router.push("/login");
     router.refresh();
+  }
+
+  function toggleLocale() {
+    const next = locale === "en" ? "de" : "en";
+    router.replace(pathname, { locale: next });
   }
 
   return (
@@ -29,34 +37,41 @@ export default function Navbar({ user }: { user: User }) {
                 href="/dashboard"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >
-                Documents
+                {t("documents")}
               </Link>
               <Link
                 href="/dashboard/follow-ups"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >
-                Follow-ups
+                {t("followUps")}
               </Link>
               <Link
                 href="/dashboard/upload"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >
-                Upload
+                {t("upload")}
               </Link>
               <Link
                 href="/dashboard/settings/billing"
                 className="text-sm text-gray-600 hover:text-gray-900"
               >
-                Billing
+                {t("billing")}
               </Link>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleLocale}
+              className="text-xs font-medium text-gray-500 hover:text-gray-800 border border-gray-200 rounded px-2 py-1 transition-colors"
+              title="Switch language"
+            >
+              {locale === "en" ? "DE" : "EN"}
+            </button>
             <span className="text-sm text-gray-500 hidden sm:block">
               {user.email}
             </span>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
-              Sign out
+              {t("signOut")}
             </Button>
           </div>
         </div>

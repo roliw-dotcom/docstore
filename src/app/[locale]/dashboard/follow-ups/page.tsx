@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import FollowUpList from "@/components/follow-up-list";
 import FollowUpsFilter from "@/components/follow-ups-filter";
+import { getTranslations } from "next-intl/server";
 
 interface FollowUp {
   id: string;
@@ -22,6 +23,7 @@ export default async function FollowUpsPage({
   const pendingOnly = filter === "pending";
 
   const supabase = await createClient();
+  const t = await getTranslations("followUps");
 
   let query = supabase
     .from("follow_ups")
@@ -42,34 +44,30 @@ export default async function FollowUpsPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Follow-ups</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Action items and deadlines extracted from your documents
-          </p>
+          <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
+          <p className="text-sm text-gray-500 mt-1">{t("subtitle")}</p>
         </div>
         <FollowUpsFilter current={filter} />
       </div>
 
       {followUps.length === 0 ? (
         <div className="text-center py-16 text-gray-400">
-          <p className="text-lg">No follow-ups yet.</p>
-          <p className="text-sm mt-1">
-            Upload and process documents to automatically extract action items.
-          </p>
+          <p className="text-lg">{t("noFollowUps")}</p>
+          <p className="text-sm mt-1">{t("noFollowUpsHint")}</p>
         </div>
       ) : (
         <div className="space-y-8">
           {(!pendingOnly || pending.length > 0) && (
             <section>
               <h2 className="text-sm font-semibold text-gray-700 mb-2">
-                Pending{" "}
+                {t("pending")}{" "}
                 <span className="font-normal text-gray-400">({pending.length})</span>
               </h2>
               <div className="bg-white border border-gray-200 rounded-lg px-4">
                 <FollowUpList
                   followUps={pending}
                   showFilename
-                  emptyMessage="All caught up!"
+                  emptyMessage={t("allCaughtUp")}
                 />
               </div>
             </section>
@@ -78,7 +76,7 @@ export default async function FollowUpsPage({
           {!pendingOnly && completed.length > 0 && (
             <section>
               <h2 className="text-sm font-semibold text-gray-700 mb-2">
-                Completed{" "}
+                {t("completed")}{" "}
                 <span className="font-normal text-gray-400">({completed.length})</span>
               </h2>
               <div className="bg-white border border-gray-200 rounded-lg px-4">

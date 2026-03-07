@@ -1,4 +1,5 @@
 import FollowUpItem from "@/components/follow-up-item";
+import { useTranslations } from "next-intl";
 
 interface FollowUp {
   id: string;
@@ -20,11 +21,14 @@ interface Props {
 export default function FollowUpList({
   followUps,
   showFilename = false,
-  emptyMessage = "No follow-ups found.",
+  emptyMessage,
 }: Props) {
+  const t = useTranslations("followUpList");
+  const empty = emptyMessage ?? t("defaultEmpty");
+
   if (followUps.length === 0) {
     return (
-      <p className="text-sm text-gray-400 py-4">{emptyMessage}</p>
+      <p className="text-sm text-gray-400 py-4">{empty}</p>
     );
   }
 
@@ -34,7 +38,7 @@ export default function FollowUpList({
         <div key={fu.id}>
           {showFilename && fu.documents?.filename && (
             <p className="text-xs text-gray-400 pt-3 pb-0.5 truncate">
-              From: {fu.documents.filename}
+              {t("from", { filename: fu.documents.filename })}
             </p>
           )}
           <FollowUpItem followUp={fu} />

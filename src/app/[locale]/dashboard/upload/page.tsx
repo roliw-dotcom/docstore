@@ -1,16 +1,17 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { Link } from "@/navigation";
 import { useDropzone } from "react-dropzone";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type FileStatus = "pending" | "uploading" | "done" | "error";
 
 interface FileItem {
-  id: string;          // local tracking id
+  id: string;
   file: File;
   status: FileStatus;
   error?: string;
@@ -73,6 +74,7 @@ async function uploadOne(
 export default function UploadPage() {
   const router = useRouter();
   const supabase = createClient();
+  const t = useTranslations("upload");
 
   const [files, setFiles] = useState<FileItem[]>([]);
   const [running, setRunning] = useState(false);
@@ -104,12 +106,12 @@ export default function UploadPage() {
       file: f,
       status: "error",
       error: !ACCEPTED_MIME_TYPES.has(f.type)
-        ? "Unsupported file type"
-        : "Exceeds 20 MB limit",
+        ? t("unsupportedType")
+        : t("exceedsLimit"),
     }));
 
     setFiles((prev) => [...prev, ...newItems, ...errorItems]);
-  }, []);
+  }, [t]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -133,14 +135,13 @@ export default function UploadPage() {
     if (!user) {
       setFiles((prev) =>
         prev.map((f) =>
-          f.status === "pending" ? { ...f, status: "error", error: "Not logged in" } : f
+          f.status === "pending" ? { ...f, status: "error", error: t("notLoggedIn") } : f
         )
       );
       setRunning(false);
       return;
     }
 
-    // Upload all pending files in parallel
     await Promise.all(
       pending.map((item) => uploadOne(supabase, user.id, item, updateStatus))
     );
@@ -166,8 +167,8 @@ export default function UploadPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Upload Documents</h1>
-        <p className="text-sm text-gray-500 mt-1">PDF or image files up to 20 MB · multiple files supported</p>
+        <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
+        <p className="text-sm text-gray-500 mt-1">{t("subtitle")}</p>
       </div>
 
       {/* Drop zone — always visible unless all done */}
@@ -184,9 +185,9 @@ export default function UploadPage() {
           <div className="space-y-2">
             <div className="text-4xl">📄</div>
             <p className="text-base font-medium text-gray-700">
-              {isDragActive ? "Drop files here" : "Drag & drop PDFs or images here"}
+              {isDragActive ? t("dropHere") : t("dragDrop")}
             </p>
-            <p className="text-sm text-gray-400">PDF, JPG, PNG, WEBP, GIF · or click to browse</p>
+            <p className="text-sm text-gray-400">{t("fileTypes")}</p>
           </div>
         </div>
       )}
@@ -209,10 +210,10 @@ export default function UploadPage() {
                     <p className="text-xs text-red-500">{item.error}</p>
                   )}
                   {item.status === "uploading" && (
-                    <p className="text-xs text-blue-500">Uploading…</p>
+                    <p className="text-xs text-blue-500">{t("uploadingStatus")}</p>
                   )}
                   {item.status === "done" && (
-                    <p className="text-xs text-green-600">Uploaded · processing in background</p>
+                    <p className="text-xs text-green-600">{t("uploadedStatus")}</p>
                   )}
                 </div>
               </div>
@@ -234,28 +235,24 @@ export default function UploadPage() {
       <div className="flex items-center gap-3">
         {!allDone && pendingCount > 0 && (
           <Button onClick={startUpload} disabled={running}>
-            {running
-              ? "Uploading…"
-              : `Upload ${pendingCount} file${pendingCount !== 1 ? "s" : ""}`}
+            {running ? t("uploading") : t("uploadFiles", { count: pendingCount })}
           </Button>
         )}
 
         {allDone && (
           <>
             <Link href="/dashboard">
-              <Button>
-                View documents →
-              </Button>
+              <Button>{t("viewDocuments")}</Button>
             </Link>
             <Button variant="outline" onClick={reset}>
-              Upload more
+              {t("uploadMore")}
             </Button>
           </>
         )}
 
         {!allDone && files.length > 0 && !running && (
           <Button variant="outline" onClick={reset}>
-            Clear all
+            {t("clearAll")}
           </Button>
         )}
       </div>
@@ -264,12 +261,12 @@ export default function UploadPage() {
       {allDone && (
         <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
           {doneCount > 0 && (
-            <p>✓ {doneCount} file{doneCount !== 1 ? "s" : ""} uploaded successfully.</p>
+            <p>{t("uploadedSuccess", { count: doneCount })}</p>
           )}
           {errorCount > 0 && (
-            <p className="text-red-600 mt-1">✗ {errorCount} file{errorCount !== 1 ? "s" : ""} failed.</p>
+            <p className="text-red-600 mt-1">{t("uploadedFailed", { count: errorCount })}</p>
           )}
-          <p className="text-green-600 mt-1">Keywords and summaries will appear on the documents page shortly.</p>
+          <p className="text-green-600 mt-1">{t("processingNote")}</p>
         </div>
       )}
     </div>

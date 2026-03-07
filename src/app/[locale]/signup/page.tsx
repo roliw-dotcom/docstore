@@ -1,37 +1,61 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
-export default function LoginPage() {
-  const router = useRouter();
+export default function SignupPage() {
   const supabase = createClient();
+  const t = useTranslations("signup");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+    });
 
     if (error) {
       setError(error.message);
       setLoading(false);
     } else {
-      router.push("/dashboard");
-      router.refresh();
+      setSuccess(true);
     }
+  }
+
+  if (success) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FAFAF7]">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">{t("checkEmailTitle")}</CardTitle>
+            <CardDescription>
+              {t("checkEmailDesc", { email })}
+            </CardDescription>
+          </CardHeader>
+          <CardFooter>
+            <Link href="/login" className="text-sm text-blue-600 hover:underline">
+              {t("backToSignIn")}
+            </Link>
+          </CardFooter>
+        </Card>
+      </div>
+    );
   }
 
   return (
@@ -39,9 +63,9 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <CardTitle className="font-serif text-2xl font-normal">b<span className="font-sans font-bold">AI</span>nder</CardTitle>
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSignup}>
           <CardContent className="space-y-4">
             {error && (
               <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">
@@ -49,36 +73,37 @@ export default function LoginPage() {
               </div>
             )}
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("email")}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t("emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t("password")}</Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="••••••••"
+                placeholder={t("passwordPlaceholder")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                minLength={6}
                 required
               />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-3">
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Signing in..." : "Sign in"}
+              {loading ? t("creatingAccount") : t("createAccount")}
             </Button>
             <p className="text-sm text-center text-gray-600">
-              No account?{" "}
-              <Link href="/signup" className="text-blue-600 hover:underline">
-                Create one
+              {t("alreadyHaveAccount")}{" "}
+              <Link href="/login" className="text-blue-600 hover:underline">
+                {t("signIn")}
               </Link>
             </p>
           </CardFooter>

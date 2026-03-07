@@ -1,8 +1,33 @@
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+const handleI18n = createMiddleware(routing);
+
 export async function proxy(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request });
+  const { pathname } = request.nextUrl;
+
+  // API routes and auth callback: skip all middlewares
+  if (pathname.startsWith("/api") || pathname.startsWith("/auth")) {
+    return NextResponse.next();
+  }
+
+  // Run i18n middleware first (handles locale detection, / → /en redirect, etc.)
+  const i18nResponse = handleI18n(request);
+
+  // If i18n wants to redirect (e.g., / → /en), return immediately
+  if (i18nResponse.status !== 200) {
+    return i18nResponse;
+  }
+
+  // Extract locale from pathname (always present after i18n handled the request)
+  const localeMatch = pathname.match(/^\/(en|de)(\/|$)/);
+  const locale = localeMatch ? localeMatch[1] : "en";
+  const pathWithoutLocale = pathname.replace(/^\/(en|de)/, "") || "/";
+
+  // Supabase auth check — build on top of the i18n response
+  let supabaseResponse = i18nResponse;
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -16,7 +41,14 @@ export async function proxy(request: NextRequest) {
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           );
+          // Create a fresh response preserving i18n headers
           supabaseResponse = NextResponse.next({ request });
+          i18nResponse.headers.forEach((value, key) => {
+            supabaseResponse.headers.set(key, value);
+          });
+          i18nResponse.cookies.getAll().forEach(({ name, value }) => {
+            supabaseResponse.cookies.set(name, value);
+          });
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
           );
@@ -29,16 +61,14 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { pathname } = request.nextUrl;
-
   // Redirect unauthenticated users away from protected routes
-  if (!user && pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (!user && pathWithoutLocale.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
   }
 
   // Redirect authenticated users away from auth pages
-  if (user && (pathname === "/login" || pathname === "/signup")) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+  if (user && (pathWithoutLocale === "/login" || pathWithoutLocale === "/signup")) {
+    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   }
 
   return supabaseResponse;

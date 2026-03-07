@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 export default function RenameTitle({
   docId,
@@ -16,6 +17,7 @@ export default function RenameTitle({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const t = useTranslations("renameTitle");
 
   useEffect(() => {
     if (editing) inputRef.current?.select();
@@ -71,7 +73,7 @@ export default function RenameTitle({
           className="text-xl font-bold text-gray-900 bg-white border border-blue-400 rounded px-2 py-0.5 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         {error && <p className="text-xs text-red-600">{error}</p>}
-        <p className="text-xs text-gray-400">Enter to save · Esc to cancel</p>
+        <p className="text-xs text-gray-400">{t("saveHint")}</p>
       </div>
     );
   }
@@ -80,7 +82,7 @@ export default function RenameTitle({
     <button
       onClick={() => setEditing(true)}
       className="group flex items-center gap-2 text-left"
-      title="Click to rename"
+      title={t("clickToRename")}
     >
       <h1 className="text-xl font-bold text-gray-900 truncate">{value}</h1>
       <span className="text-gray-300 group-hover:text-gray-500 transition-colors text-sm flex-shrink-0">

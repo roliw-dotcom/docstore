@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 interface DocumentWithMeta {
   id: string;
@@ -25,21 +26,22 @@ function formatBytes(bytes: number | null) {
 }
 
 function StatusBadge({ status }: { status: string }) {
+  const t = useTranslations("documentCard");
   const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
     ready: "default",
     processing: "secondary",
     pending: "outline",
     error: "destructive",
   };
-  const labels: Record<string, string> = {
-    ready: "Ready",
-    processing: "Processing…",
-    pending: "Pending",
-    error: "Error",
+  const labelMap: Record<string, string> = {
+    ready: t("ready"),
+    processing: t("processing"),
+    pending: t("pending"),
+    error: t("error"),
   };
   return (
     <Badge variant={variants[status] ?? "outline"}>
-      {labels[status] ?? status}
+      {labelMap[status] ?? status}
     </Badge>
   );
 }

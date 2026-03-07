@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,6 +14,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function DeleteDocumentButton({
   docId,
@@ -25,6 +26,7 @@ export default function DeleteDocumentButton({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const t = useTranslations("deleteDocument");
 
   async function handleDelete() {
     setLoading(true);
@@ -34,7 +36,7 @@ export default function DeleteDocumentButton({
 
     if (!res.ok) {
       const data = await res.json();
-      setError(data.error ?? "Failed to delete document.");
+      setError(data.error ?? t("deleteButton"));
       setLoading(false);
       return;
     }
@@ -48,24 +50,23 @@ export default function DeleteDocumentButton({
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <Button variant="destructive" size="sm" disabled={loading}>
-            {loading ? "Deleting…" : "Delete document"}
+            {loading ? t("deleting") : t("deleteButton")}
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete document?</AlertDialogTitle>
+            <AlertDialogTitle>{t("confirmTitle")}</AlertDialogTitle>
             <AlertDialogDescription>
-              <strong>{filename}</strong> will be permanently deleted along with
-              its keywords and summary. This cannot be undone.
+              {t("confirmDesc", { filename })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               className="bg-red-600 hover:bg-red-700 focus:ring-red-600"
             >
-              Delete
+              {t("delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

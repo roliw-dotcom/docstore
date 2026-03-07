@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import PdfViewer from "@/components/pdf-viewer";
@@ -9,14 +9,16 @@ import DeleteDocumentButton from "@/components/delete-document-button";
 import RenameTitle from "@/components/rename-title";
 import AutoRefresh from "@/components/auto-refresh";
 import FollowUpList from "@/components/follow-up-list";
+import { getTranslations } from "next-intl/server";
 
 export default async function DocumentPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }) {
   const { id } = await params;
   const supabase = await createClient();
+  const t = await getTranslations("documents");
 
   const { data: doc } = await supabase
     .from("documents")
@@ -52,7 +54,7 @@ export default async function DocumentPage({
           <RenameTitle docId={doc.id} filename={doc.filename} />
           <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
             <span>{new Date(doc.created_at).toLocaleDateString()}</span>
-            {meta?.page_count && <span>· {meta.page_count} pages</span>}
+            {meta?.page_count && <span>{t("pages", { count: meta.page_count })}</span>}
             <Badge
               variant={
                 doc.status === "ready"
@@ -70,13 +72,13 @@ export default async function DocumentPage({
           {downloadUrl?.signedUrl && (
             <a href={downloadUrl.signedUrl} download={doc.filename}>
               <Button variant="outline" size="sm">
-                Download
+                {t("download")}
               </Button>
             </a>
           )}
           <Link href="/dashboard">
             <Button variant="outline" size="sm">
-              ← Back
+              {t("back")}
             </Button>
           </Link>
         </div>
@@ -100,7 +102,7 @@ export default async function DocumentPage({
             )
           ) : (
             <div className="flex items-center justify-center h-64 bg-gray-100 rounded-lg text-gray-400">
-              Could not load document.
+              {t("couldNotLoad")}
             </div>
           )}
         </div>
@@ -109,14 +111,14 @@ export default async function DocumentPage({
         <div className="space-y-5">
           {meta?.summary && (
             <div>
-              <h2 className="text-sm font-semibold text-gray-700 mb-2">Summary</h2>
+              <h2 className="text-sm font-semibold text-gray-700 mb-2">{t("summary")}</h2>
               <p className="text-sm text-gray-600 leading-relaxed">{meta.summary}</p>
             </div>
           )}
 
           {meta?.categories && meta.categories.length > 0 && (
             <div>
-              <h2 className="text-sm font-semibold text-gray-700 mb-2">Categories</h2>
+              <h2 className="text-sm font-semibold text-gray-700 mb-2">{t("categories")}</h2>
               <div className="flex flex-wrap gap-2">
                 {meta.categories.map((c: string) => (
                   <Badge key={c} variant="secondary">
@@ -129,7 +131,7 @@ export default async function DocumentPage({
 
           {meta?.keywords && meta.keywords.length > 0 && (
             <div>
-              <h2 className="text-sm font-semibold text-gray-700 mb-2">Keywords</h2>
+              <h2 className="text-sm font-semibold text-gray-700 mb-2">{t("keywords")}</h2>
               <div className="flex flex-wrap gap-1.5">
                 {meta.keywords.map((kw: string) => (
                   <span
@@ -145,7 +147,7 @@ export default async function DocumentPage({
 
           {followUps && followUps.length > 0 && (
             <div>
-              <h2 className="text-sm font-semibold text-gray-700 mb-2">Follow-ups</h2>
+              <h2 className="text-sm font-semibold text-gray-700 mb-2">{t("followUps")}</h2>
               <FollowUpList followUps={followUps} />
             </div>
           )}
@@ -154,13 +156,13 @@ export default async function DocumentPage({
 
           {doc.status === "processing" && (
             <div className="p-3 bg-blue-50 border border-blue-200 rounded-md text-sm text-blue-700">
-              Processing… keywords and summary will appear shortly.
+              {t("processing")}
             </div>
           )}
 
           {doc.status === "error" && (
             <div className="p-3 bg-red-50 border border-red-200 rounded-md text-sm text-red-700">
-              Processing failed. The PDF may be scanned or encrypted.
+              {t("processingError")}
             </div>
           )}
 

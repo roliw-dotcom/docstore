@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import DocumentCard from "@/components/document-card";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
 
 interface DocumentWithMeta {
   id: string;
@@ -21,6 +21,7 @@ interface DocumentWithMeta {
 export default function DocumentList({ documents }: { documents: DocumentWithMeta[] }) {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const t = useTranslations("documentList");
 
   // Collect all unique categories across documents
   const allCategories = useMemo(() => {
@@ -55,8 +56,8 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
     return (
       <div className="text-center py-20 text-gray-400">
         <p className="text-4xl mb-4">📄</p>
-        <p className="text-lg font-medium">No documents yet</p>
-        <p className="text-sm mt-1">Upload your first PDF to get started.</p>
+        <p className="text-lg font-medium">{t("noDocuments")}</p>
+        <p className="text-sm mt-1">{t("noDocumentsHint")}</p>
       </div>
     );
   }
@@ -65,7 +66,7 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
     <div className="space-y-5">
       {/* Search bar */}
       <Input
-        placeholder="Search by filename, keyword, category or summary…"
+        placeholder={t("searchPlaceholder")}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="max-w-lg"
@@ -82,7 +83,7 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
                 : "border-gray-300 text-gray-600 hover:border-gray-500"
             }`}
           >
-            All
+            {t("all")}
           </button>
           {allCategories.map((cat) => (
             <button
@@ -104,12 +105,12 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
 
       {/* Results count */}
       <p className="text-sm text-gray-400">
-        {filtered.length} of {documents.length} document{documents.length !== 1 ? "s" : ""}
+        {t("resultsCount", { filtered: filtered.length, total: documents.length })}
       </p>
 
       {filtered.length === 0 ? (
         <div className="text-center py-12 text-gray-400">
-          <p>No documents match your search.</p>
+          <p>{t("noResults")}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

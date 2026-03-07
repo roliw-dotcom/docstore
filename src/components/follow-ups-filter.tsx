@@ -1,9 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 export default function FollowUpsFilter({ current }: { current?: string }) {
   const isPending = current === "pending";
+  const t = useTranslations("followUpsFilter");
 
   return (
     <div className="flex gap-2">
@@ -15,7 +17,7 @@ export default function FollowUpsFilter({ current }: { current?: string }) {
             : "text-gray-600 border-gray-200 hover:border-gray-400"
         }`}
       >
-        All
+        {t("all")}
       </Link>
       <Link
         href="/dashboard/follow-ups?filter=pending"
@@ -25,7 +27,7 @@ export default function FollowUpsFilter({ current }: { current?: string }) {
             : "text-gray-600 border-gray-200 hover:border-gray-400"
         }`}
       >
-        Pending only
+        {t("pendingOnly")}
       </Link>
     </div>
   );

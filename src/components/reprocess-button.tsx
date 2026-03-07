@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
 export default function ReprocessButton({ docId }: { docId: string }) {
   const router = useRouter();
   const [state, setState] = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const t = useTranslations("reprocessButton");
 
   async function handleReprocess() {
     setState("loading");
@@ -33,7 +35,7 @@ export default function ReprocessButton({ docId }: { docId: string }) {
         onClick={handleReprocess}
         disabled={state === "loading"}
       >
-        {state === "loading" ? "Processing…" : "Reprocess document"}
+        {state === "loading" ? t("processing") : t("reprocess")}
       </Button>
       {state === "error" && (
         <p className="text-xs text-red-600">{errorMsg}</p>
