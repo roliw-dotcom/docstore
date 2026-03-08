@@ -34,11 +34,6 @@ export default async function DocumentPage({
 
   if (!doc) notFound();
 
-  // Signed URL for viewing (inline)
-  const { data: viewUrl } = await supabase.storage
-    .from("documents")
-    .createSignedUrl(doc.storage_path, 3600);
-
   // Signed URL for downloading (forces Content-Disposition: attachment)
   const { data: downloadUrl } = await supabase.storage
     .from("documents")
@@ -87,23 +82,17 @@ export default async function DocumentPage({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Document Viewer */}
         <div className="lg:col-span-2">
-          {viewUrl?.signedUrl ? (
-            doc.mime_type?.startsWith("image/") ? (
-              <div className="rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={viewUrl.signedUrl}
-                  alt={doc.filename}
-                  className="w-full h-auto"
-                />
-              </div>
-            ) : (
-              <PdfViewer url={viewUrl.signedUrl} />
-            )
-          ) : (
-            <div className="flex items-center justify-center h-64 bg-gray-100 rounded-lg text-gray-400">
-              {t("couldNotLoad")}
+          {doc.mime_type?.startsWith("image/") ? (
+            <div className="rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/api/documents/${doc.id}/file`}
+                alt={doc.filename}
+                className="w-full h-auto"
+              />
             </div>
+          ) : (
+            <PdfViewer url={`/api/documents/${doc.id}/file`} />
           )}
         </div>
 
