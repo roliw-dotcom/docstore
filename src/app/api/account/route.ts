@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { NextResponse } from "next/server";
+import { accountLimiter } from "@/lib/ratelimit";
 
 export async function DELETE() {
   const supabase = await createClient();
@@ -11,6 +12,11 @@ export async function DELETE() {
 
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { success } = await accountLimiter.limit(user.id);
+  if (!success) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
 
   // 1. Fetch all documents to collect storage paths
