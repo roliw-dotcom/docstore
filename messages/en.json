@@ -30,7 +30,9 @@
     "featurePrivateDesc": "Every document is stored privately. Only you can access your files — enforced at the database level, not just the UI.",
     "ctaTitle": "Nothing buried. Nothing missed.",
     "ctaDesc": "Create a free account and upload your first document in minutes.",
-    "footerSignUp": "Sign up"
+    "footerSignUp": "Sign up",
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "login": {
     "description": "Sign in to your account",
@@ -179,5 +181,19 @@
   "reprocessButton": {
     "reprocess": "Reprocess document",
     "processing": "Processing…"
+  },
+  "cookieBanner": {
+    "text": "We use cookies to keep you signed in.",
+    "accept": "Got it",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "account": {
+    "dangerZone": "Danger zone",
+    "deleteAccount": "Delete account",
+    "deleting": "Deleting…",
+    "confirmTitle": "Delete your account?",
+    "confirmDesc": "This will permanently delete all your documents, metadata, follow-ups, and your account. This cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Yes, delete everything"
   }
 }

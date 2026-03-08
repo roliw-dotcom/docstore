@@ -244,6 +244,8 @@ export default async function RootPage({
           <span>© {new Date().getFullYear()} bainder</span>
           <div className="flex gap-6">
             <Link href="/pricing" className="hover:text-stone-600">{t("pricing")}</Link>
+            <Link href="/privacy" className="hover:text-stone-600">{t("privacy")}</Link>
+            <Link href="/terms" className="hover:text-stone-600">{t("terms")}</Link>
             <Link href="/login" className="hover:text-stone-600">{t("signIn")}</Link>
             <Link href="/signup" className="hover:text-stone-600">{t("footerSignUp")}</Link>
           </div>

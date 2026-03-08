@@ -30,7 +30,9 @@
     "featurePrivateDesc": "Jedes Dokument wird privat gespeichert. Nur du kannst auf deine Dateien zugreifen — auf Datenbankebene erzwungen, nicht nur in der Benutzeroberfläche.",
     "ctaTitle": "Nichts vergraben. Nichts verpasst.",
     "ctaDesc": "Erstelle ein kostenloses Konto und lade dein erstes Dokument in Minuten hoch.",
-    "footerSignUp": "Registrieren"
+    "footerSignUp": "Registrieren",
+    "privacy": "Datenschutz",
+    "terms": "AGB"
   },
   "login": {
     "description": "Bei deinem Konto anmelden",
@@ -179,5 +181,19 @@
   "reprocessButton": {
     "reprocess": "Dokument neu verarbeiten",
     "processing": "Wird verarbeitet…"
+  },
+  "cookieBanner": {
+    "text": "Wir verwenden Cookies, um dich angemeldet zu halten.",
+    "accept": "Verstanden",
+    "privacyPolicy": "Datenschutzerklärung"
+  },
+  "account": {
+    "dangerZone": "Gefahrenzone",
+    "deleteAccount": "Konto löschen",
+    "deleting": "Wird gelöscht…",
+    "confirmTitle": "Konto wirklich löschen?",
+    "confirmDesc": "Dadurch werden alle deine Dokumente, Metadaten, Aufgaben und dein Konto dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.",
+    "cancel": "Abbrechen",
+    "confirm": "Ja, alles löschen"
   }
 }

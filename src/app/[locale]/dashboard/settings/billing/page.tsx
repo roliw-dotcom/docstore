@@ -4,7 +4,19 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "@/navigation";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useTranslations } from "next-intl";
+import { createClient } from "@/lib/supabase/client";
 
 interface Profile {
   tier: "free" | "pro";
@@ -17,9 +29,11 @@ export default function BillingPage() {
   const searchParams = useSearchParams();
   const success = searchParams.get("success") === "1";
   const t = useTranslations("billing");
+  const ta = useTranslations("account");
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -40,6 +54,18 @@ export default function BillingPage() {
     const res = await fetch("/api/stripe/portal", { method: "POST" });
     const data = await res.json();
     if (data.url) router.push(data.url);
+  }
+
+  async function handleDeleteAccount() {
+    setDeleting(true);
+    const res = await fetch("/api/account", { method: "DELETE" });
+    if (res.ok) {
+      const supabase = createClient();
+      await supabase.auth.signOut();
+      router.push("/");
+    } else {
+      setDeleting(false);
+    }
   }
 
   const renewalDate = profile?.current_period_end
@@ -112,6 +138,34 @@ export default function BillingPage() {
       <Link href="/dashboard" className="text-sm text-stone-500 hover:text-stone-700">
         {t("backToDocuments")}
       </Link>
+
+      {/* Danger Zone */}
+      <div className="rounded-xl border border-red-200 bg-white p-6 space-y-3">
+        <h2 className="text-base font-semibold text-red-700">{ta("dangerZone")}</h2>
+        <p className="text-sm text-stone-500">{ta("confirmDesc")}</p>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="destructive" disabled={deleting}>
+              {deleting ? ta("deleting") : ta("deleteAccount")}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>{ta("confirmTitle")}</AlertDialogTitle>
+              <AlertDialogDescription>{ta("confirmDesc")}</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>{ta("cancel")}</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleDeleteAccount}
+                className="bg-red-600 hover:bg-red-700 text-white"
+              >
+                {ta("confirm")}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
   );
 }

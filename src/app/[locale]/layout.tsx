@@ -3,6 +3,7 @@ import { DM_Serif_Display, Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import { CookieBanner } from "@/components/cookie-banner";
 import "../globals.css";
 
 const dmSerifDisplay = DM_Serif_Display({
@@ -42,6 +43,7 @@ export default async function LocaleLayout({
       <body className={`${dmSerifDisplay.variable} ${inter.variable} font-sans antialiased`}>
         <NextIntlClientProvider messages={messages}>
           {children}
+          <CookieBanner />
         </NextIntlClientProvider>
       </body>
     </html>
