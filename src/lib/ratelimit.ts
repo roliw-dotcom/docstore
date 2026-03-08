@@ -26,3 +26,20 @@ export const accountLimiter = new Ratelimit({
   limiter: Ratelimit.slidingWindow(5, "1 h"),
   prefix: "rl:account",
 });
+
+/**
+ * Fail-open wrapper: if Upstash is unreachable or misconfigured,
+ * log the error and allow the request through rather than hanging the app.
+ */
+export async function checkRateLimit(
+  limiter: Ratelimit,
+  key: string
+): Promise<boolean> {
+  try {
+    const { success } = await limiter.limit(key);
+    return success;
+  } catch (err) {
+    console.error("[ratelimit] Upstash error — allowing request:", err);
+    return true; // fail-open
+  }
+}

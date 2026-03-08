@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import { getUserTier } from "@/lib/get-user-tier";
-import { uploadLimiter } from "@/lib/ratelimit";
+import { uploadLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 export async function POST(request: NextRequest) {
   const supabase = await createClient();
@@ -14,8 +14,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { success } = await uploadLimiter.limit(user.id);
-  if (!success) {
+  if (!await checkRateLimit(uploadLimiter, user.id)) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
 

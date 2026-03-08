@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { NextResponse } from "next/server";
-import { accountLimiter } from "@/lib/ratelimit";
+import { accountLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 export async function DELETE() {
   const supabase = await createClient();
@@ -14,8 +14,7 @@ export async function DELETE() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { success } = await accountLimiter.limit(user.id);
-  if (!success) {
+  if (!await checkRateLimit(accountLimiter, user.id)) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
 
