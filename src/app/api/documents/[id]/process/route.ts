@@ -12,6 +12,11 @@ const pdfParse = require("pdf-parse") as (
   buffer: Buffer
 ) => Promise<{ text: string; numpages: number }>;
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const mammoth = require("mammoth") as {
+  extractRawText: (options: { buffer: Buffer }) => Promise<{ value: string }>;
+};
+
 interface FollowUpItem {
   title: string;
   description?: string;
@@ -77,6 +82,7 @@ export async function POST(
     const buffer = Buffer.from(await fileBlob.arrayBuffer());
 
     const isImage = doc.mime_type?.startsWith("image/");
+    const isDocx = doc.mime_type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
     // ── 2. Extract content and call Claude ────────────────────────────────
     const PROMPT = `Analyze the document and return a single JSON object with these exact fields:
@@ -117,8 +123,27 @@ Return ONLY the raw JSON object — no markdown fences, no explanation.`;
           },
         ],
       });
+    } else if (isDocx) {
+      // ── 2b. Word document: extract text with mammoth ─────────────────────
+      const result = await mammoth.extractRawText({ buffer });
+      const text = result.value.slice(0, 40000).trim();
+
+      if (!text) {
+        throw new Error("No text could be extracted from the Word document.");
+      }
+
+      message = await anthropic.messages.create({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 2048,
+        messages: [
+          {
+            role: "user",
+            content: `${PROMPT}\n\nDocument:\n${text}`,
+          },
+        ],
+      });
     } else {
-      // ── 2b. PDF: extract text with pdf-parse ────────────────────────────
+      // ── 2c. PDF: extract text with pdf-parse ────────────────────────────
       const pdf = await pdfParse(buffer);
       pageCount = pdf.numpages;
       const text = pdf.text.slice(0, 40000).trim();

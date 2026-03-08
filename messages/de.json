@@ -83,10 +83,10 @@
   },
   "upload": {
     "title": "Dokumente hochladen",
-    "subtitle": "PDF oder Bilddateien bis 20 MB · mehrere Dateien unterstützt",
+    "subtitle": "PDF-, Word- oder Bilddateien bis 20 MB · mehrere Dateien unterstützt",
     "dropHere": "Dateien hier ablegen",
-    "dragDrop": "PDFs oder Bilder hier hineinziehen",
-    "fileTypes": "PDF, JPG, PNG, WEBP, GIF · oder zum Durchsuchen klicken",
+    "dragDrop": "Dateien hier hineinziehen",
+    "fileTypes": "PDF, DOCX, JPG, PNG, WEBP, GIF · oder zum Durchsuchen klicken",
     "uploading": "Lädt hoch…",
     "uploadFiles": "{count, plural, one {# Datei hochladen} other {# Dateien hochladen}}",
     "viewDocuments": "Dokumente ansehen →",
