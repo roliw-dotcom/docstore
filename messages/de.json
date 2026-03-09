@@ -112,15 +112,15 @@
   },
   "billing": {
     "title": "Abrechnung",
-    "subtitle": "Verwalte dein Abonnement und deinen Plan.",
-    "subscriptionActivated": "Abonnement aktiviert — Willkommen bei Pro!",
+    "subtitle": "Verwalte deinen Plan und dein Abonnement.",
+    "subscriptionActivated": "Du bist jetzt Pro — unbegrenzte Dokumente und E-Mail-Erinnerungen sind aktiv.",
     "loading": "Lädt…",
     "currentPlan": "Aktueller Plan",
     "renewsOn": "Verlängert am {date}",
     "upgradeToPro": "Zu Pro wechseln — 9 $/Monat",
-    "unlimitedDocs": "Unbegrenzte Dokumente + E-Mail-Erinnerungen.",
+    "unlimitedDocs": "Unbegrenzte Dokumente, alle Formate und E-Mail-Erinnerungen 5 Tage vor jeder Frist.",
     "manageBilling": "Abrechnung verwalten",
-    "updatePayment": "Zahlungsmethode aktualisieren, Rechnungen anzeigen oder kündigen.",
+    "updatePayment": "Zahlungsmethode aktualisieren, Rechnungen herunterladen oder Abonnement kündigen.",
     "backToDocuments": "← Zurück zu Dokumenten"
   },
   "documents": {

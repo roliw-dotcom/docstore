@@ -112,15 +112,15 @@
   },
   "billing": {
     "title": "Billing",
-    "subtitle": "Manage your subscription and plan.",
-    "subscriptionActivated": "Subscription activated — welcome to Pro!",
+    "subtitle": "Manage your plan and subscription.",
+    "subscriptionActivated": "You're on Pro — unlimited documents and email reminders are now active.",
     "loading": "Loading…",
     "currentPlan": "Current plan",
     "renewsOn": "Renews on {date}",
     "upgradeToPro": "Upgrade to Pro — $9/month",
-    "unlimitedDocs": "Unlimited documents + email reminders.",
+    "unlimitedDocs": "Unlimited documents, all formats, and email reminders 5 days before every deadline.",
     "manageBilling": "Manage billing",
-    "updatePayment": "Update payment method, view invoices, or cancel.",
+    "updatePayment": "Update your payment method, download invoices, or cancel your subscription.",
     "backToDocuments": "← Back to documents"
   },
   "documents": {
