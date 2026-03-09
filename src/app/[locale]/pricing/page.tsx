@@ -48,7 +48,7 @@ export default function PricingPage() {
           <div className="rounded-xl border border-stone-200 bg-white p-8 flex flex-col">
             <p className="text-xs uppercase tracking-widest text-stone-400 font-sans mb-3">{t("freePlan")}</p>
             <div className="flex items-baseline gap-1 mb-6">
-              <span className="font-serif text-4xl text-[#1C2333]">$0</span>
+              <span className="font-serif text-4xl text-[#1C2333]">€0</span>
               <span className="text-stone-400 font-sans text-sm">{t("perMonth")}</span>
             </div>
             <ul className="space-y-3 text-sm text-stone-600 font-sans flex-1 mb-8">
@@ -77,7 +77,7 @@ export default function PricingPage() {
             </span>
             <p className="text-xs uppercase tracking-widest text-amber-600 font-sans mb-3">{t("proPlan")}</p>
             <div className="flex items-baseline gap-1 mb-6">
-              <span className="font-serif text-4xl text-[#1C2333]">$9</span>
+              <span className="font-serif text-4xl text-[#1C2333]">€9</span>
               <span className="text-stone-400 font-sans text-sm">{t("perMonth")}</span>
             </div>
             <ul className="space-y-3 text-sm text-stone-600 font-sans flex-1 mb-8">
