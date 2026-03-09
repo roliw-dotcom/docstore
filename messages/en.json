@@ -83,10 +83,10 @@
   },
   "upload": {
     "title": "Upload Documents",
-    "subtitle": "PDF, Word, or image files up to 20 MB · multiple files supported",
+    "subtitle": "PDF, Word, Excel, ODT, TXT, MD or image files up to 20 MB · multiple files supported",
     "dropHere": "Drop files here",
     "dragDrop": "Drag & drop files here",
-    "fileTypes": "PDF, DOCX, JPG, PNG, WEBP, GIF · or click to browse",
+    "fileTypes": "PDF, DOCX, XLSX, ODT, TXT, MD, JPG, PNG · or click to browse",
     "uploading": "Uploading…",
     "uploadFiles": "{count, plural, one {Upload # file} other {Upload # files}}",
     "viewDocuments": "View documents →",

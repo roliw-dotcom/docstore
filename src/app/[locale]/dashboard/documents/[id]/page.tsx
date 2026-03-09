@@ -91,13 +91,13 @@ export default async function DocumentPage({
                 className="w-full h-auto"
               />
             </div>
-          ) : doc.mime_type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ? (
-            <div className="flex flex-col items-center justify-center h-64 gap-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-500">
-              <span className="text-4xl">📝</span>
-              <p className="text-sm">Word document — use the Download button to open it.</p>
-            </div>
-          ) : (
+          ) : doc.mime_type === "application/pdf" ? (
             <PdfViewer url={`/api/documents/${doc.id}/file`} />
+          ) : (
+            <div className="flex flex-col items-center justify-center h-64 gap-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-500">
+              <span className="text-4xl">📄</span>
+              <p className="text-sm">Preview not available — use the Download button to open this file.</p>
+            </div>
           )}
         </div>
 

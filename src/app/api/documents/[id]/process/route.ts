@@ -17,6 +17,9 @@ const mammoth = require("mammoth") as {
   extractRawText: (options: { buffer: Buffer }) => Promise<{ value: string }>;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const XLSX = require("xlsx") as typeof import("xlsx");
+
 interface FollowUpItem {
   title: string;
   description?: string;
@@ -83,6 +86,9 @@ export async function POST(
 
     const isImage = doc.mime_type?.startsWith("image/");
     const isDocx = doc.mime_type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    const isOdt  = doc.mime_type === "application/vnd.oasis.opendocument.text";
+    const isXlsx = doc.mime_type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    const isText = doc.mime_type === "text/plain" || doc.mime_type === "text/markdown";
 
     // ── 2. Extract content and call Claude ────────────────────────────────
     const PROMPT = `Analyze the document and return a single JSON object with these exact fields:
@@ -123,24 +129,49 @@ Return ONLY the raw JSON object — no markdown fences, no explanation.`;
           },
         ],
       });
-    } else if (isDocx) {
-      // ── 2b. Word document: extract text with mammoth ─────────────────────
+    } else if (isDocx || isOdt) {
+      // ── 2b. Word / ODT: extract text with mammoth ────────────────────────
       const result = await mammoth.extractRawText({ buffer });
       const text = result.value.slice(0, 40000).trim();
 
       if (!text) {
-        throw new Error("No text could be extracted from the Word document.");
+        throw new Error("No text could be extracted from the document.");
       }
 
       message = await anthropic.messages.create({
         model: "claude-haiku-4-5-20251001",
         max_tokens: 2048,
-        messages: [
-          {
-            role: "user",
-            content: `${PROMPT}\n\nDocument:\n${text}`,
-          },
-        ],
+        messages: [{ role: "user", content: `${PROMPT}\n\nDocument:\n${text}` }],
+      });
+    } else if (isXlsx) {
+      // ── 2c. Excel: convert all sheets to CSV text ─────────────────────────
+      const workbook = XLSX.read(buffer, { type: "buffer" });
+      const text = workbook.SheetNames.map((name: string) => {
+        const csv = XLSX.utils.sheet_to_csv(workbook.Sheets[name]);
+        return `Sheet: ${name}\n${csv}`;
+      }).join("\n\n").slice(0, 40000).trim();
+
+      if (!text) {
+        throw new Error("No data could be extracted from the spreadsheet.");
+      }
+
+      message = await anthropic.messages.create({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 2048,
+        messages: [{ role: "user", content: `${PROMPT}\n\nDocument:\n${text}` }],
+      });
+    } else if (isText) {
+      // ── 2d. Plain text / Markdown ─────────────────────────────────────────
+      const text = buffer.toString("utf-8").slice(0, 40000).trim();
+
+      if (!text) {
+        throw new Error("The file appears to be empty.");
+      }
+
+      message = await anthropic.messages.create({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 2048,
+        messages: [{ role: "user", content: `${PROMPT}\n\nDocument:\n${text}` }],
       });
     } else {
       // ── 2c. PDF: extract text with pdf-parse ────────────────────────────

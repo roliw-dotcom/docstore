@@ -26,6 +26,10 @@ const ACCEPTED_MIME_TYPES = new Set([
   "image/webp",
   "image/gif",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.oasis.opendocument.text",
+  "text/plain",
+  "text/markdown",
 ]);
 
 async function uploadOne(
@@ -123,6 +127,10 @@ export default function UploadPage() {
       "image/webp": [".webp"],
       "image/gif": [".gif"],
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"],
+      "application/vnd.oasis.opendocument.text": [".odt"],
+      "text/plain": [".txt"],
+      "text/markdown": [".md"],
     },
     disabled: running,
   });
