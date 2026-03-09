@@ -60,21 +60,21 @@
     "backToSignIn": "Zurück zur Anmeldung"
   },
   "pricing": {
-    "title": "Einfache Preise",
-    "subtitle": "Kostenlos starten. Upgrade wenn du mehr brauchst.",
+    "title": "Einfache, faire Preise",
+    "subtitle": "Kostenlos ausprobieren. Upgrade wenn Fristen wichtig werden.",
     "signIn": "Anmelden",
     "getStarted": "Loslegen",
     "freePlan": "Kostenlos",
     "perMonth": "/Monat",
-    "freeFeature1": "10 Dokumente (lebenslang)",
-    "freeFeature2": "KI-Extraktion (Schlagwörter, Zusammenfassung, Aufgaben)",
+    "freeFeature1": "10 Dokumente (PDF, Word, Excel, ODT, Bilder u. v. m.)",
+    "freeFeature2": "KI-Extraktion — Schlagwörter, Zusammenfassung, Fristen & Aufgaben",
     "freeFeatureNo": "E-Mail-Erinnerungen",
     "getStartedFree": "Kostenlos starten",
     "proPlan": "Pro",
     "mostPopular": "Beliebteste",
-    "proFeature1": "Unbegrenzte Dokumente",
-    "proFeature2": "KI-Extraktion (Schlagwörter, Zusammenfassung, Aufgaben)",
-    "proFeature3": "E-Mail-Erinnerungen 5 Tage vor Fristen",
+    "proFeature1": "Unbegrenzte Dokumente — alle unterstützten Formate",
+    "proFeature2": "KI-Extraktion — Schlagwörter, Zusammenfassung, Fristen & Aufgaben",
+    "proFeature3": "E-Mail-Erinnerungen 5 Tage vor jeder Frist",
     "upgradeToPro": "Zu Pro wechseln"
   },
   "dashboard": {

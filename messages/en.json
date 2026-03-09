@@ -60,21 +60,21 @@
     "backToSignIn": "Back to sign in"
   },
   "pricing": {
-    "title": "Simple pricing",
-    "subtitle": "Start free. Upgrade when you need more.",
+    "title": "Simple, honest pricing",
+    "subtitle": "Try it free. Upgrade when deadlines start to matter.",
     "signIn": "Sign in",
     "getStarted": "Get started",
     "freePlan": "Free",
     "perMonth": "/month",
-    "freeFeature1": "10 documents (lifetime)",
-    "freeFeature2": "AI extraction (keywords, summary, follow-ups)",
+    "freeFeature1": "10 documents (PDF, Word, Excel, ODT, images & more)",
+    "freeFeature2": "AI extraction — keywords, summary, deadlines & follow-ups",
     "freeFeatureNo": "Email reminders",
     "getStartedFree": "Get started free",
     "proPlan": "Pro",
     "mostPopular": "Most popular",
-    "proFeature1": "Unlimited documents",
-    "proFeature2": "AI extraction (keywords, summary, follow-ups)",
-    "proFeature3": "Email reminders 5 days before deadlines",
+    "proFeature1": "Unlimited documents — all supported formats",
+    "proFeature2": "AI extraction — keywords, summary, deadlines & follow-ups",
+    "proFeature3": "Email reminders 5 days before every deadline",
     "upgradeToPro": "Upgrade to Pro"
   },
   "dashboard": {
