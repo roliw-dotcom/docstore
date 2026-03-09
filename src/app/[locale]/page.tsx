@@ -177,7 +177,12 @@ export default async function RootPage({
             </p>
           </div>
           <div className="hidden lg:flex justify-center">
-            <BinderVisual />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/hero.jpg"
+              alt="Overwhelmed by documents? bAInder handles it."
+              className="w-full max-w-[480px] rounded-2xl shadow-xl"
+            />
           </div>
         </div>
       </section>
