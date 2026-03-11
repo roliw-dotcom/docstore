@@ -61,6 +61,7 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         style={{
+          width: "100%",
           maxWidth: "480px",
           background: "rgba(255,255,255,0.06)",
           border: "1px solid rgba(255,255,255,0.1)",

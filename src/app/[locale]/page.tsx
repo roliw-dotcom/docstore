@@ -120,7 +120,7 @@ export default async function RootPage({
     <div style={{ background: "#0F2337", color: "white" }}>
 
       {/* ── Hero ── */}
-      <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "480px" }}>
+      <section className="grid grid-cols-1 md:grid-cols-2" style={{ minHeight: "480px" }}>
 
         {/* Left: binder art + text overlay */}
         <div style={{ position: "relative", overflow: "hidden" }}>
@@ -133,7 +133,7 @@ export default async function RootPage({
           {/* Content */}
           <div style={{
             position: "relative", zIndex: 4,
-            padding: "56px 50px",
+            padding: "clamp(32px, 6vw, 56px) clamp(20px, 6vw, 50px)",
             display: "flex", flexDirection: "column", justifyContent: "center",
             minHeight: "480px",
           }}>
@@ -161,7 +161,7 @@ export default async function RootPage({
               fontSize: "0.9rem",
               lineHeight: 1.72,
               marginBottom: "34px",
-              maxWidth: "320px",
+              maxWidth: "400px",
             }}>
               {t("heroDesc")}
             </p>
@@ -213,7 +213,7 @@ export default async function RootPage({
       <div style={{
         background: "rgba(8,20,32,0.98)",
         borderTop: "1px solid rgba(230,126,34,0.18)",
-        padding: "13px 48px",
+        padding: "13px 24px",
         textAlign: "center",
         fontSize: "0.8rem",
         color: "#C4956A",
@@ -299,11 +299,11 @@ export default async function RootPage({
 
       {/* ── Footer ── */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "32px 0" }}>
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center gap-4 justify-between">
           <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.25)", fontFamily: "monospace" }}>
             © {new Date().getFullYear()} bainder
           </span>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap justify-center gap-5 sm:gap-6">
             {[
               { href: "/pricing", label: t("pricing") },
               { href: "/privacy", label: t("privacy") },

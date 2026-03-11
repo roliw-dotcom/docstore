@@ -50,7 +50,7 @@ export default async function DocumentPage({
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "16px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
         <div style={{ minWidth: 0, flex: 1 }}>
           <RenameTitle docId={doc.id} filename={doc.filename} />
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px", marginTop: "6px" }}>
@@ -64,13 +64,13 @@ export default async function DocumentPage({
         <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
           {downloadUrl?.signedUrl && (
             <a href={downloadUrl.signedUrl} download={doc.filename}>
-              <button style={{ fontSize: "0.8rem", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", padding: "6px 14px", background: "transparent", cursor: "pointer" }}>
+              <button style={{ fontSize: "0.8rem", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", padding: "10px 16px", background: "transparent", cursor: "pointer" }}>
                 {t("download")}
               </button>
             </a>
           )}
           <Link href="/dashboard">
-            <button style={{ fontSize: "0.8rem", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", padding: "6px 14px", background: "transparent", cursor: "pointer" }}>
+            <button style={{ fontSize: "0.8rem", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "6px", padding: "10px 16px", background: "transparent", cursor: "pointer" }}>
               {t("back")}
             </button>
           </Link>

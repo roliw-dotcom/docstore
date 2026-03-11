@@ -21,13 +21,13 @@ export default function PricingPage() {
           <p style={{ fontFamily: "monospace", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#E67E22", marginBottom: "12px" }}>
             Plans
           </p>
-          <h1 className="font-serif text-5xl tracking-tight text-white mb-4">{t("title")}</h1>
+          <h1 className="font-serif text-3xl sm:text-5xl tracking-tight text-white mb-4">{t("title")}</h1>
           <p style={{ color: "#6A90AA" }}>{t("subtitle")}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Free card */}
-          <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "14px", padding: "32px", display: "flex", flexDirection: "column" }}>
+          <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "14px", padding: "clamp(20px, 5vw, 32px)", display: "flex", flexDirection: "column" }}>
             <p style={{ fontFamily: "monospace", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6A90AA", marginBottom: "12px" }}>{t("freePlan")}</p>
             <div className="flex items-baseline gap-1 mb-6">
               <span className="font-serif text-4xl text-white">€0</span>
@@ -52,7 +52,7 @@ export default function PricingPage() {
           </div>
 
           {/* Pro card */}
-          <div style={{ background: "rgba(230,126,34,0.08)", border: "2px solid #E67E22", borderRadius: "14px", padding: "32px", display: "flex", flexDirection: "column", position: "relative" }}>
+          <div style={{ background: "rgba(230,126,34,0.08)", border: "2px solid #E67E22", borderRadius: "14px", padding: "clamp(20px, 5vw, 32px)", display: "flex", flexDirection: "column", position: "relative" }}>
             <span style={{ position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", background: "#E67E22", color: "white", fontWeight: 700, padding: "4px 12px", borderRadius: "20px", whiteSpace: "nowrap" }}>
               {t("mostPopular")}
             </span>

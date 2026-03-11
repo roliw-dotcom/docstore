@@ -139,7 +139,7 @@ export default function UploadPage() {
           style={{
             border: `2px dashed ${isDragActive ? "#E67E22" : "rgba(255,255,255,0.15)"}`,
             borderRadius: "12px",
-            padding: "48px 24px",
+            padding: "clamp(28px, 5vw, 48px) 20px",
             textAlign: "center",
             cursor: running ? "not-allowed" : "pointer",
             background: isDragActive ? "rgba(230,126,34,0.06)" : "rgba(255,255,255,0.02)",

@@ -10,7 +10,7 @@ const cardStyle: React.CSSProperties = {
   background: "rgba(255,255,255,0.06)",
   border: "1px solid rgba(255,255,255,0.1)",
   borderRadius: "14px",
-  padding: "36px",
+  padding: "clamp(20px, 5vw, 36px)",
   width: "100%",
   maxWidth: "420px",
 };
