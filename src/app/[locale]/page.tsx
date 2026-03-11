@@ -305,11 +305,12 @@ export default async function RootPage({
           </span>
           <div className="flex flex-wrap justify-center gap-5 sm:gap-6">
             {[
-              { href: "/pricing", label: t("pricing") },
-              { href: "/privacy", label: t("privacy") },
-              { href: "/terms",   label: t("terms") },
-              { href: "/login",   label: t("signIn") },
-              { href: "/signup",  label: t("footerSignUp") },
+              { href: "/pricing",    label: t("pricing") },
+              { href: "/privacy",    label: t("privacy") },
+              { href: "/terms",      label: t("terms") },
+              { href: "/impressum",  label: t("impressum") },
+              { href: "/login",      label: t("signIn") },
+              { href: "/signup",     label: t("footerSignUp") },
             ].map(({ href, label }) => (
               <Link
                 key={href}
