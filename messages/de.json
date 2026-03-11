@@ -4,7 +4,10 @@
     "followUps": "Aufgaben",
     "upload": "Upload",
     "billing": "Abrechnung",
-    "signOut": "Abmelden"
+    "signOut": "Abmelden",
+    "pricing": "Preise",
+    "signIn": "Anmelden",
+    "getStarted": "Loslegen"
   },
   "landing": {
     "pricing": "Preise",

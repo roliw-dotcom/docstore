@@ -1,7 +1,6 @@
 "use client";
 
-import { Link } from "@/navigation";
-import { useRouter } from "@/navigation";
+import { Link, useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 
 export default function PricingPage() {
@@ -16,25 +15,6 @@ export default function PricingPage() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0F2337", color: "white" }}>
-      {/* Nav */}
-      <header style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(15,35,55,0.97)", position: "sticky", top: 0, zIndex: 50 }}>
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="font-serif text-2xl tracking-tight text-white">
-            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link href="/login" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
-              {t("signIn")}
-            </Link>
-            <Link href="/signup">
-              <button style={{ background: "#E67E22", color: "white", padding: "7px 16px", borderRadius: "6px", fontSize: "0.78rem", fontWeight: 600, border: "none", cursor: "pointer" }}>
-                {t("getStarted")}
-              </button>
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* Pricing section */}
       <section className="max-w-3xl mx-auto px-6 py-20">
         <div className="text-center mb-12">

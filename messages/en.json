@@ -4,7 +4,10 @@
     "followUps": "Follow-ups",
     "upload": "Upload",
     "billing": "Billing",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "pricing": "Pricing",
+    "signIn": "Sign in",
+    "getStarted": "Get started"
   },
   "landing": {
     "pricing": "Pricing",

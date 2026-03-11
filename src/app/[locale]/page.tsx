@@ -117,38 +117,7 @@ export default async function RootPage({
   const t = await getTranslations("landing");
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0F2337", color: "white" }}>
-
-      {/* ── Nav ── */}
-      <header style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(15,35,55,0.97)", position: "sticky", top: 0, zIndex: 50 }}>
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-serif text-2xl tracking-tight">
-            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
-          </span>
-          <nav className="flex items-center gap-6">
-            <Link href="/pricing" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
-              {t("pricing")}
-            </Link>
-            <Link href="/login" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
-              {t("signIn")}
-            </Link>
-            <Link href="/signup">
-              <button style={{
-                background: "#E67E22",
-                color: "white",
-                padding: "7px 16px",
-                borderRadius: "6px",
-                fontSize: "0.78rem",
-                fontWeight: 600,
-                border: "none",
-                cursor: "pointer",
-              }}>
-                {t("getStarted")}
-              </button>
-            </Link>
-          </nav>
-        </div>
-      </header>
+    <div style={{ background: "#0F2337", color: "white" }}>
 
       {/* ── Hero ── */}
       <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "480px" }}>
