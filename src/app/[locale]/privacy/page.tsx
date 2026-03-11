@@ -382,11 +382,64 @@ export default async function PrivacyPage({
 
   return (
     <div style={{ minHeight: "100vh", background: "#0F2337", color: "white" }}>
+      <style>{`
+        .privacy-content h1 {
+          font-family: var(--font-dm-serif);
+          font-size: 2rem;
+          color: white;
+          margin: 0 0 6px 0;
+        }
+        .privacy-content h2 {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: white;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          margin: 48px 0 16px 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid rgba(230,126,34,0.25);
+        }
+        .privacy-content h3 {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #E67E22;
+          margin: 24px 0 8px 0;
+        }
+        .privacy-content p {
+          font-size: 0.9rem;
+          color: #8AAEC7;
+          line-height: 1.75;
+          margin: 0 0 12px 0;
+        }
+        .privacy-content ul {
+          padding-left: 20px;
+          margin: 0 0 14px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .privacy-content li {
+          font-size: 0.9rem;
+          color: #8AAEC7;
+          line-height: 1.65;
+        }
+        .privacy-content strong {
+          color: rgba(255,255,255,0.85);
+          font-weight: 600;
+        }
+        .privacy-content a {
+          color: #E67E22;
+          text-decoration: none;
+        }
+        .privacy-content a:hover {
+          text-decoration: underline;
+        }
+      `}</style>
       <div className="max-w-3xl mx-auto px-6 py-16">
         <div style={{ marginBottom: "32px", borderRadius: "8px", border: "1px solid rgba(230,126,34,0.3)", background: "rgba(230,126,34,0.08)", padding: "12px 16px", fontSize: "0.875rem", color: "#F5A623" }}>
           ⚠️ Review and fill in your company details (name, address) before going live.
         </div>
-        <div className="prose prose-invert max-w-none">
+        <div className="privacy-content">
           {locale === "de" ? <DE /> : <EN />}
         </div>
       </div>
