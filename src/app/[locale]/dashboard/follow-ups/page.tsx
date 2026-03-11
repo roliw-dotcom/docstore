@@ -30,56 +30,47 @@ export default async function FollowUpsPage({
     .select(`*, documents(filename)`)
     .order("due_date", { ascending: true, nullsFirst: false });
 
-  if (pendingOnly) {
-    query = query.eq("completed", false);
-  }
+  if (pendingOnly) query = query.eq("completed", false);
 
   const { data: allFollowUps } = await query;
   const followUps: FollowUp[] = allFollowUps ?? [];
-
   const pending = followUps.filter((fu) => !fu.completed);
   const completed = followUps.filter((fu) => fu.completed);
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "16px" }}>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
-          <p className="text-sm text-gray-500 mt-1">{t("subtitle")}</p>
+          <h1 className="font-serif text-2xl text-white">{t("title")}</h1>
+          <p style={{ fontSize: "0.875rem", color: "#6A90AA", marginTop: "4px" }}>{t("subtitle")}</p>
         </div>
         <FollowUpsFilter current={filter} />
       </div>
 
       {followUps.length === 0 ? (
-        <div className="text-center py-16 text-gray-400">
-          <p className="text-lg">{t("noFollowUps")}</p>
-          <p className="text-sm mt-1">{t("noFollowUpsHint")}</p>
+        <div style={{ textAlign: "center", padding: "64px 0", color: "#6A90AA" }}>
+          <p style={{ fontSize: "1rem" }}>{t("noFollowUps")}</p>
+          <p style={{ fontSize: "0.875rem", marginTop: "4px" }}>{t("noFollowUpsHint")}</p>
         </div>
       ) : (
-        <div className="space-y-8">
+        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
           {(!pendingOnly || pending.length > 0) && (
             <section>
-              <h2 className="text-sm font-semibold text-gray-700 mb-2">
-                {t("pending")}{" "}
-                <span className="font-normal text-gray-400">({pending.length})</span>
+              <h2 style={{ fontSize: "0.75rem", fontFamily: "monospace", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6A90AA", marginBottom: "10px" }}>
+                {t("pending")} <span style={{ color: "rgba(255,255,255,0.25)" }}>({pending.length})</span>
               </h2>
-              <div className="bg-white border border-gray-200 rounded-lg px-4">
-                <FollowUpList
-                  followUps={pending}
-                  showFilename
-                  emptyMessage={t("allCaughtUp")}
-                />
+              <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "10px", padding: "0 16px" }}>
+                <FollowUpList followUps={pending} showFilename emptyMessage={t("allCaughtUp")} />
               </div>
             </section>
           )}
 
           {!pendingOnly && completed.length > 0 && (
             <section>
-              <h2 className="text-sm font-semibold text-gray-700 mb-2">
-                {t("completed")}{" "}
-                <span className="font-normal text-gray-400">({completed.length})</span>
+              <h2 style={{ fontSize: "0.75rem", fontFamily: "monospace", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6A90AA", marginBottom: "10px" }}>
+                {t("completed")} <span style={{ color: "rgba(255,255,255,0.25)" }}>({completed.length})</span>
               </h2>
-              <div className="bg-white border border-gray-200 rounded-lg px-4">
+              <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "10px", padding: "0 16px" }}>
                 <FollowUpList followUps={completed} showFilename />
               </div>
             </section>

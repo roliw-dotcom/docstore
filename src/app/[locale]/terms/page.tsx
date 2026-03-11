@@ -5,9 +5,9 @@ export const metadata: Metadata = {
 };
 
 const EN = () => (
-  <div className="prose prose-stone max-w-none">
+  <div className="prose prose-invert max-w-none">
     <h1>Terms of Service</h1>
-    <p className="text-stone-500">Last updated: March 2026</p>
+    <p style={{ color: "#6A90AA" }}>Last updated: March 2026</p>
 
     <h2>1. Service Description</h2>
     <p>
@@ -80,9 +80,9 @@ const EN = () => (
 );
 
 const DE = () => (
-  <div className="prose prose-stone max-w-none">
+  <div className="prose prose-invert max-w-none">
     <h1>Nutzungsbedingungen</h1>
-    <p className="text-stone-500">Zuletzt aktualisiert: März 2026</p>
+    <p style={{ color: "#6A90AA" }}>Zuletzt aktualisiert: März 2026</p>
 
     <h2>1. Leistungsbeschreibung</h2>
     <p>
@@ -161,9 +161,9 @@ export default async function TermsPage({
   const { locale } = await params;
 
   return (
-    <div className="min-h-screen bg-[#FAFAF7]">
+    <div style={{ minHeight: "100vh", background: "#0F2337", color: "white" }}>
       <div className="max-w-3xl mx-auto px-6 py-16">
-        <div className="mb-8 rounded-lg border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-800">
+        <div style={{ marginBottom: "32px", borderRadius: "8px", border: "1px solid rgba(230,126,34,0.3)", background: "rgba(230,126,34,0.08)", padding: "12px 16px", fontSize: "0.875rem", color: "#F5A623" }}>
           ⚠️ Review and fill in your company details (name, city, governing law) before going live.
         </div>
         {locale === "de" ? <DE /> : <EN />}

@@ -3,11 +3,35 @@
 import { useState } from "react";
 import { Link } from "@/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
+
+const cardStyle: React.CSSProperties = {
+  background: "rgba(255,255,255,0.06)",
+  border: "1px solid rgba(255,255,255,0.1)",
+  borderRadius: "14px",
+  padding: "36px",
+  width: "100%",
+  maxWidth: "420px",
+};
+
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  background: "rgba(255,255,255,0.06)",
+  border: "1px solid rgba(255,255,255,0.12)",
+  borderRadius: "6px",
+  padding: "10px 14px",
+  color: "white",
+  fontSize: "0.875rem",
+  outline: "none",
+  boxSizing: "border-box",
+};
+
+const labelStyle: React.CSSProperties = {
+  display: "block",
+  fontSize: "0.8rem",
+  color: "#8AAEC7",
+  marginBottom: "6px",
+};
 
 export default function SignupPage() {
   const supabase = createClient();
@@ -23,13 +47,11 @@ export default function SignupPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
     });
-
     if (error) {
       setError(error.message);
       setLoading(false);
@@ -40,75 +62,87 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAFAF7]">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">{t("checkEmailTitle")}</CardTitle>
-            <CardDescription>
-              {t("checkEmailDesc", { email })}
-            </CardDescription>
-          </CardHeader>
-          <CardFooter>
-            <Link href="/login" className="text-sm text-blue-600 hover:underline">
-              {t("backToSignIn")}
-            </Link>
-          </CardFooter>
-        </Card>
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0F2337", padding: "24px" }}>
+        <div style={cardStyle}>
+          <h2 style={{ fontFamily: "var(--font-dm-serif)", fontSize: "1.5rem", color: "white", marginBottom: "10px" }}>
+            {t("checkEmailTitle")}
+          </h2>
+          <p style={{ fontSize: "0.875rem", color: "#6A90AA", marginBottom: "20px" }}>
+            {t("checkEmailDesc", { email })}
+          </p>
+          <Link href="/login" style={{ fontSize: "0.825rem", color: "#E67E22" }}>
+            {t("backToSignIn")}
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FAFAF7]">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="font-serif text-2xl font-normal">b<span className="font-sans font-bold">AI</span>nder</CardTitle>
-          <CardDescription>{t("description")}</CardDescription>
-        </CardHeader>
-        <form onSubmit={handleSignup}>
-          <CardContent className="space-y-4">
-            {error && (
-              <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">
-                {error}
-              </div>
-            )}
-            <div className="space-y-2">
-              <Label htmlFor="email">{t("email")}</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder={t("emailPlaceholder")}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0F2337", padding: "24px" }}>
+      <div style={cardStyle}>
+        <div style={{ marginBottom: "28px" }}>
+          <div className="font-serif text-2xl text-white mb-1">
+            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
+          </div>
+          <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("description")}</p>
+        </div>
+
+        <form onSubmit={handleSignup} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          {error && (
+            <div style={{ padding: "10px 14px", fontSize: "0.825rem", color: "#FCA5A5", background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.25)", borderRadius: "6px" }}>
+              {error}
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">{t("password")}</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder={t("passwordPlaceholder")}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                minLength={6}
-                required
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col gap-3">
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? t("creatingAccount") : t("createAccount")}
-            </Button>
-            <p className="text-sm text-center text-gray-600">
-              {t("alreadyHaveAccount")}{" "}
-              <Link href="/login" className="text-blue-600 hover:underline">
-                {t("signIn")}
-              </Link>
-            </p>
-          </CardFooter>
+          )}
+          <div>
+            <label style={labelStyle}>{t("email")}</label>
+            <input
+              type="email"
+              placeholder={t("emailPlaceholder")}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={inputStyle}
+            />
+          </div>
+          <div>
+            <label style={labelStyle}>{t("password")}</label>
+            <input
+              type="password"
+              placeholder={t("passwordPlaceholder")}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              minLength={6}
+              required
+              style={inputStyle}
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              background: loading ? "rgba(230,126,34,0.5)" : "#E67E22",
+              color: "white",
+              border: "none",
+              borderRadius: "7px",
+              padding: "12px",
+              fontSize: "0.875rem",
+              fontWeight: 600,
+              cursor: loading ? "not-allowed" : "pointer",
+              marginTop: "4px",
+            }}
+          >
+            {loading ? t("creatingAccount") : t("createAccount")}
+          </button>
         </form>
-      </Card>
+
+        <p style={{ marginTop: "20px", fontSize: "0.825rem", textAlign: "center", color: "#6A90AA" }}>
+          {t("alreadyHaveAccount")}{" "}
+          <Link href="/login" style={{ color: "#E67E22" }}>
+            {t("signIn")}
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

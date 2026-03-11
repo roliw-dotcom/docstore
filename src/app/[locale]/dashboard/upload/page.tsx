@@ -5,7 +5,6 @@ import { useRouter } from "@/navigation";
 import { Link } from "@/navigation";
 import { useDropzone } from "react-dropzone";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
 type FileStatus = "pending" | "uploading" | "done" | "error";
@@ -17,7 +16,7 @@ interface FileItem {
   error?: string;
 }
 
-const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20 MB
+const MAX_FILE_SIZE = 20 * 1024 * 1024;
 
 const ACCEPTED_MIME_TYPES = new Set([
   "application/pdf",
@@ -39,7 +38,6 @@ async function uploadOne(
   onStatus: (id: string, status: FileStatus, error?: string) => void
 ) {
   onStatus(item.id, "uploading");
-
   const docId = crypto.randomUUID();
   const storagePath = `${userId}/${docId}/${item.file.name}`;
 
@@ -47,21 +45,12 @@ async function uploadOne(
     .from("documents")
     .upload(storagePath, item.file, { upsert: false });
 
-  if (storageError) {
-    onStatus(item.id, "error", storageError.message);
-    return;
-  }
+  if (storageError) { onStatus(item.id, "error", storageError.message); return; }
 
   const res = await fetch("/api/documents", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      docId,
-      filename: item.file.name,
-      storagePath,
-      fileSize: item.file.size,
-      mimeType: item.file.type,
-    }),
+    body: JSON.stringify({ docId, filename: item.file.name, storagePath, fileSize: item.file.size, mimeType: item.file.type }),
   });
 
   if (!res.ok) {
@@ -71,8 +60,6 @@ async function uploadOne(
   }
 
   onStatus(item.id, "done");
-
-  // Trigger LLM processing in the background
   fetch(`/api/documents/${docId}/process`, { method: "POST" }).catch(() => {});
 }
 
@@ -86,35 +73,17 @@ export default function UploadPage() {
   const [allDone, setAllDone] = useState(false);
 
   function updateStatus(id: string, status: FileStatus, error?: string) {
-    setFiles((prev) =>
-      prev.map((f) => (f.id === id ? { ...f, status, error } : f))
-    );
+    setFiles((prev) => prev.map((f) => (f.id === id ? { ...f, status, error } : f)));
   }
 
   const onDrop = useCallback((accepted: File[]) => {
-    const valid = accepted.filter(
-      (f) => ACCEPTED_MIME_TYPES.has(f.type) && f.size <= MAX_FILE_SIZE
-    );
-
-    const rejected = accepted.filter(
-      (f) => !ACCEPTED_MIME_TYPES.has(f.type) || f.size > MAX_FILE_SIZE
-    );
-
-    const newItems: FileItem[] = valid.map((f) => ({
-      id: crypto.randomUUID(),
-      file: f,
-      status: "pending",
-    }));
-
+    const valid = accepted.filter((f) => ACCEPTED_MIME_TYPES.has(f.type) && f.size <= MAX_FILE_SIZE);
+    const rejected = accepted.filter((f) => !ACCEPTED_MIME_TYPES.has(f.type) || f.size > MAX_FILE_SIZE);
+    const newItems: FileItem[] = valid.map((f) => ({ id: crypto.randomUUID(), file: f, status: "pending" }));
     const errorItems: FileItem[] = rejected.map((f) => ({
-      id: crypto.randomUUID(),
-      file: f,
-      status: "error",
-      error: !ACCEPTED_MIME_TYPES.has(f.type)
-        ? t("unsupportedType")
-        : t("exceedsLimit"),
+      id: crypto.randomUUID(), file: f, status: "error",
+      error: !ACCEPTED_MIME_TYPES.has(f.type) ? t("unsupportedType") : t("exceedsLimit"),
     }));
-
     setFiles((prev) => [...prev, ...newItems, ...errorItems]);
   }, [t]);
 
@@ -138,145 +107,124 @@ export default function UploadPage() {
   async function startUpload() {
     const pending = files.filter((f) => f.status === "pending");
     if (!pending.length) return;
-
     setRunning(true);
-
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
-      setFiles((prev) =>
-        prev.map((f) =>
-          f.status === "pending" ? { ...f, status: "error", error: t("notLoggedIn") } : f
-        )
-      );
+      setFiles((prev) => prev.map((f) => f.status === "pending" ? { ...f, status: "error", error: t("notLoggedIn") } : f));
       setRunning(false);
       return;
     }
-
-    await Promise.all(
-      pending.map((item) => uploadOne(supabase, user.id, item, updateStatus))
-    );
-
+    await Promise.all(pending.map((item) => uploadOne(supabase, user.id, item, updateStatus)));
     setRunning(false);
     setAllDone(true);
   }
 
-  function removeFile(id: string) {
-    setFiles((prev) => prev.filter((f) => f.id !== id));
-    setAllDone(false);
-  }
-
-  function reset() {
-    setFiles([]);
-    setAllDone(false);
-  }
+  function removeFile(id: string) { setFiles((prev) => prev.filter((f) => f.id !== id)); setAllDone(false); }
+  function reset() { setFiles([]); setAllDone(false); }
 
   const pendingCount = files.filter((f) => f.status === "pending").length;
   const doneCount = files.filter((f) => f.status === "done").length;
   const errorCount = files.filter((f) => f.status === "error").length;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div style={{ maxWidth: "640px", display: "flex", flexDirection: "column", gap: "20px" }}>
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
-        <p className="text-sm text-gray-500 mt-1">{t("subtitle")}</p>
+        <h1 className="font-serif text-2xl text-white">{t("title")}</h1>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA", marginTop: "4px" }}>{t("subtitle")}</p>
       </div>
 
-      {/* Drop zone — always visible unless all done */}
       {!allDone && (
         <div
           {...getRootProps()}
-          className={`
-            border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-colors
-            ${isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400 bg-white"}
-            ${running ? "pointer-events-none opacity-50" : ""}
-          `}
+          style={{
+            border: `2px dashed ${isDragActive ? "#E67E22" : "rgba(255,255,255,0.15)"}`,
+            borderRadius: "12px",
+            padding: "48px 24px",
+            textAlign: "center",
+            cursor: running ? "not-allowed" : "pointer",
+            background: isDragActive ? "rgba(230,126,34,0.06)" : "rgba(255,255,255,0.02)",
+            transition: "all 0.15s",
+            opacity: running ? 0.5 : 1,
+          }}
         >
           <input {...getInputProps()} />
-          <div className="space-y-2">
-            <div className="text-4xl">📄</div>
-            <p className="text-base font-medium text-gray-700">
-              {isDragActive ? t("dropHere") : t("dragDrop")}
-            </p>
-            <p className="text-sm text-gray-400">{t("fileTypes")}</p>
-          </div>
+          <p style={{ fontSize: "2.5rem", marginBottom: "12px" }}>📄</p>
+          <p style={{ fontSize: "0.95rem", fontWeight: 500, color: isDragActive ? "#E67E22" : "rgba(255,255,255,0.7)", marginBottom: "4px" }}>
+            {isDragActive ? t("dropHere") : t("dragDrop")}
+          </p>
+          <p style={{ fontSize: "0.8rem", color: "#6A90AA" }}>{t("fileTypes")}</p>
         </div>
       )}
 
-      {/* File list */}
       {files.length > 0 && (
-        <ul className="space-y-2">
+        <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
           {files.map((item) => (
             <li
               key={item.id}
-              className="flex items-center justify-between gap-3 bg-white border rounded-lg px-4 py-3"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "12px",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "8px",
+                padding: "12px 16px",
+              }}
             >
-              <div className="flex items-center gap-3 min-w-0">
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", minWidth: 0 }}>
                 <StatusIcon status={item.status} />
-                <div className="min-w-0">
-                  <p className="text-sm font-medium text-gray-800 truncate">
+                <div style={{ minWidth: 0 }}>
+                  <p style={{ fontSize: "0.875rem", fontWeight: 500, color: "white", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                     {item.file.name}
                   </p>
-                  {item.error && (
-                    <p className="text-xs text-red-500">{item.error}</p>
-                  )}
-                  {item.status === "uploading" && (
-                    <p className="text-xs text-blue-500">{t("uploadingStatus")}</p>
-                  )}
-                  {item.status === "done" && (
-                    <p className="text-xs text-green-600">{t("uploadedStatus")}</p>
-                  )}
+                  {item.error && <p style={{ fontSize: "0.75rem", color: "#FCA5A5" }}>{item.error}</p>}
+                  {item.status === "uploading" && <p style={{ fontSize: "0.75rem", color: "#93C5FD" }}>{t("uploadingStatus")}</p>}
+                  {item.status === "done" && <p style={{ fontSize: "0.75rem", color: "#4ADE80" }}>{t("uploadedStatus")}</p>}
                 </div>
               </div>
               {(item.status === "pending" || item.status === "error") && !running && (
-                <button
-                  onClick={() => removeFile(item.id)}
-                  className="text-gray-300 hover:text-gray-500 text-lg leading-none flex-shrink-0"
-                  title="Remove"
-                >
-                  ×
-                </button>
+                <button onClick={() => removeFile(item.id)} style={{ color: "rgba(255,255,255,0.25)", fontSize: "1.25rem", background: "none", border: "none", cursor: "pointer", lineHeight: 1, flexShrink: 0 }}>×</button>
               )}
             </li>
           ))}
         </ul>
       )}
 
-      {/* Actions */}
-      <div className="flex items-center gap-3">
+      <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
         {!allDone && pendingCount > 0 && (
-          <Button onClick={startUpload} disabled={running}>
+          <button
+            onClick={startUpload}
+            disabled={running}
+            style={{ background: running ? "rgba(230,126,34,0.5)" : "#E67E22", color: "white", border: "none", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", fontWeight: 600, cursor: running ? "not-allowed" : "pointer" }}
+          >
             {running ? t("uploading") : t("uploadFiles", { count: pendingCount })}
-          </Button>
+          </button>
         )}
-
         {allDone && (
           <>
             <Link href="/dashboard">
-              <Button>{t("viewDocuments")}</Button>
+              <button style={{ background: "#E67E22", color: "white", border: "none", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>
+                {t("viewDocuments")}
+              </button>
             </Link>
-            <Button variant="outline" onClick={reset}>
+            <button onClick={reset} style={{ background: "transparent", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", cursor: "pointer" }}>
               {t("uploadMore")}
-            </Button>
+            </button>
           </>
         )}
-
         {!allDone && files.length > 0 && !running && (
-          <Button variant="outline" onClick={reset}>
+          <button onClick={reset} style={{ background: "transparent", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", cursor: "pointer" }}>
             {t("clearAll")}
-          </Button>
+          </button>
         )}
       </div>
 
-      {/* Summary when done */}
       {allDone && (
-        <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-sm text-green-700">
-          {doneCount > 0 && (
-            <p>{t("uploadedSuccess", { count: doneCount })}</p>
-          )}
-          {errorCount > 0 && (
-            <p className="text-red-600 mt-1">{t("uploadedFailed", { count: errorCount })}</p>
-          )}
-          <p className="text-green-600 mt-1">{t("processingNote")}</p>
+        <div style={{ padding: "14px 16px", background: "rgba(39,174,96,0.08)", border: "1px solid rgba(39,174,96,0.2)", borderRadius: "8px", fontSize: "0.875rem" }}>
+          {doneCount > 0 && <p style={{ color: "#4ADE80" }}>{t("uploadedSuccess", { count: doneCount })}</p>}
+          {errorCount > 0 && <p style={{ color: "#FCA5A5", marginTop: "4px" }}>{t("uploadedFailed", { count: errorCount })}</p>}
+          <p style={{ color: "#6A90AA", marginTop: "4px" }}>{t("processingNote")}</p>
         </div>
       )}
     </div>
@@ -284,8 +232,8 @@ export default function UploadPage() {
 }
 
 function StatusIcon({ status }: { status: FileStatus }) {
-  if (status === "pending") return <span className="text-gray-300 text-lg">○</span>;
-  if (status === "uploading") return <span className="text-blue-400 animate-pulse text-lg">●</span>;
-  if (status === "done") return <span className="text-green-500 text-lg">✓</span>;
-  return <span className="text-red-400 text-lg">✗</span>;
+  if (status === "pending")   return <span style={{ color: "rgba(255,255,255,0.25)", fontSize: "1.1rem" }}>○</span>;
+  if (status === "uploading") return <span style={{ color: "#93C5FD", fontSize: "1.1rem" }} className="animate-pulse">●</span>;
+  if (status === "done")      return <span style={{ color: "#4ADE80", fontSize: "1.1rem" }}>✓</span>;
+  return <span style={{ color: "#FCA5A5", fontSize: "1.1rem" }}>✗</span>;
 }

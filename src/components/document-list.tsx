@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import DocumentCard from "@/components/document-card";
-import { Input } from "@/components/ui/input";
 import { useTranslations } from "next-intl";
 
 interface DocumentWithMeta {
@@ -23,12 +22,9 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const t = useTranslations("documentList");
 
-  // Collect all unique categories across documents
   const allCategories = useMemo(() => {
     const set = new Set<string>();
-    documents.forEach((d) =>
-      d.doc_metadata?.categories?.forEach((c) => set.add(c))
-    );
+    documents.forEach((d) => d.doc_metadata?.categories?.forEach((c) => set.add(c)));
     return Array.from(set).sort();
   }, [documents]);
 
@@ -36,13 +32,8 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
     const q = search.toLowerCase();
     return documents.filter((d) => {
       const meta = d.doc_metadata;
-
-      if (activeCategory && !meta?.categories?.includes(activeCategory)) {
-        return false;
-      }
-
+      if (activeCategory && !meta?.categories?.includes(activeCategory)) return false;
       if (!q) return true;
-
       return (
         d.filename.toLowerCase().includes(q) ||
         meta?.summary?.toLowerCase().includes(q) ||
@@ -54,48 +45,67 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
 
   if (documents.length === 0) {
     return (
-      <div className="text-center py-20 text-gray-400">
-        <p className="text-4xl mb-4">📄</p>
-        <p className="text-lg font-medium">{t("noDocuments")}</p>
-        <p className="text-sm mt-1">{t("noDocumentsHint")}</p>
+      <div style={{ textAlign: "center", padding: "80px 0", color: "#6A90AA" }}>
+        <p style={{ fontSize: "2.5rem", marginBottom: "16px" }}>📄</p>
+        <p style={{ fontSize: "1rem", fontWeight: 500, color: "rgba(255,255,255,0.5)" }}>{t("noDocuments")}</p>
+        <p style={{ fontSize: "0.875rem", marginTop: "4px" }}>{t("noDocumentsHint")}</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-5">
-      {/* Search bar */}
-      <Input
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      {/* Search */}
+      <input
         placeholder={t("searchPlaceholder")}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="max-w-lg"
+        style={{
+          maxWidth: "480px",
+          background: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: "7px",
+          padding: "9px 14px",
+          color: "white",
+          fontSize: "0.875rem",
+          outline: "none",
+        }}
       />
 
-      {/* Category filter pills */}
+      {/* Category pills */}
       {allCategories.length > 0 && (
-        <div className="flex flex-wrap gap-2">
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
           <button
             onClick={() => setActiveCategory(null)}
-            className={`text-sm px-3 py-1 rounded-full border transition-colors ${
-              activeCategory === null
-                ? "bg-gray-900 text-white border-gray-900"
-                : "border-gray-300 text-gray-600 hover:border-gray-500"
-            }`}
+            style={{
+              fontSize: "0.8rem",
+              padding: "4px 14px",
+              borderRadius: "20px",
+              border: "1px solid",
+              cursor: "pointer",
+              transition: "all 0.15s",
+              background: activeCategory === null ? "#E67E22" : "transparent",
+              borderColor: activeCategory === null ? "#E67E22" : "rgba(255,255,255,0.2)",
+              color: activeCategory === null ? "white" : "#8AAEC7",
+            }}
           >
             {t("all")}
           </button>
           {allCategories.map((cat) => (
             <button
               key={cat}
-              onClick={() =>
-                setActiveCategory(activeCategory === cat ? null : cat)
-              }
-              className={`text-sm px-3 py-1 rounded-full border transition-colors ${
-                activeCategory === cat
-                  ? "bg-gray-900 text-white border-gray-900"
-                  : "border-gray-300 text-gray-600 hover:border-gray-500"
-              }`}
+              onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+              style={{
+                fontSize: "0.8rem",
+                padding: "4px 14px",
+                borderRadius: "20px",
+                border: "1px solid",
+                cursor: "pointer",
+                transition: "all 0.15s",
+                background: activeCategory === cat ? "#E67E22" : "transparent",
+                borderColor: activeCategory === cat ? "#E67E22" : "rgba(255,255,255,0.2)",
+                color: activeCategory === cat ? "white" : "#8AAEC7",
+              }}
             >
               {cat}
             </button>
@@ -103,13 +113,13 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
         </div>
       )}
 
-      {/* Results count */}
-      <p className="text-sm text-gray-400">
+      {/* Count */}
+      <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>
         {t("resultsCount", { filtered: filtered.length, total: documents.length })}
       </p>
 
       {filtered.length === 0 ? (
-        <div className="text-center py-12 text-gray-400">
+        <div style={{ textAlign: "center", padding: "48px 0", color: "#6A90AA" }}>
           <p>{t("noResults")}</p>
         </div>
       ) : (

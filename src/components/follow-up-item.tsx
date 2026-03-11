@@ -34,20 +34,20 @@ function DueDatePill({ dueDate }: { dueDate: string | null | undefined }) {
 
   if (diffDays < 0) {
     return (
-      <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-medium">
+      <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(239,68,68,0.15)", color: "#FCA5A5", fontWeight: 500 }}>
         {t("overdue", { date: formatted })}
       </span>
     );
   }
   if (diffDays <= 5) {
     return (
-      <span className="text-xs px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 font-medium">
+      <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(230,126,34,0.15)", color: "#F5A623", fontWeight: 500 }}>
         {t("dueSoon", { date: formatted })}
       </span>
     );
   }
   return (
-    <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+    <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(255,255,255,0.08)", color: "#8AAEC7" }}>
       {t("dueDate", { date: formatted })}
     </span>
   );
@@ -60,17 +60,13 @@ export default function FollowUpItem({ followUp }: { followUp: FollowUp }) {
   async function handleCheck(checked: boolean) {
     setCompleted(checked);
     setLoading(true);
-
     try {
       const res = await fetch(`/api/follow-ups/${followUp.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ completed: checked }),
       });
-
-      if (!res.ok) {
-        setCompleted(!checked);
-      }
+      if (!res.ok) setCompleted(!checked);
     } catch {
       setCompleted(!checked);
     } finally {
@@ -79,25 +75,25 @@ export default function FollowUpItem({ followUp }: { followUp: FollowUp }) {
   }
 
   return (
-    <div className={`flex items-start gap-3 py-3 ${completed ? "opacity-50" : ""}`}>
+    <div style={{ display: "flex", alignItems: "flex-start", gap: "12px", padding: "12px 0", opacity: completed ? 0.45 : 1 }}>
       <Checkbox
         checked={completed}
         disabled={loading}
         onCheckedChange={(val) => handleCheck(val === true)}
-        className="mt-0.5"
+        style={{ marginTop: "2px" }}
       />
-      <div className="flex-1 min-w-0">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className={`text-sm font-medium ${completed ? "line-through text-gray-400" : "text-gray-800"}`}>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px" }}>
+          <span style={{ fontSize: "0.875rem", fontWeight: 500, color: completed ? "#6A90AA" : "white", textDecoration: completed ? "line-through" : "none" }}>
             {followUp.title}
           </span>
           {followUp.reminded && (
-            <Bell className="w-3 h-3 text-gray-400 flex-shrink-0" />
+            <Bell style={{ width: "12px", height: "12px", color: "#6A90AA", flexShrink: 0 }} />
           )}
           <DueDatePill dueDate={followUp.due_date} />
         </div>
         {followUp.description && (
-          <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{followUp.description}</p>
+          <p style={{ fontSize: "0.775rem", color: "#6A90AA", marginTop: "2px", lineHeight: 1.55 }}>{followUp.description}</p>
         )}
       </div>
     </div>

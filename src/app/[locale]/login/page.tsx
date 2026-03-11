@@ -4,11 +4,35 @@ import { useState } from "react";
 import { useRouter } from "@/navigation";
 import { Link } from "@/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
+
+const cardStyle: React.CSSProperties = {
+  background: "rgba(255,255,255,0.06)",
+  border: "1px solid rgba(255,255,255,0.1)",
+  borderRadius: "14px",
+  padding: "36px",
+  width: "100%",
+  maxWidth: "420px",
+};
+
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  background: "rgba(255,255,255,0.06)",
+  border: "1px solid rgba(255,255,255,0.12)",
+  borderRadius: "6px",
+  padding: "10px 14px",
+  color: "white",
+  fontSize: "0.875rem",
+  outline: "none",
+  boxSizing: "border-box",
+};
+
+const labelStyle: React.CSSProperties = {
+  display: "block",
+  fontSize: "0.8rem",
+  color: "#8AAEC7",
+  marginBottom: "6px",
+};
 
 export default function LoginPage() {
   const router = useRouter();
@@ -24,9 +48,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-
     if (error) {
       setError(error.message);
       setLoading(false);
@@ -37,55 +59,69 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FAFAF7]">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="font-serif text-2xl font-normal">b<span className="font-sans font-bold">AI</span>nder</CardTitle>
-          <CardDescription>{t("description")}</CardDescription>
-        </CardHeader>
-        <form onSubmit={handleLogin}>
-          <CardContent className="space-y-4">
-            {error && (
-              <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-md">
-                {error}
-              </div>
-            )}
-            <div className="space-y-2">
-              <Label htmlFor="email">{t("email")}</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder={t("emailPlaceholder")}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+    <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0F2337", padding: "24px" }}>
+      <div style={cardStyle}>
+        <div style={{ marginBottom: "28px" }}>
+          <div className="font-serif text-2xl text-white mb-1">
+            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
+          </div>
+          <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("description")}</p>
+        </div>
+
+        <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          {error && (
+            <div style={{ padding: "10px 14px", fontSize: "0.825rem", color: "#FCA5A5", background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.25)", borderRadius: "6px" }}>
+              {error}
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">{t("password")}</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder={t("passwordPlaceholder")}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col gap-3">
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? t("signingIn") : t("signIn")}
-            </Button>
-            <p className="text-sm text-center text-gray-600">
-              {t("noAccount")}{" "}
-              <Link href="/signup" className="text-blue-600 hover:underline">
-                {t("createOne")}
-              </Link>
-            </p>
-          </CardFooter>
+          )}
+          <div>
+            <label style={labelStyle}>{t("email")}</label>
+            <input
+              type="email"
+              placeholder={t("emailPlaceholder")}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={inputStyle}
+            />
+          </div>
+          <div>
+            <label style={labelStyle}>{t("password")}</label>
+            <input
+              type="password"
+              placeholder={t("passwordPlaceholder")}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              style={inputStyle}
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              background: loading ? "rgba(230,126,34,0.5)" : "#E67E22",
+              color: "white",
+              border: "none",
+              borderRadius: "7px",
+              padding: "12px",
+              fontSize: "0.875rem",
+              fontWeight: 600,
+              cursor: loading ? "not-allowed" : "pointer",
+              marginTop: "4px",
+            }}
+          >
+            {loading ? t("signingIn") : t("signIn")}
+          </button>
         </form>
-      </Card>
+
+        <p style={{ marginTop: "20px", fontSize: "0.825rem", textAlign: "center", color: "#6A90AA" }}>
+          {t("noAccount")}{" "}
+          <Link href="/signup" style={{ color: "#E67E22" }}>
+            {t("createOne")}
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

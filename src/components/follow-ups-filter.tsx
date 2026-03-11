@@ -7,26 +7,32 @@ export default function FollowUpsFilter({ current }: { current?: string }) {
   const isPending = current === "pending";
   const t = useTranslations("followUpsFilter");
 
+  const activeStyle: React.CSSProperties = {
+    fontSize: "0.8rem",
+    padding: "6px 14px",
+    borderRadius: "6px",
+    border: "1px solid #E67E22",
+    background: "#E67E22",
+    color: "white",
+    transition: "all 0.15s",
+  };
+
+  const inactiveStyle: React.CSSProperties = {
+    fontSize: "0.8rem",
+    padding: "6px 14px",
+    borderRadius: "6px",
+    border: "1px solid rgba(255,255,255,0.15)",
+    background: "transparent",
+    color: "#6A90AA",
+    transition: "all 0.15s",
+  };
+
   return (
-    <div className="flex gap-2">
-      <Link
-        href="/dashboard/follow-ups"
-        className={`text-sm px-3 py-1.5 rounded-md border transition-colors ${
-          !isPending
-            ? "bg-gray-900 text-white border-gray-900"
-            : "text-gray-600 border-gray-200 hover:border-gray-400"
-        }`}
-      >
+    <div style={{ display: "flex", gap: "8px" }}>
+      <Link href="/dashboard/follow-ups" style={!isPending ? activeStyle : inactiveStyle}>
         {t("all")}
       </Link>
-      <Link
-        href="/dashboard/follow-ups?filter=pending"
-        className={`text-sm px-3 py-1.5 rounded-md border transition-colors ${
-          isPending
-            ? "bg-gray-900 text-white border-gray-900"
-            : "text-gray-600 border-gray-200 hover:border-gray-400"
-        }`}
-      >
+      <Link href="/dashboard/follow-ups?filter=pending" style={isPending ? activeStyle : inactiveStyle}>
         {t("pendingOnly")}
       </Link>
     </div>

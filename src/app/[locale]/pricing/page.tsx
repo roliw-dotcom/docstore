@@ -2,7 +2,6 @@
 
 import { Link } from "@/navigation";
 import { useRouter } from "@/navigation";
-import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
 export default function PricingPage() {
@@ -16,21 +15,21 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAF7] text-[#1C2333]">
+    <div style={{ minHeight: "100vh", background: "#0F2337", color: "white" }}>
       {/* Nav */}
-      <header className="border-b border-stone-200">
+      <header style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(15,35,55,0.97)", position: "sticky", top: 0, zIndex: 50 }}>
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="font-serif text-2xl tracking-tight">b<span className="font-sans font-bold">AI</span>nder</Link>
+          <Link href="/" className="font-serif text-2xl tracking-tight text-white">
+            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
+          </Link>
           <div className="flex items-center gap-3">
-            <Link href="/login">
-              <Button variant="ghost" size="sm" className="text-stone-500 hover:text-[#1C2333]">
-                {t("signIn")}
-              </Button>
+            <Link href="/login" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
+              {t("signIn")}
             </Link>
             <Link href="/signup">
-              <Button size="sm" className="bg-amber-600 hover:bg-amber-700 text-white border-0">
+              <button style={{ background: "#E67E22", color: "white", padding: "7px 16px", borderRadius: "6px", fontSize: "0.78rem", fontWeight: 600, border: "none", cursor: "pointer" }}>
                 {t("getStarted")}
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
@@ -39,67 +38,66 @@ export default function PricingPage() {
       {/* Pricing section */}
       <section className="max-w-3xl mx-auto px-6 py-20">
         <div className="text-center mb-12">
-          <h1 className="font-serif text-5xl tracking-tight text-[#1C2333] mb-4">{t("title")}</h1>
-          <p className="text-stone-500 font-sans">{t("subtitle")}</p>
+          <p style={{ fontFamily: "monospace", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#E67E22", marginBottom: "12px" }}>
+            Plans
+          </p>
+          <h1 className="font-serif text-5xl tracking-tight text-white mb-4">{t("title")}</h1>
+          <p style={{ color: "#6A90AA" }}>{t("subtitle")}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Free card */}
-          <div className="rounded-xl border border-stone-200 bg-white p-8 flex flex-col">
-            <p className="text-xs uppercase tracking-widest text-stone-400 font-sans mb-3">{t("freePlan")}</p>
+          <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "14px", padding: "32px", display: "flex", flexDirection: "column" }}>
+            <p style={{ fontFamily: "monospace", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#6A90AA", marginBottom: "12px" }}>{t("freePlan")}</p>
             <div className="flex items-baseline gap-1 mb-6">
-              <span className="font-serif text-4xl text-[#1C2333]">€0</span>
-              <span className="text-stone-400 font-sans text-sm">{t("perMonth")}</span>
+              <span className="font-serif text-4xl text-white">€0</span>
+              <span style={{ color: "#6A90AA", fontSize: "0.875rem" }}>{t("perMonth")}</span>
             </div>
-            <ul className="space-y-3 text-sm text-stone-600 font-sans flex-1 mb-8">
-              <li className="flex items-center gap-2">
-                <span className="text-amber-500">✓</span>
-                {t("freeFeature1")}
+            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px 0", display: "flex", flexDirection: "column", gap: "12px", flex: 1 }}>
+              <li style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "#8AAEC7" }}>
+                <span style={{ color: "#E67E22" }}>✓</span>{t("freeFeature1")}
               </li>
-              <li className="flex items-center gap-2">
-                <span className="text-amber-500">✓</span>
-                {t("freeFeature2")}
+              <li style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "#8AAEC7" }}>
+                <span style={{ color: "#E67E22" }}>✓</span>{t("freeFeature2")}
               </li>
-              <li className="flex items-center gap-2">
-                <span className="text-stone-300">✗</span>
-                <span className="text-stone-400">{t("freeFeatureNo")}</span>
+              <li style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "rgba(255,255,255,0.25)" }}>
+                <span style={{ color: "rgba(255,255,255,0.2)" }}>✗</span>{t("freeFeatureNo")}
               </li>
             </ul>
             <Link href="/signup">
-              <Button variant="outline" className="w-full">{t("getStartedFree")}</Button>
+              <button style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "white", borderRadius: "7px", padding: "11px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>
+                {t("getStartedFree")}
+              </button>
             </Link>
           </div>
 
           {/* Pro card */}
-          <div className="rounded-xl border-2 border-amber-400 bg-white p-8 flex flex-col relative">
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-widest bg-amber-400 text-white font-semibold px-3 py-1 rounded-full font-sans">
+          <div style={{ background: "rgba(230,126,34,0.08)", border: "2px solid #E67E22", borderRadius: "14px", padding: "32px", display: "flex", flexDirection: "column", position: "relative" }}>
+            <span style={{ position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", background: "#E67E22", color: "white", fontWeight: 700, padding: "4px 12px", borderRadius: "20px", whiteSpace: "nowrap" }}>
               {t("mostPopular")}
             </span>
-            <p className="text-xs uppercase tracking-widest text-amber-600 font-sans mb-3">{t("proPlan")}</p>
+            <p style={{ fontFamily: "monospace", fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#E67E22", marginBottom: "12px" }}>{t("proPlan")}</p>
             <div className="flex items-baseline gap-1 mb-6">
-              <span className="font-serif text-4xl text-[#1C2333]">€9</span>
-              <span className="text-stone-400 font-sans text-sm">{t("perMonth")}</span>
+              <span className="font-serif text-4xl text-white">€9</span>
+              <span style={{ color: "#6A90AA", fontSize: "0.875rem" }}>{t("perMonth")}</span>
             </div>
-            <ul className="space-y-3 text-sm text-stone-600 font-sans flex-1 mb-8">
-              <li className="flex items-center gap-2">
-                <span className="text-amber-500">✓</span>
-                {t("proFeature1")}
+            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px 0", display: "flex", flexDirection: "column", gap: "12px", flex: 1 }}>
+              <li style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "#8AAEC7" }}>
+                <span style={{ color: "#E67E22" }}>✓</span>{t("proFeature1")}
               </li>
-              <li className="flex items-center gap-2">
-                <span className="text-amber-500">✓</span>
-                {t("proFeature2")}
+              <li style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "#8AAEC7" }}>
+                <span style={{ color: "#E67E22" }}>✓</span>{t("proFeature2")}
               </li>
-              <li className="flex items-center gap-2">
-                <span className="text-amber-500">✓</span>
-                {t("proFeature3")}
+              <li style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "#8AAEC7" }}>
+                <span style={{ color: "#E67E22" }}>✓</span>{t("proFeature3")}
               </li>
             </ul>
-            <Button
+            <button
               onClick={handleUpgrade}
-              className="w-full bg-amber-600 hover:bg-amber-700 text-white border-0"
+              style={{ width: "100%", background: "#E67E22", color: "white", border: "none", borderRadius: "7px", padding: "11px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}
             >
               {t("upgradeToPro")}
-            </Button>
+            </button>
           </div>
         </div>
       </section>

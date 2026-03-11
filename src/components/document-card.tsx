@@ -1,8 +1,6 @@
 "use client";
 
 import { Link } from "@/navigation";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 
 interface DocumentWithMeta {
@@ -27,22 +25,33 @@ function formatBytes(bytes: number | null) {
 
 function StatusBadge({ status }: { status: string }) {
   const t = useTranslations("documentCard");
-  const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
-    ready: "default",
-    processing: "secondary",
-    pending: "outline",
-    error: "destructive",
-  };
   const labelMap: Record<string, string> = {
     ready: t("ready"),
     processing: t("processing"),
     pending: t("pending"),
     error: t("error"),
   };
+  const colorMap: Record<string, { bg: string; color: string }> = {
+    ready:      { bg: "rgba(39,174,96,0.15)",  color: "#4ADE80" },
+    processing: { bg: "rgba(59,130,246,0.15)",  color: "#93C5FD" },
+    pending:    { bg: "rgba(255,255,255,0.08)", color: "#8AAEC7" },
+    error:      { bg: "rgba(239,68,68,0.15)",   color: "#FCA5A5" },
+  };
+  const c = colorMap[status] ?? colorMap.pending;
   return (
-    <Badge variant={variants[status] ?? "outline"}>
+    <span style={{
+      fontSize: "0.65rem",
+      fontFamily: "monospace",
+      letterSpacing: "0.08em",
+      textTransform: "uppercase",
+      padding: "3px 8px",
+      borderRadius: "20px",
+      background: c.bg,
+      color: c.color,
+      flexShrink: 0,
+    }}>
       {labelMap[status] ?? status}
-    </Badge>
+    </span>
   );
 }
 
@@ -51,49 +60,62 @@ export default function DocumentCard({ doc }: { doc: DocumentWithMeta }) {
 
   return (
     <Link href={`/dashboard/documents/${doc.id}`}>
-      <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
-        <CardHeader className="pb-2">
-          <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-base font-medium leading-snug line-clamp-2">
-              {doc.filename}
-            </CardTitle>
-            <StatusBadge status={doc.status} />
-          </div>
-          {meta?.categories && meta.categories.length > 0 && (
-            <div className="flex flex-wrap gap-1 pt-1">
-              {meta.categories.map((c) => (
-                <Badge key={c} variant="secondary" className="text-xs">
-                  {c}
-                </Badge>
-              ))}
-            </div>
-          )}
-        </CardHeader>
+      <div style={{
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: "10px",
+        padding: "16px",
+        height: "100%",
+        cursor: "pointer",
+        transition: "border-color 0.15s, background 0.15s",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+      }}
+        className="hover:border-[rgba(230,126,34,0.35)] hover:bg-[rgba(255,255,255,0.06)]"
+      >
+        {/* Title + status */}
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "8px" }}>
+          <p style={{ fontSize: "0.875rem", fontWeight: 500, color: "white", lineHeight: 1.4, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
+            {doc.filename}
+          </p>
+          <StatusBadge status={doc.status} />
+        </div>
 
-        {meta?.summary && (
-          <CardContent className="pb-2">
-            <p className="text-sm text-gray-500 line-clamp-3">{meta.summary}</p>
-          </CardContent>
+        {/* Categories */}
+        {meta?.categories && meta.categories.length > 0 && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+            {meta.categories.map((c) => (
+              <span key={c} style={{ fontSize: "0.65rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(230,126,34,0.12)", color: "#F5A623", border: "1px solid rgba(230,126,34,0.2)" }}>
+                {c}
+              </span>
+            ))}
+          </div>
         )}
 
-        <CardFooter className="flex flex-col items-start gap-2 pt-2">
-          {meta?.keywords && meta.keywords.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {meta.keywords.slice(0, 6).map((kw) => (
-                <span
-                  key={kw}
-                  className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full"
-                >
-                  {kw}
-                </span>
-              ))}
-            </div>
-          )}
-          <span className="text-xs text-gray-400">
-            {new Date(doc.created_at).toLocaleDateString()} · {formatBytes(doc.file_size)}
-          </span>
-        </CardFooter>
-      </Card>
+        {/* Summary */}
+        {meta?.summary && (
+          <p style={{ fontSize: "0.8rem", color: "#6A90AA", lineHeight: 1.55, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", flex: 1 }}>
+            {meta.summary}
+          </p>
+        )}
+
+        {/* Keywords */}
+        {meta?.keywords && meta.keywords.length > 0 && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+            {meta.keywords.slice(0, 6).map((kw) => (
+              <span key={kw} style={{ fontSize: "0.65rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(255,255,255,0.06)", color: "#6A90AA" }}>
+                {kw}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Footer */}
+        <span style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.25)", fontFamily: "monospace", marginTop: "auto" }}>
+          {new Date(doc.created_at).toLocaleDateString()} · {formatBytes(doc.file_size)}
+        </span>
+      </div>
     </Link>
   );
 }

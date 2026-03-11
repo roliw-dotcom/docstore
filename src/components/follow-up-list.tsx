@@ -18,26 +18,20 @@ interface Props {
   emptyMessage?: string;
 }
 
-export default function FollowUpList({
-  followUps,
-  showFilename = false,
-  emptyMessage,
-}: Props) {
+export default function FollowUpList({ followUps, showFilename = false, emptyMessage }: Props) {
   const t = useTranslations("followUpList");
   const empty = emptyMessage ?? t("defaultEmpty");
 
   if (followUps.length === 0) {
-    return (
-      <p className="text-sm text-gray-400 py-4">{empty}</p>
-    );
+    return <p style={{ fontSize: "0.875rem", color: "#6A90AA", padding: "16px 0" }}>{empty}</p>;
   }
 
   return (
-    <div className="divide-y divide-gray-100">
-      {followUps.map((fu) => (
-        <div key={fu.id}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {followUps.map((fu, idx) => (
+        <div key={fu.id} style={{ borderTop: idx > 0 ? "1px solid rgba(255,255,255,0.06)" : "none" }}>
           {showFilename && fu.documents?.filename && (
-            <p className="text-xs text-gray-400 pt-3 pb-0.5 truncate">
+            <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.3)", paddingTop: "12px", paddingBottom: "2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {t("from", { filename: fu.documents.filename })}
             </p>
           )}

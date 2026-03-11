@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "@/navigation";
-import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -69,85 +68,98 @@ export default function BillingPage() {
   }
 
   const renewalDate = profile?.current_period_end
-    ? new Date(profile.current_period_end).toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+    ? new Date(profile.current_period_end).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })
     : null;
 
+  const cardStyle: React.CSSProperties = {
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "12px",
+    padding: "24px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+  };
+
   return (
-    <div className="max-w-xl space-y-6">
+    <div style={{ maxWidth: "480px", display: "flex", flexDirection: "column", gap: "24px" }}>
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">{t("title")}</h1>
-        <p className="text-sm text-stone-500 mt-1">{t("subtitle")}</p>
+        <h1 className="font-serif text-2xl text-white">{t("title")}</h1>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA", marginTop: "4px" }}>{t("subtitle")}</p>
       </div>
 
       {success && (
-        <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+        <div style={{ borderRadius: "8px", border: "1px solid rgba(39,174,96,0.3)", background: "rgba(39,174,96,0.1)", padding: "12px 16px", fontSize: "0.875rem", color: "#4ADE80" }}>
           {t("subscriptionActivated")}
         </div>
       )}
 
-      <div className="rounded-xl border border-stone-200 bg-white p-6 space-y-4">
+      <div style={cardStyle}>
         {loading ? (
-          <p className="text-sm text-stone-400">{t("loading")}</p>
+          <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("loading")}</p>
         ) : (
           <>
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-stone-700">{t("currentPlan")}</span>
-              <span
-                className={`text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full ${
-                  profile?.tier === "pro"
-                    ? "bg-amber-100 text-amber-700"
-                    : "bg-stone-100 text-stone-500"
-                }`}
-              >
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span style={{ fontSize: "0.875rem", fontWeight: 500, color: "rgba(255,255,255,0.7)" }}>{t("currentPlan")}</span>
+              <span style={{
+                fontSize: "0.65rem",
+                fontFamily: "monospace",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                padding: "4px 10px",
+                borderRadius: "20px",
+                background: profile?.tier === "pro" ? "rgba(230,126,34,0.15)" : "rgba(255,255,255,0.08)",
+                color: profile?.tier === "pro" ? "#F5A623" : "#8AAEC7",
+              }}>
                 {profile?.tier ?? "free"}
               </span>
             </div>
 
             {profile?.tier === "pro" && renewalDate && (
-              <p className="text-sm text-stone-500">
-                {t("renewsOn", { date: renewalDate })}
-              </p>
+              <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("renewsOn", { date: renewalDate })}</p>
             )}
 
             {profile?.tier === "free" ? (
-              <div className="pt-2">
-                <Button
+              <div>
+                <button
                   onClick={handleUpgrade}
-                  className="bg-amber-600 hover:bg-amber-700 text-white border-0"
+                  style={{ background: "#E67E22", color: "white", border: "none", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}
                 >
                   {t("upgradeToPro")}
-                </Button>
-                <p className="mt-2 text-xs text-stone-400">{t("unlimitedDocs")}</p>
+                </button>
+                <p style={{ marginTop: "8px", fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>{t("unlimitedDocs")}</p>
               </div>
             ) : (
-              <div className="pt-2">
-                <Button variant="outline" onClick={handlePortal}>
+              <div>
+                <button
+                  onClick={handlePortal}
+                  style={{ background: "transparent", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", fontWeight: 500, cursor: "pointer" }}
+                >
                   {t("manageBilling")}
-                </Button>
-                <p className="mt-2 text-xs text-stone-400">{t("updatePayment")}</p>
+                </button>
+                <p style={{ marginTop: "8px", fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>{t("updatePayment")}</p>
               </div>
             )}
           </>
         )}
       </div>
 
-      <Link href="/dashboard" className="text-sm text-stone-500 hover:text-stone-700">
+      <Link href="/dashboard" style={{ fontSize: "0.875rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
         {t("backToDocuments")}
       </Link>
 
       {/* Danger Zone */}
-      <div className="rounded-xl border border-red-200 bg-white p-6 space-y-3">
-        <h2 className="text-base font-semibold text-red-700">{ta("dangerZone")}</h2>
-        <p className="text-sm text-stone-500">{ta("confirmDesc")}</p>
+      <div style={{ ...cardStyle, border: "1px solid rgba(239,68,68,0.25)", background: "rgba(239,68,68,0.05)" }}>
+        <h2 style={{ fontSize: "0.875rem", fontWeight: 600, color: "#FCA5A5" }}>{ta("dangerZone")}</h2>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{ta("confirmDesc")}</p>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive" disabled={deleting}>
+            <button
+              disabled={deleting}
+              style={{ alignSelf: "flex-start", background: "rgba(239,68,68,0.15)", color: "#FCA5A5", border: "1px solid rgba(239,68,68,0.3)", borderRadius: "7px", padding: "9px 18px", fontSize: "0.875rem", fontWeight: 600, cursor: deleting ? "not-allowed" : "pointer", opacity: deleting ? 0.6 : 1 }}
+            >
               {deleting ? ta("deleting") : ta("deleteAccount")}
-            </Button>
+            </button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
@@ -156,10 +168,7 @@ export default function BillingPage() {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>{ta("cancel")}</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={handleDeleteAccount}
-                className="bg-red-600 hover:bg-red-700 text-white"
-              >
+              <AlertDialogAction onClick={handleDeleteAccount} className="bg-red-600 hover:bg-red-700 text-white">
                 {ta("confirm")}
               </AlertDialogAction>
             </AlertDialogFooter>

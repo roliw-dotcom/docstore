@@ -21,17 +21,33 @@ export function CookieBanner() {
   if (dismissed) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-stone-200 bg-white/95 backdrop-blur-sm px-6 py-4">
+    <div style={{
+      position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 50,
+      borderTop: "1px solid rgba(230,126,34,0.18)",
+      background: "rgba(8,20,32,0.98)",
+      backdropFilter: "blur(8px)",
+      padding: "16px 24px",
+    }}>
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-sm text-stone-600 font-sans">
+        <p style={{ fontSize: "0.875rem", color: "#8AAEC7" }}>
           {t("text")}{" "}
-          <Link href="/privacy" className="underline hover:text-stone-900">
+          <Link href="/privacy" style={{ color: "#E67E22", textDecoration: "underline" }}>
             {t("privacyPolicy")}
           </Link>
         </p>
         <button
           onClick={accept}
-          className="flex-shrink-0 rounded-md bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700 transition-colors"
+          style={{
+            flexShrink: 0,
+            background: "#E67E22",
+            color: "white",
+            border: "none",
+            borderRadius: "6px",
+            padding: "8px 18px",
+            fontSize: "0.825rem",
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
         >
           {t("accept")}
         </button>
