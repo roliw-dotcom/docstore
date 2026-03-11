@@ -4,151 +4,178 @@ export const metadata: Metadata = {
   title: "Terms of Service — bAInder",
 };
 
-const EN = () => (
-  <div className="prose prose-invert max-w-none">
-    <h1>Terms of Service</h1>
-    <p style={{ color: "#6A90AA" }}>Last updated: March 2026</p>
+const DE = () => (
+  <div>
+    <h1>Nutzungsbedingungen</h1>
+    <p style={{ color: "#6A90AA" }}>Zuletzt aktualisiert: März 2026</p>
 
-    <h2>1. Service Description</h2>
+    <h2>1. Geltungsbereich</h2>
     <p>
-      bAInder (&ldquo;Service&rdquo;) is an AI-powered document management tool operated by
-      <strong> [YOUR COMPANY NAME]</strong> (&ldquo;we&rdquo;, &ldquo;us&rdquo;). The Service allows users
-      to upload PDF documents, extract deadlines and action items using AI, and receive email reminders.
+      Diese Nutzungsbedingungen regeln die Nutzung der Softwareplattform bainder (nachfolgend „Dienst").
     </p>
+    <p>Mit der Registrierung eines Kontos erklärst du dich mit diesen Bedingungen einverstanden.</p>
 
-    <h2>2. Eligibility</h2>
-    <p>
-      You must be at least 18 years old to use the Service. By creating an account you confirm that the
-      information you provide is accurate and that you have the legal authority to accept these Terms.
-    </p>
-
-    <h2>3. User Obligations</h2>
+    <h2>2. Beschreibung des Dienstes</h2>
+    <p>bainder ist eine webbasierte Software zur Organisation und Analyse von Dokumenten.</p>
+    <p>Der Dienst ermöglicht unter anderem:</p>
     <ul>
-      <li>You are responsible for all documents you upload and for ensuring you have the right to process them.</li>
-      <li>You must not upload content that is illegal, harmful, or infringes third-party intellectual property rights.</li>
-      <li>You must not attempt to reverse-engineer, abuse, or interfere with the Service.</li>
-      <li>You are responsible for maintaining the confidentiality of your account credentials.</li>
+      <li>Upload und Speicherung von Dokumenten</li>
+      <li>KI-gestützte Analyse und Zusammenfassungen</li>
+      <li>Extraktion von Aufgaben, Fristen und Kategorien</li>
+    </ul>
+    <p>Die Funktionen können sich im Laufe der Zeit ändern oder erweitert werden.</p>
+
+    <h2>3. Benutzerkonto</h2>
+    <p>Zur Nutzung des Dienstes ist ein Benutzerkonto erforderlich.</p>
+    <p>Du bist verantwortlich für:</p>
+    <ul>
+      <li>die Sicherheit deines Kontos</li>
+      <li>die Geheimhaltung deines Passworts</li>
+      <li>alle Aktivitäten, die über dein Konto erfolgen</li>
+    </ul>
+    <p>Du verpflichtest dich, korrekte Angaben bei der Registrierung zu machen.</p>
+
+    <h2>4. Hochgeladene Inhalte</h2>
+    <p>Du behältst alle Rechte an den Dokumenten, die du hochlädst.</p>
+    <p>Mit dem Upload gewährst du bainder das notwendige Recht, diese Inhalte zu:</p>
+    <ul>
+      <li>speichern</li>
+      <li>analysieren</li>
+      <li>verarbeiten</li>
+    </ul>
+    <p>ausschließlich zum Zweck der Bereitstellung des Dienstes.</p>
+    <p>bainder verwendet deine Dokumente nicht zum Training von KI-Modellen.</p>
+    <p>Du bist dafür verantwortlich sicherzustellen, dass du berechtigt bist, die hochgeladenen Inhalte zu verarbeiten.</p>
+
+    <h2>5. Abonnements und Zahlungen</h2>
+    <p>Einige Funktionen können kostenpflichtig sein. Zahlungen werden über Stripe abgewickelt.</p>
+    <p>Abonnements:</p>
+    <ul>
+      <li>verlängern sich automatisch</li>
+      <li>können jederzeit über die Kontoeinstellungen gekündigt werden</li>
+    </ul>
+    <p>Bereits gezahlte Beträge werden grundsätzlich nicht erstattet, sofern gesetzlich nichts anderes vorgeschrieben ist.</p>
+
+    <h2>6. Verfügbarkeit des Dienstes</h2>
+    <p>Wir bemühen uns, den Dienst möglichst unterbrechungsfrei bereitzustellen.</p>
+    <p>Es kann jedoch zu Wartungsarbeiten, technischen Störungen oder temporären Ausfällen kommen.</p>
+    <p>Ein Anspruch auf permanente Verfügbarkeit besteht nicht.</p>
+
+    <h2>7. Haftungsbeschränkung</h2>
+    <p>Der Dienst wird „wie verfügbar" bereitgestellt.</p>
+    <p>bainder haftet nur für Schäden, die auf vorsätzlichem oder grob fahrlässigem Verhalten beruhen.</p>
+    <p>Für indirekte Schäden, Datenverlust oder entgangenen Gewinn wird keine Haftung übernommen, soweit gesetzlich zulässig.</p>
+
+    <h2>8. Kündigung</h2>
+    <p>Du kannst dein Konto jederzeit löschen.</p>
+    <p>Wir behalten uns das Recht vor, Konten zu sperren oder zu löschen, wenn:</p>
+    <ul>
+      <li>diese Bedingungen verletzt werden</li>
+      <li>der Dienst missbräuchlich genutzt wird</li>
     </ul>
 
-    <h2>4. Subscription and Payment</h2>
+    <h2>9. Änderungen der Bedingungen</h2>
+    <p>Wir können diese Nutzungsbedingungen gelegentlich anpassen.</p>
+    <p>Über wesentliche Änderungen informieren wir dich per E-Mail oder innerhalb der Anwendung.</p>
+
+    <h2>10. Anwendbares Recht</h2>
     <p>
-      The Free plan provides up to 10 document uploads. The Pro plan is a monthly subscription billed through
-      Stripe. Prices are listed on the pricing page and may change with 30 days&rsquo; notice. Refunds are
-      not provided for partial months except where required by law.
+      Es gilt das Recht von [Land einsetzen, z. B. Österreich].
+      Gerichtsstand ist [Stadt einsetzen], sofern gesetzlich zulässig.
     </p>
 
-    <h2>5. Intellectual Property</h2>
+    <h2>11. Kontakt</h2>
     <p>
-      You retain all rights to the documents you upload. You grant us a limited, non-exclusive licence to
-      process your documents solely to provide the Service. We retain all rights to the Service itself,
-      including its AI models, interface, and code.
-    </p>
-
-    <h2>6. Availability and Modifications</h2>
-    <p>
-      We strive for high availability but do not guarantee uninterrupted access. We may modify, suspend, or
-      discontinue the Service at any time. We will provide reasonable notice of material changes.
-    </p>
-
-    <h2>7. Limitation of Liability</h2>
-    <p>
-      To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential
-      damages arising from your use of the Service, including missed deadlines or decisions made based on
-      AI-extracted data. The Service is provided &ldquo;as is&rdquo; without warranties of any kind.
-    </p>
-
-    <h2>8. Account Termination</h2>
-    <p>
-      You may delete your account at any time from Settings → Billing → Danger Zone. We may suspend or
-      terminate your account for violations of these Terms. Upon termination, your data will be deleted in
-      accordance with our Privacy Policy.
-    </p>
-
-    <h2>9. Governing Law and Dispute Resolution</h2>
-    <p>
-      These Terms are governed by the laws of Germany. Any disputes shall be resolved in the competent courts
-      of <strong>[YOUR CITY]</strong>, Germany, unless mandatory consumer protection law in your country
-      requires otherwise.
-    </p>
-
-    <h2>10. Contact</h2>
-    <p>
-      For any questions about these Terms, contact us at{" "}
-      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>.
+      Bei Fragen zu diesen Nutzungsbedingungen kontaktiere uns bitte unter:{" "}
+      <a href="mailto:hello@bainder.net">hello@bainder.net</a>
     </p>
   </div>
 );
 
-const DE = () => (
-  <div className="prose prose-invert max-w-none">
-    <h1>Nutzungsbedingungen</h1>
-    <p style={{ color: "#6A90AA" }}>Zuletzt aktualisiert: März 2026</p>
+const EN = () => (
+  <div>
+    <h1>Terms of Service</h1>
+    <p style={{ color: "#6A90AA" }}>Last updated: March 2026</p>
 
-    <h2>1. Leistungsbeschreibung</h2>
+    <h2>1. Scope</h2>
     <p>
-      bAInder (&bdquo;Dienst&ldquo;) ist ein KI-gestütztes Dokumentenverwaltungstool, betrieben von
-      <strong> [IHR UNTERNEHMENSNAME]</strong> (&bdquo;wir&ldquo;). Der Dienst ermöglicht es Nutzern,
-      PDF-Dokumente hochzuladen, Fristen und Aufgaben per KI zu extrahieren und E-Mail-Erinnerungen zu empfangen.
+      These Terms of Service govern the use of the bainder software platform (the &ldquo;Service&rdquo;).
     </p>
+    <p>By creating an account you agree to these Terms.</p>
 
-    <h2>2. Nutzungsberechtigung</h2>
-    <p>
-      Du musst mindestens 18 Jahre alt sein, um den Dienst zu nutzen. Durch die Erstellung eines Kontos
-      bestätigst du, dass die von dir angegebenen Informationen korrekt sind.
-    </p>
-
-    <h2>3. Nutzerpflichten</h2>
+    <h2>2. Service Description</h2>
+    <p>bainder is a web-based software for organising and analysing documents.</p>
+    <p>The Service includes, among other things:</p>
     <ul>
-      <li>Du bist für alle hochgeladenen Dokumente verantwortlich und musst das Recht haben, diese zu verarbeiten.</li>
-      <li>Du darfst keine rechtswidrigen, schädlichen oder urheberrechtsverletzenden Inhalte hochladen.</li>
-      <li>Du darfst den Dienst nicht missbrauchen oder zu stören versuchen.</li>
-      <li>Du bist für die Vertraulichkeit deiner Zugangsdaten verantwortlich.</li>
+      <li>Document upload and storage</li>
+      <li>AI-powered analysis and summaries</li>
+      <li>Extraction of tasks, deadlines, and categories</li>
+    </ul>
+    <p>Features may change or be extended over time.</p>
+
+    <h2>3. User Account</h2>
+    <p>A user account is required to use the Service.</p>
+    <p>You are responsible for:</p>
+    <ul>
+      <li>the security of your account</li>
+      <li>keeping your password confidential</li>
+      <li>all activities that occur through your account</li>
+    </ul>
+    <p>You agree to provide accurate information when registering.</p>
+
+    <h2>4. Uploaded Content</h2>
+    <p>You retain all rights to the documents you upload.</p>
+    <p>By uploading, you grant bainder the necessary right to:</p>
+    <ul>
+      <li>store</li>
+      <li>analyse</li>
+      <li>process</li>
+    </ul>
+    <p>your content, solely for the purpose of providing the Service.</p>
+    <p>bainder does not use your documents to train AI models.</p>
+    <p>You are responsible for ensuring that you are authorised to process the content you upload.</p>
+
+    <h2>5. Subscriptions and Payments</h2>
+    <p>Some features may require a paid subscription. Payments are processed via Stripe.</p>
+    <p>Subscriptions:</p>
+    <ul>
+      <li>renew automatically</li>
+      <li>can be cancelled at any time via account settings</li>
+    </ul>
+    <p>Payments already made are generally non-refundable unless required by law.</p>
+
+    <h2>6. Service Availability</h2>
+    <p>We strive to provide the Service with as little interruption as possible.</p>
+    <p>However, maintenance, technical issues, or temporary outages may occur.</p>
+    <p>No right to permanent availability exists.</p>
+
+    <h2>7. Limitation of Liability</h2>
+    <p>The Service is provided &ldquo;as available&rdquo;.</p>
+    <p>bainder is only liable for damages resulting from intentional or grossly negligent conduct.</p>
+    <p>No liability is accepted for indirect damages, data loss, or loss of profit, to the extent permitted by law.</p>
+
+    <h2>8. Termination</h2>
+    <p>You may delete your account at any time.</p>
+    <p>We reserve the right to suspend or delete accounts if:</p>
+    <ul>
+      <li>these Terms are violated</li>
+      <li>the Service is used abusively</li>
     </ul>
 
-    <h2>4. Abonnement und Zahlung</h2>
+    <h2>9. Changes to These Terms</h2>
+    <p>We may update these Terms of Service from time to time.</p>
+    <p>We will notify you of material changes by email or within the application.</p>
+
+    <h2>10. Governing Law</h2>
     <p>
-      Der Free-Plan umfasst bis zu 10 Dokument-Uploads. Der Pro-Plan ist ein monatliches Abonnement,
-      das über Stripe abgerechnet wird. Preise können sich mit einer Frist von 30 Tagen ändern.
-      Rückerstattungen für Teilmonate werden grundsätzlich nicht gewährt, sofern gesetzlich nichts anderes
-      vorgesehen ist.
+      The law of [insert country, e.g. Austria] applies.
+      Place of jurisdiction is [insert city], to the extent permitted by law.
     </p>
 
-    <h2>5. Geistiges Eigentum</h2>
+    <h2>11. Contact</h2>
     <p>
-      Du behältst alle Rechte an deinen hochgeladenen Dokumenten. Du räumst uns eine eingeschränkte,
-      nicht-exklusive Lizenz zur Verarbeitung deiner Dokumente ausschließlich zur Erbringung des Dienstes ein.
-      Alle Rechte am Dienst selbst verbleiben bei uns.
-    </p>
-
-    <h2>6. Verfügbarkeit und Änderungen</h2>
-    <p>
-      Wir bemühen uns um hohe Verfügbarkeit, garantieren jedoch keinen ununterbrochenen Zugang.
-      Wesentliche Änderungen werden mit angemessener Vorankündigung bekannt gegeben.
-    </p>
-
-    <h2>7. Haftungsbeschränkung</h2>
-    <p>
-      Soweit gesetzlich zulässig, haften wir nicht für indirekte, zufällige oder Folgeschäden, die aus der
-      Nutzung des Dienstes entstehen, einschließlich verpasster Fristen oder Entscheidungen auf Basis
-      KI-extrahierter Daten. Der Dienst wird &bdquo;wie besehen&ldquo; ohne jegliche Garantien bereitgestellt.
-    </p>
-
-    <h2>8. Kontokündigung</h2>
-    <p>
-      Du kannst dein Konto jederzeit unter Einstellungen → Abrechnung → Gefahrenzone löschen. Wir können
-      dein Konto bei Verstößen gegen diese Bedingungen sperren oder kündigen.
-    </p>
-
-    <h2>9. Anwendbares Recht und Gerichtsstand</h2>
-    <p>
-      Diese Bedingungen unterliegen deutschem Recht. Gerichtsstand ist <strong>[DEINE STADT]</strong>,
-      Deutschland, sofern zwingendes Verbraucherschutzrecht in deinem Land nichts anderes vorschreibt.
-    </p>
-
-    <h2>10. Kontakt</h2>
-    <p>
-      Bei Fragen zu diesen Bedingungen wende dich an{" "}
-      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>.
+      For questions about these Terms, please contact us at:{" "}
+      <a href="mailto:hello@bainder.net">hello@bainder.net</a>
     </p>
   </div>
 );
@@ -162,11 +189,60 @@ export default async function TermsPage({
 
   return (
     <div style={{ minHeight: "100vh", background: "#0F2337", color: "white" }}>
+      <style>{`
+        .terms-content h1 {
+          font-family: var(--font-dm-serif);
+          font-size: 2rem;
+          color: white;
+          margin: 0 0 6px 0;
+        }
+        .terms-content h2 {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: white;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          margin: 48px 0 16px 0;
+          padding-bottom: 10px;
+          border-bottom: 1px solid rgba(230,126,34,0.25);
+        }
+        .terms-content p {
+          font-size: 0.9rem;
+          color: #8AAEC7;
+          line-height: 1.75;
+          margin: 0 0 12px 0;
+        }
+        .terms-content ul {
+          padding-left: 20px;
+          margin: 0 0 14px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .terms-content li {
+          font-size: 0.9rem;
+          color: #8AAEC7;
+          line-height: 1.65;
+        }
+        .terms-content strong {
+          color: rgba(255,255,255,0.85);
+          font-weight: 600;
+        }
+        .terms-content a {
+          color: #E67E22;
+          text-decoration: none;
+        }
+        .terms-content a:hover {
+          text-decoration: underline;
+        }
+      `}</style>
       <div className="max-w-3xl mx-auto px-6 py-16">
         <div style={{ marginBottom: "32px", borderRadius: "8px", border: "1px solid rgba(230,126,34,0.3)", background: "rgba(230,126,34,0.08)", padding: "12px 16px", fontSize: "0.875rem", color: "#F5A623" }}>
-          ⚠️ Review and fill in your company details (name, city, governing law) before going live.
+          ⚠️ Fill in your country and city (sections 10) before going live.
         </div>
-        {locale === "de" ? <DE /> : <EN />}
+        <div className="terms-content">
+          {locale === "de" ? <DE /> : <EN />}
+        </div>
       </div>
     </div>
   );
