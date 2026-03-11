@@ -163,7 +163,7 @@
     "pendingOnly": "Pending only"
   },
   "upgradeBanner": {
-    "message": "You've used {count} of 10 free documents. Upgrade to Pro for unlimited documents and email reminders.",
+    "message": "You've used {count} of 10 free uploads. Upgrade to Pro for unlimited uploads and email reminders. Your existing documents always stay accessible.",
     "upgradeToPro": "Upgrade to Pro"
   },
   "deleteDocument": {

@@ -163,7 +163,7 @@
     "pendingOnly": "Nur ausstehende"
   },
   "upgradeBanner": {
-    "message": "Du hast {count} von 10 kostenlosen Dokumenten verwendet. Wechsle zu Pro für unbegrenzte Dokumente und E-Mail-Erinnerungen.",
+    "message": "Du hast {count} von 10 kostenlosen Uploads verwendet. Wechsle zu Pro für unbegrenzte Uploads und E-Mail-Erinnerungen. Deine vorhandenen Dokumente bleiben immer zugänglich.",
     "upgradeToPro": "Zu Pro wechseln"
   },
   "deleteDocument": {

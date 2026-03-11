@@ -46,6 +46,12 @@ const EN = () => (
       from <strong>Settings → Billing → Danger Zone</strong>, which permanently erases all documents,
       metadata, and your account credentials. Payment records may be retained by Stripe as required by law.
     </p>
+    <p>
+      <strong>Inactivity policy:</strong> Accounts that have not been signed into for 11 months will receive
+      an email warning. If no sign-in occurs within 30 days of that warning (12 months total inactivity),
+      the account and all associated data will be permanently deleted. Active Pro subscribers are exempt
+      from this policy while their subscription remains active.
+    </p>
 
     <h2>6. Your Rights</h2>
     <p>Under the GDPR you have the right to:</p>
@@ -108,6 +114,13 @@ const DE = () => (
       <strong>Einstellungen → Abrechnung → Gefahrenzone</strong> löschen, wodurch alle Dokumente,
       Metadaten und Zugangsdaten dauerhaft gelöscht werden. Zahlungsaufzeichnungen können von Stripe
       gemäß gesetzlicher Anforderungen aufbewahrt werden.
+    </p>
+    <p>
+      <strong>Inaktivitätsrichtlinie:</strong> Konten, bei denen seit 11 Monaten keine Anmeldung
+      erfolgte, erhalten eine E-Mail-Warnung. Erfolgt innerhalb von 30 Tagen nach dieser Warnung
+      (insgesamt 12 Monate Inaktivität) keine Anmeldung, werden das Konto und alle zugehörigen Daten
+      dauerhaft gelöscht. Aktive Pro-Abonnenten sind von dieser Richtlinie ausgenommen, solange ihr
+      Abonnement aktiv ist.
     </p>
 
     <h2>6. Deine Rechte</h2>
