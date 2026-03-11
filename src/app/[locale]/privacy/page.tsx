@@ -11,63 +11,179 @@ const EN = () => (
 
     <h2>1. Controller</h2>
     <p>
-      <strong>[YOUR COMPANY NAME]</strong><br />
-      [Street, City, Postal Code, Country]<br />
+      The controller within the meaning of the General Data Protection Regulation (GDPR) is:<br /><br />
+      <strong>[COMPANY NAME]</strong><br />
+      [Street + Number]<br />
+      [Postal Code, City]<br />
+      [Country]<br /><br />
       E-mail: <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
     </p>
+    <p>For any questions regarding data protection, please contact us at the email address above.</p>
 
     <h2>2. Data We Collect</h2>
+    <p>We process personal data only to the extent necessary to provide and operate our service.</p>
+
+    <h3>Account data</h3>
     <ul>
-      <li><strong>Account data:</strong> email address and encrypted password (managed by Supabase Auth).</li>
-      <li><strong>Documents:</strong> PDF files and images you upload, stored in a private Supabase Storage bucket accessible only to you.</li>
-      <li><strong>Document metadata:</strong> AI-extracted summaries, keywords, categories, and follow-up items derived from your documents.</li>
-      <li><strong>Payment information:</strong> Stripe handles all payment processing. We store only your subscription status and plan tier; we never see your card number.</li>
-      <li><strong>Cookies:</strong> A strictly necessary session cookie issued by Supabase to keep you signed in. No tracking or advertising cookies are set.</li>
+      <li>Email address</li>
+      <li>Encrypted password</li>
+    </ul>
+    <p>Authentication is provided by Supabase Auth.</p>
+
+    <h3>Uploaded documents</h3>
+    <p>When you upload documents, we process:</p>
+    <ul>
+      <li>PDF files</li>
+      <li>Images</li>
+      <li>Other document files</li>
+    </ul>
+    <p>These files are stored in a private Supabase Storage bucket associated exclusively with your user account.</p>
+
+    <h3>Document metadata</h3>
+    <p>The following information may be automatically extracted from your documents:</p>
+    <ul>
+      <li>Summaries</li>
+      <li>Keywords</li>
+      <li>Categories</li>
+      <li>Tasks or follow-up items</li>
+    </ul>
+    <p>This metadata is stored to improve the usability of the service.</p>
+
+    <h3>Server log data</h3>
+    <p>When you access our application, technical data is automatically processed:</p>
+    <ul>
+      <li>IP address</li>
+      <li>Time of request</li>
+      <li>Browser type</li>
+      <li>Operating system</li>
+    </ul>
+    <p>This data is used exclusively for system security and stability.</p>
+
+    <h3>Payment information</h3>
+    <p>Payment processing is handled by Stripe. We store only:</p>
+    <ul>
+      <li>your subscription status</li>
+      <li>payment events (e.g. active, cancelled)</li>
+    </ul>
+    <p>We have no access to your credit card details.</p>
+
+    <h3>Cookies</h3>
+    <p>
+      We use only strictly necessary session cookies set by Supabase to keep you signed in during your
+      session. No tracking or advertising cookies are used.
+    </p>
+
+    <h2>3. Legal Basis for Processing (Art. 6 GDPR)</h2>
+    <p>Processing of your data is based on the following legal grounds:</p>
+
+    <p><strong>Art. 6(1)(b) GDPR — Performance of a contract</strong><br />
+    Processing is necessary to provide our service, including:</p>
+    <ul>
+      <li>User accounts</li>
+      <li>Document storage</li>
+      <li>AI-powered analysis</li>
+      <li>Subscription management</li>
     </ul>
 
-    <h2>3. Legal Basis (GDPR Art. 6)</h2>
-    <p>
-      Processing is necessary for the performance of the contract between you and bainder (Art. 6(1)(b) GDPR).
-      Session cookies are strictly necessary for the service to function.
-    </p>
+    <p><strong>Art. 6(1)(f) GDPR — Legitimate interests</strong><br />
+    Some processing is based on our legitimate interests, in particular:</p>
+    <ul>
+      <li>Ensuring IT security</li>
+      <li>Preventing abuse and fraud</li>
+      <li>System stability and error analysis</li>
+    </ul>
 
     <h2>4. Processors</h2>
+    <p>
+      We use third-party service providers (processors) to deliver our service. They process data solely
+      according to our instructions and under data processing agreements pursuant to Art. 28 GDPR.
+    </p>
     <ul>
-      <li><strong>Supabase (EU):</strong> database and file storage — <a href="https://supabase.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a></li>
-      <li><strong>Anthropic:</strong> AI text extraction via the Claude API — <a href="https://www.anthropic.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>. Document text is sent to the Claude API for processing and is not used to train models.</li>
-      <li><strong>Stripe:</strong> payment processing — <a href="https://stripe.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a></li>
-      <li><strong>Resend:</strong> transactional email delivery — <a href="https://resend.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a></li>
-      <li><strong>Vercel:</strong> application hosting — <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noreferrer">Privacy Policy</a></li>
+      <li><strong>Supabase (EU):</strong> Database, authentication, and file storage.</li>
+      <li><strong>Anthropic:</strong> AI text extraction via the Claude API. Document text may be transmitted to the API for analysis. According to the provider, this data is not used to train models.</li>
+      <li><strong>Stripe:</strong> Payment processing and subscription management.</li>
+      <li><strong>Resend:</strong> Delivery of system-relevant emails (e.g. login or notifications).</li>
+      <li><strong>Vercel:</strong> Hosting of the web application.</li>
     </ul>
 
-    <h2>5. Retention</h2>
+    <h2>5. International Data Transfers</h2>
     <p>
-      Your data is retained for as long as your account is active. You may delete your account at any time
-      from <strong>Settings → Billing → Danger Zone</strong>, which permanently erases all documents,
-      metadata, and your account credentials. Payment records may be retained by Stripe as required by law.
+      Some of our service providers may process data outside the European Union or the European Economic
+      Area. In such cases, data transfers take place only in compliance with the legal requirements of the
+      GDPR, in particular on the basis of:
     </p>
-    <p>
-      <strong>Inactivity policy:</strong> Accounts that have not been signed into for 11 months will receive
-      an email warning. If no sign-in occurs within 30 days of that warning (12 months total inactivity),
-      the account and all associated data will be permanently deleted. Active Pro subscribers are exempt
-      from this policy while their subscription remains active.
-    </p>
-
-    <h2>6. Your Rights</h2>
-    <p>Under the GDPR you have the right to:</p>
     <ul>
-      <li><strong>Access</strong> a copy of the personal data we hold about you.</li>
-      <li><strong>Rectification</strong> of inaccurate data.</li>
-      <li><strong>Erasure</strong> ("right to be forgotten") — use the in-app account deletion or contact us.</li>
-      <li><strong>Portability</strong> of your data in a machine-readable format.</li>
-      <li><strong>Object</strong> to processing based on legitimate interests.</li>
-      <li><strong>Lodge a complaint</strong> with your national supervisory authority (in Germany: <em>Bundesbeauftragte für den Datenschutz und die Informationsfreiheit</em>).</li>
+      <li>EU Standard Contractual Clauses (Art. 46 GDPR), or</li>
+      <li>other appropriate safeguards to protect personal data.</li>
     </ul>
-    <p>To exercise any right, contact us at <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>.</p>
 
-    <h2>7. Contact</h2>
+    <h2>6. Retention</h2>
+    <p>We store personal data only for as long as necessary for the respective purpose.</p>
+
+    <p><strong>Account data</strong><br />Stored for as long as your user account is active.</p>
+
+    <p><strong>Documents and metadata</strong><br />
+    Stored for as long as your account exists. When you delete your account, all documents, metadata,
+    and credentials are permanently deleted.</p>
+
     <p>
-      For any privacy-related questions, email <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>.
+      <strong>Inactivity policy:</strong> Accounts with no sign-in for 11 months will receive a reminder
+      email. If no sign-in occurs within 30 days, the account, all documents, and all associated data will
+      be permanently deleted. Active Pro subscribers are exempt from this policy while their subscription
+      remains active.
+    </p>
+
+    <p><strong>Payment data</strong><br />Stripe may retain payment information in accordance with statutory retention obligations.</p>
+
+    <p><strong>Server logs</strong><br />Server log data is stored for a maximum of 30 days for security purposes.</p>
+
+    <h2>7. Your Rights</h2>
+    <p>Under the GDPR you have the following rights:</p>
+    <ul>
+      <li><strong>Access</strong> (Art. 15 GDPR) to your stored personal data</li>
+      <li><strong>Rectification</strong> (Art. 16 GDPR) of inaccurate data</li>
+      <li><strong>Erasure</strong> (Art. 17 GDPR) of your data</li>
+      <li><strong>Restriction of processing</strong> (Art. 18 GDPR)</li>
+      <li><strong>Data portability</strong> (Art. 20 GDPR)</li>
+      <li><strong>Object</strong> to processing (Art. 21 GDPR)</li>
+    </ul>
+    <p>
+      To exercise your rights, you may delete your account within the application or contact us at{" "}
+      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>.
+    </p>
+
+    <h2>8. Right to Lodge a Complaint</h2>
+    <p>You have the right to lodge a complaint with a data protection supervisory authority.</p>
+    <p>The competent authority in Austria is:</p>
+    <p>
+      Österreichische Datenschutzbehörde<br />
+      Barichgasse 40–42<br />
+      1030 Vienna, Austria<br />
+      <a href="https://www.dsb.gv.at" target="_blank" rel="noreferrer">https://www.dsb.gv.at</a>
+    </p>
+
+    <h2>9. Data Security</h2>
+    <p>
+      We implement appropriate technical and organisational measures (TOMs) to protect your data,
+      including:
+    </p>
+    <ul>
+      <li>Encrypted data transmission (HTTPS)</li>
+      <li>Access controls</li>
+      <li>Secure cloud infrastructure</li>
+      <li>Regular security updates</li>
+    </ul>
+
+    <h2>10. Automated Decision-Making</h2>
+    <p>
+      No automated decision-making within the meaning of Art. 22 GDPR takes place. The AI features
+      are used solely to assist with document analysis.
+    </p>
+
+    <h2>11. Contact</h2>
+    <p>
+      For any questions regarding data protection or the processing of your data, please contact us at:{" "}
+      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
     </p>
   </div>
 );
