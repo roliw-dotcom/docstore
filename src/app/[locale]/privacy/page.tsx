@@ -79,65 +79,180 @@ const DE = () => (
 
     <h2>1. Verantwortlicher</h2>
     <p>
-      <strong>[IHR UNTERNEHMENSNAME]</strong><br />
-      [Straße, Stadt, PLZ, Land]<br />
+      Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:<br /><br />
+      <strong>[UNTERNEHMENSNAME]</strong><br />
+      [Straße + Hausnummer]<br />
+      [PLZ, Stadt]<br />
+      [Land]<br /><br />
       E-Mail: <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
     </p>
+    <p>Bei Fragen zum Datenschutz kannst du uns jederzeit unter der oben genannten E-Mail-Adresse kontaktieren.</p>
 
     <h2>2. Erhobene Daten</h2>
+    <p>Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung und zum Betrieb unseres Dienstes erforderlich ist.</p>
+
+    <h3>Kontodaten</h3>
     <ul>
-      <li><strong>Kontodaten:</strong> E-Mail-Adresse und verschlüsseltes Passwort (verwaltet von Supabase Auth).</li>
-      <li><strong>Dokumente:</strong> PDF-Dateien und Bilder, die du hochlädst, gespeichert in einem privaten Supabase-Storage-Bucket, der nur für dich zugänglich ist.</li>
-      <li><strong>Dokumenten-Metadaten:</strong> KI-extrahierte Zusammenfassungen, Schlagwörter, Kategorien und Follow-up-Punkte.</li>
-      <li><strong>Zahlungsinformationen:</strong> Stripe übernimmt die gesamte Zahlungsabwicklung. Wir speichern nur deinen Abonnementstatus; wir sehen niemals deine Kartennummer.</li>
-      <li><strong>Cookies:</strong> Ein technisch notwendiges Session-Cookie von Supabase, um dich angemeldet zu halten. Es werden keine Tracking- oder Werbe-Cookies gesetzt.</li>
+      <li>E-Mail-Adresse</li>
+      <li>Verschlüsseltes Passwort</li>
+    </ul>
+    <p>Die Authentifizierung wird über Supabase Auth bereitgestellt.</p>
+
+    <h3>Hochgeladene Dokumente</h3>
+    <p>Wenn du Dokumente hochlädst, verarbeiten wir:</p>
+    <ul>
+      <li>PDF-Dateien</li>
+      <li>Bilder</li>
+      <li>andere Dokumentdateien</li>
+    </ul>
+    <p>Diese Dateien werden in einem privaten Supabase Storage Bucket gespeichert, der ausschließlich deinem Benutzerkonto zugeordnet ist.</p>
+
+    <h3>Dokument-Metadaten</h3>
+    <p>Aus deinen Dokumenten können automatisch folgende Informationen extrahiert werden:</p>
+    <ul>
+      <li>Zusammenfassungen</li>
+      <li>Schlagwörter</li>
+      <li>Kategorien</li>
+      <li>Aufgaben oder Follow-up-Punkte</li>
+    </ul>
+    <p>Diese Metadaten werden zur Verbesserung der Nutzbarkeit des Dienstes gespeichert.</p>
+
+    <h3>Server-Logdaten</h3>
+    <p>Beim Zugriff auf unsere Anwendung werden automatisch technische Daten verarbeitet:</p>
+    <ul>
+      <li>IP-Adresse</li>
+      <li>Zeitpunkt der Anfrage</li>
+      <li>Browsertyp</li>
+      <li>Betriebssystem</li>
+    </ul>
+    <p>Diese Daten dienen ausschließlich der Sicherheit und Stabilität des Systems.</p>
+
+    <h3>Zahlungsinformationen</h3>
+    <p>Die Zahlungsabwicklung erfolgt über Stripe. Wir speichern lediglich:</p>
+    <ul>
+      <li>deinen Abonnementstatus</li>
+      <li>Zahlungsereignisse (z. B. aktiv, gekündigt)</li>
+    </ul>
+    <p>Wir haben keinen Zugriff auf deine Kreditkartendaten.</p>
+
+    <h3>Cookies</h3>
+    <p>
+      Wir verwenden ausschließlich technisch notwendige Session-Cookies, die von Supabase gesetzt werden,
+      um dich während deiner Sitzung angemeldet zu halten. Es werden keine Tracking- oder Werbe-Cookies eingesetzt.
+    </p>
+
+    <h2>3. Rechtsgrundlage der Verarbeitung (Art. 6 DSGVO)</h2>
+    <p>Die Verarbeitung deiner Daten erfolgt auf Grundlage folgender Rechtsgrundlagen:</p>
+
+    <p><strong>Art. 6 Abs. 1 lit. b DSGVO – Vertragserfüllung</strong><br />
+    Die Verarbeitung ist erforderlich, um dir unseren Dienst bereitzustellen, einschließlich:</p>
+    <ul>
+      <li>Benutzerkonten</li>
+      <li>Dokumentenspeicherung</li>
+      <li>KI-gestützte Analyse</li>
+      <li>Abonnementverwaltung</li>
     </ul>
 
-    <h2>3. Rechtsgrundlage (Art. 6 DSGVO)</h2>
-    <p>
-      Die Verarbeitung ist zur Erfüllung des Vertrags zwischen dir und bainder erforderlich (Art. 6 Abs. 1 lit. b DSGVO).
-      Session-Cookies sind für den Betrieb des Dienstes technisch notwendig.
-    </p>
+    <p><strong>Art. 6 Abs. 1 lit. f DSGVO – Berechtigtes Interesse</strong><br />
+    Einige Verarbeitungen erfolgen zur Wahrung berechtigter Interessen, insbesondere:</p>
+    <ul>
+      <li>Gewährleistung der IT-Sicherheit</li>
+      <li>Missbrauchs- und Betrugsprävention</li>
+      <li>Systemstabilität und Fehleranalyse</li>
+    </ul>
 
     <h2>4. Auftragsverarbeiter</h2>
+    <p>
+      Wir nutzen externe Dienstleister (Auftragsverarbeiter) zur Bereitstellung unseres Dienstes.
+      Diese verarbeiten Daten ausschließlich gemäß unseren Weisungen und auf Grundlage von
+      Auftragsverarbeitungsverträgen gemäß Art. 28 DSGVO.
+    </p>
     <ul>
-      <li><strong>Supabase (EU):</strong> Datenbank und Dateispeicherung</li>
-      <li><strong>Anthropic:</strong> KI-Textextraktion über die Claude API. Der Dokumententext wird zur Verarbeitung an die Claude API gesendet und nicht zum Training von Modellen verwendet.</li>
-      <li><strong>Stripe:</strong> Zahlungsabwicklung</li>
-      <li><strong>Resend:</strong> E-Mail-Zustellung</li>
-      <li><strong>Vercel:</strong> Anwendungshosting</li>
+      <li><strong>Supabase (EU):</strong> Bereitstellung von Datenbank, Authentifizierung und Dateispeicherung.</li>
+      <li><strong>Anthropic:</strong> KI-Textextraktion über die Claude API. Dokumenttexte können zur Analyse an die API übermittelt werden. Laut Anbieter werden diese Daten nicht zum Training von Modellen verwendet.</li>
+      <li><strong>Stripe:</strong> Zahlungsabwicklung und Abonnementverwaltung.</li>
+      <li><strong>Resend:</strong> Versand von systemrelevanten E-Mails (z. B. Login oder Benachrichtigungen).</li>
+      <li><strong>Vercel:</strong> Hosting der Webanwendung.</li>
     </ul>
 
-    <h2>5. Speicherdauer</h2>
+    <h2>5. Internationale Datenübermittlungen</h2>
     <p>
-      Deine Daten werden gespeichert, solange dein Konto aktiv ist. Du kannst dein Konto jederzeit unter
-      <strong>Einstellungen → Abrechnung → Gefahrenzone</strong> löschen, wodurch alle Dokumente,
-      Metadaten und Zugangsdaten dauerhaft gelöscht werden. Zahlungsaufzeichnungen können von Stripe
-      gemäß gesetzlicher Anforderungen aufbewahrt werden.
+      Einige unserer Dienstleister können Daten außerhalb der Europäischen Union oder des Europäischen
+      Wirtschaftsraums verarbeiten. In solchen Fällen erfolgt die Datenübermittlung nur unter Einhaltung
+      der gesetzlichen Vorgaben der DSGVO, insbesondere auf Grundlage von:
     </p>
-    <p>
-      <strong>Inaktivitätsrichtlinie:</strong> Konten, bei denen seit 11 Monaten keine Anmeldung
-      erfolgte, erhalten eine E-Mail-Warnung. Erfolgt innerhalb von 30 Tagen nach dieser Warnung
-      (insgesamt 12 Monate Inaktivität) keine Anmeldung, werden das Konto und alle zugehörigen Daten
-      dauerhaft gelöscht. Aktive Pro-Abonnenten sind von dieser Richtlinie ausgenommen, solange ihr
-      Abonnement aktiv ist.
-    </p>
-
-    <h2>6. Deine Rechte</h2>
-    <p>Gemäß DSGVO hast du das Recht auf:</p>
     <ul>
-      <li><strong>Auskunft</strong> über deine gespeicherten personenbezogenen Daten.</li>
-      <li><strong>Berichtigung</strong> unrichtiger Daten.</li>
-      <li><strong>Löschung</strong> – nutze die In-App-Kontolöschung oder kontaktiere uns.</li>
-      <li><strong>Datenübertragbarkeit</strong> in einem maschinenlesbaren Format.</li>
-      <li><strong>Widerspruch</strong> gegen die Verarbeitung auf Basis berechtigter Interessen.</li>
-      <li><strong>Beschwerde</strong> bei der zuständigen Aufsichtsbehörde (in Deutschland: <em>Bundesbeauftragte für den Datenschutz und die Informationsfreiheit</em>).</li>
+      <li>EU-Standardvertragsklauseln (Art. 46 DSGVO) oder</li>
+      <li>anderen geeigneten Garantien zum Schutz personenbezogener Daten.</li>
     </ul>
-    <p>Zur Ausübung deiner Rechte kontaktiere uns unter <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>.</p>
 
-    <h2>7. Kontakt</h2>
+    <h2>6. Speicherdauer</h2>
+    <p>Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist.</p>
+
+    <p><strong>Kontodaten</strong><br />Werden gespeichert, solange dein Benutzerkonto aktiv ist.</p>
+
+    <p><strong>Dokumente und Metadaten</strong><br />
+    Werden gespeichert, solange dein Konto besteht. Wenn du dein Konto löschst, werden alle Dokumente,
+    Metadaten und Zugangsdaten dauerhaft gelöscht.</p>
+
     <p>
-      Für datenschutzbezogene Fragen wende dich an <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>.
+      <strong>Inaktivitätsrichtlinie:</strong> Konten ohne Anmeldung über 11 Monate erhalten eine
+      Erinnerungs-E-Mail. Wenn innerhalb von 30 Tagen keine Anmeldung erfolgt, werden das Konto, alle
+      Dokumente und alle zugehörigen Daten dauerhaft gelöscht. Aktive Pro-Abonnenten sind von dieser
+      Regelung ausgenommen, solange ihr Abonnement aktiv ist.
+    </p>
+
+    <p><strong>Zahlungsdaten</strong><br />Stripe kann Zahlungsinformationen gemäß gesetzlichen Aufbewahrungspflichten speichern.</p>
+
+    <p><strong>Server-Logs</strong><br />Server-Logdaten werden aus Sicherheitsgründen für maximal 30 Tage gespeichert.</p>
+
+    <h2>7. Deine Rechte</h2>
+    <p>Du hast gemäß DSGVO folgende Rechte:</p>
+    <ul>
+      <li><strong>Auskunft</strong> (Art. 15 DSGVO) über deine gespeicherten personenbezogenen Daten</li>
+      <li><strong>Berichtigung</strong> (Art. 16 DSGVO) unrichtiger Daten</li>
+      <li><strong>Löschung</strong> (Art. 17 DSGVO) deiner Daten</li>
+      <li><strong>Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO)</li>
+      <li><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO)</li>
+      <li><strong>Widerspruch</strong> gegen die Verarbeitung (Art. 21 DSGVO)</li>
+    </ul>
+    <p>
+      Zur Ausübung deiner Rechte kannst du dein Konto in der Anwendung löschen oder uns unter{" "}
+      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a> kontaktieren.
+    </p>
+
+    <h2>8. Beschwerderecht</h2>
+    <p>Du hast das Recht, eine Beschwerde bei einer Datenschutzaufsichtsbehörde einzureichen.</p>
+    <p>Zuständige Behörde in Österreich:</p>
+    <p>
+      Österreichische Datenschutzbehörde<br />
+      Barichgasse 40–42<br />
+      1030 Wien<br />
+      <a href="https://www.dsb.gv.at" target="_blank" rel="noreferrer">https://www.dsb.gv.at</a>
+    </p>
+
+    <h2>9. Sicherheit der Daten</h2>
+    <p>
+      Wir verwenden angemessene technische und organisatorische Maßnahmen (TOMs), um deine Daten zu schützen.
+      Dazu gehören insbesondere:
+    </p>
+    <ul>
+      <li>verschlüsselte Datenübertragung (HTTPS)</li>
+      <li>Zugriffsbeschränkungen</li>
+      <li>sichere Cloud-Infrastruktur</li>
+      <li>regelmäßige Sicherheitsupdates</li>
+    </ul>
+
+    <h2>10. Automatisierte Entscheidungen</h2>
+    <p>
+      Es findet keine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO statt.
+      Die KI-Funktionen dienen ausschließlich der Unterstützung bei der Analyse von Dokumenten.
+    </p>
+
+    <h2>11. Kontakt</h2>
+    <p>
+      Bei Fragen zum Datenschutz oder zur Verarbeitung deiner Daten kontaktiere uns bitte unter:{" "}
+      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
     </p>
   </div>
 );
