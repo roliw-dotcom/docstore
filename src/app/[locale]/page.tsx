@@ -247,12 +247,13 @@ export default async function RootPage({
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
             {[
-              { title: t("featureExtractTitle"), desc: t("featureExtractDesc") },
-              { title: t("featureTrackTitle"),   desc: t("featureTrackDesc") },
-              { title: t("featureRemindTitle"),  desc: t("featureRemindDesc") },
-              { title: t("featureUploadTitle"),  desc: t("featureUploadDesc") },
-              { title: t("featureSearchTitle"),  desc: t("featureSearchDesc") },
-              { title: t("featurePrivateTitle"), desc: t("featurePrivateDesc") },
+              { title: t("featureExtractTitle"),  desc: t("featureExtractDesc") },
+              { title: t("featureTrackTitle"),    desc: t("featureTrackDesc") },
+              { title: t("featureRemindTitle"),   desc: t("featureRemindDesc") },
+              { title: t("featureUploadTitle"),   desc: t("featureUploadDesc") },
+              { title: t("featureSearchTitle"),   desc: t("featureSearchDesc") },
+              { title: t("featurePrivateTitle"),  desc: t("featurePrivateDesc") },
+              { title: t("featureLanguageTitle"), desc: t("featureLanguageDesc") },
             ].map(({ title, desc }) => (
               <div key={title}>
                 <div style={{ width: "32px", height: "2px", background: "#E67E22", marginBottom: "16px" }} />
