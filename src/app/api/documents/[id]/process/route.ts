@@ -33,11 +33,18 @@ interface ClaudeMetadata {
   follow_ups: FollowUpItem[];
 }
 
+const LOCALE_LANGUAGE: Record<string, string> = {
+  en: "English",
+  de: "German",
+};
+
 export async function POST(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
+  const locale = _request.nextUrl.searchParams.get("locale") ?? "en";
+  const language = LOCALE_LANGUAGE[locale] ?? "English";
   const supabase = await createClient();
 
   const {
@@ -100,7 +107,7 @@ export async function POST(
   - "description": optional brief details or context
   - "due_date": ISO date string (YYYY-MM-DD) if a specific date is mentioned, otherwise null
 
-Respond in the same language as the document.
+Respond in ${language}, regardless of the document's language.
 Return ONLY the raw JSON object — no markdown fences, no explanation.`;
 
     let pageCount = 1;

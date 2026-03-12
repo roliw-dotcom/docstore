@@ -5,7 +5,7 @@ import { useRouter } from "@/navigation";
 import { Link } from "@/navigation";
 import { useDropzone } from "react-dropzone";
 import { createClient } from "@/lib/supabase/client";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 type FileStatus = "pending" | "uploading" | "done" | "error";
 
@@ -35,7 +35,8 @@ async function uploadOne(
   supabase: ReturnType<typeof createClient>,
   userId: string,
   item: FileItem,
-  onStatus: (id: string, status: FileStatus, error?: string) => void
+  onStatus: (id: string, status: FileStatus, error?: string) => void,
+  locale: string
 ) {
   onStatus(item.id, "uploading");
   const docId = crypto.randomUUID();
@@ -60,13 +61,14 @@ async function uploadOne(
   }
 
   onStatus(item.id, "done");
-  fetch(`/api/documents/${docId}/process`, { method: "POST" }).catch(() => {});
+  fetch(`/api/documents/${docId}/process?locale=${locale}`, { method: "POST" }).catch(() => {});
 }
 
 export default function UploadPage() {
   const router = useRouter();
   const supabase = createClient();
   const t = useTranslations("upload");
+  const locale = useLocale();
 
   const [files, setFiles] = useState<FileItem[]>([]);
   const [running, setRunning] = useState(false);
@@ -114,7 +116,7 @@ export default function UploadPage() {
       setRunning(false);
       return;
     }
-    await Promise.all(pending.map((item) => uploadOne(supabase, user.id, item, updateStatus)));
+    await Promise.all(pending.map((item) => uploadOne(supabase, user.id, item, updateStatus, locale)));
     setRunning(false);
     setAllDone(true);
   }

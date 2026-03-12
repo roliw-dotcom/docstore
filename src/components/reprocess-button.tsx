@@ -3,19 +3,20 @@
 import { useState } from "react";
 import { useRouter } from "@/navigation";
 import { Button } from "@/components/ui/button";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function ReprocessButton({ docId }: { docId: string }) {
   const router = useRouter();
   const [state, setState] = useState<"idle" | "loading" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const t = useTranslations("reprocessButton");
+  const locale = useLocale();
 
   async function handleReprocess() {
     setState("loading");
     setErrorMsg("");
 
-    const res = await fetch(`/api/documents/${docId}/process`, { method: "POST" });
+    const res = await fetch(`/api/documents/${docId}/process?locale=${locale}`, { method: "POST" });
     const data = await res.json();
 
     if (!res.ok) {
