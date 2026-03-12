@@ -220,7 +220,7 @@ export default async function RootPage({
         fontStyle: "italic",
         fontFamily: "var(--font-dm-serif)",
       }}>
-        &ldquo;Free for your first 10 documents — no credit card required&rdquo;
+        &ldquo;{t("taglineQuote")}&rdquo;
       </div>
 
       {/* ── Features ── */}
@@ -235,7 +235,7 @@ export default async function RootPage({
             color: "#E67E22",
             marginBottom: "10px",
           }}>
-            What bAInder does
+            {t("featureSectionLabel")}
           </p>
           <h2 style={{
             fontFamily: "var(--font-dm-serif)",
@@ -243,7 +243,7 @@ export default async function RootPage({
             color: "white",
             marginBottom: "48px",
           }}>
-            Every document. Every deadline. Under control.
+            {t("featureSectionTitle")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
             {[
