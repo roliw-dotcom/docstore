@@ -1,3 +1,26 @@
+function buildIcs(title: string, description: string | null | undefined, dueDate: string): string {
+  const escape = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+  const dtstart = dueDate.replace(/-/g, "");
+  const dtstamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//bAInder//bAInder//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:bainder-${dtstamp}`,
+    `DTSTAMP:${dtstamp}`,
+    `DTSTART;VALUE=DATE:${dtstart}`,
+    `DTEND;VALUE=DATE:${dtstart}`,
+    `SUMMARY:${escape(title)}`,
+    description ? `DESCRIPTION:${escape(description)}` : null,
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].filter(Boolean).join("\r\n");
+  return lines;
+}
+
 export async function sendReminderEmail({
   to,
   title,
@@ -30,6 +53,9 @@ export async function sendReminderEmail({
     `Mark it complete: ${appUrl}/dashboard/follow-ups`,
   ].join("\n");
 
+  const icsContent = buildIcs(title, description, dueDate);
+  const icsBase64 = Buffer.from(icsContent).toString("base64");
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -41,6 +67,12 @@ export async function sendReminderEmail({
       to,
       subject: `Reminder: "${title}" is due in 5 days`,
       text,
+      attachments: [
+        {
+          filename: "reminder.ics",
+          content: icsBase64,
+        },
+      ],
     }),
   });
 
