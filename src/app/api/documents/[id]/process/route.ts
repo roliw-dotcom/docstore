@@ -214,27 +214,31 @@ Return ONLY the raw JSON object — no markdown fences, no explanation.`;
         messages: [{ role: "user", content: `${PROMPT}\n\nDocument:\n${text}` }],
       });
     } else {
-      // ── 2c. PDF: extract text with pdf-parse ────────────────────────────
+      // ── 2e. PDF: extract text with pdf-parse, fall back to Claude OCR ────
       const pdf = await pdfParse(buffer);
       pageCount = pdf.numpages;
       const text = pdf.text.slice(0, 40000).trim();
 
-      if (!text) {
-        throw new Error(
-          "No text could be extracted — the PDF may be scanned or image-only."
-        );
+      if (text) {
+        // Text-based PDF — fast path
+        message = await anthropic.messages.create({
+          model: "claude-haiku-4-5-20251001",
+          max_tokens: 2048,
+          messages: [{ role: "user", content: `${PROMPT}\n\nDocument:\n${text}` }],
+        });
+      } else {
+        // Scanned / image-only PDF — send raw PDF to Claude for OCR
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const docBlock: any = {
+          type: "document",
+          source: { type: "base64", media_type: "application/pdf", data: buffer.toString("base64") },
+        };
+        message = await anthropic.messages.create({
+          model: "claude-haiku-4-5-20251001",
+          max_tokens: 2048,
+          messages: [{ role: "user", content: [docBlock, { type: "text", text: PROMPT }] }],
+        });
       }
-
-      message = await anthropic.messages.create({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 2048,
-        messages: [
-          {
-            role: "user",
-            content: `${PROMPT}\n\nDocument:\n${text}`,
-          },
-        ],
-      });
     }
 
     const responseBlock = message.content[0];
