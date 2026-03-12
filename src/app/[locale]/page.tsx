@@ -250,7 +250,6 @@ export default async function RootPage({
               { title: t("featureExtractTitle"),  desc: t("featureExtractDesc") },
               { title: t("featureTrackTitle"),    desc: t("featureTrackDesc") },
               { title: t("featureRemindTitle"),   desc: t("featureRemindDesc") },
-              { title: t("featureUploadTitle"),   desc: t("featureUploadDesc") },
               { title: t("featureSearchTitle"),   desc: t("featureSearchDesc") },
               { title: t("featurePrivateTitle"),  desc: t("featurePrivateDesc") },
               { title: t("featureLanguageTitle"), desc: t("featureLanguageDesc") },
