@@ -3,6 +3,7 @@
     "documents": "Dokumente",
     "followUps": "Aufgaben",
     "upload": "Upload",
+    "chat": "KI fragen",
     "billing": "Abrechnung",
     "signOut": "Abmelden",
     "pricing": "Preise",
@@ -117,6 +118,18 @@
     "completed": "Abgeschlossen",
     "allCaughtUp": "Alles erledigt!",
     "exportCalendar": ".ics exportieren"
+  },
+  "chat": {
+    "title": "Dokumente befragen",
+    "subtitle": "Stelle Fragen zu deinen Dokumenten, Fristen oder Verpflichtungen",
+    "placeholder": "Frage stellen… (Enter zum Senden, Shift+Enter für neue Zeile)",
+    "send": "Senden",
+    "emptyTitle": "Was möchtest du wissen?",
+    "emptyDesc": "Ich kann Fragen zu deinen Dokumenten, Fristen und Verpflichtungen beantworten.",
+    "suggestion1": "Welche Fristen habe ich in nächster Zeit?",
+    "suggestion2": "Fasse mein neuestes Dokument zusammen",
+    "suggestion3": "Welche Dokumente erwähnen eine Zahlung?",
+    "errorMessage": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
   },
   "timeline": {
     "title": "Fristenübersicht",

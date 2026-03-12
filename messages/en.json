@@ -3,6 +3,7 @@
     "documents": "Documents",
     "followUps": "Follow-ups",
     "upload": "Upload",
+    "chat": "Ask AI",
     "billing": "Billing",
     "signOut": "Sign out",
     "pricing": "Pricing",
@@ -117,6 +118,18 @@
     "completed": "Completed",
     "allCaughtUp": "All caught up!",
     "exportCalendar": "Export .ics"
+  },
+  "chat": {
+    "title": "Ask your documents",
+    "subtitle": "Ask anything about your documents, deadlines, or obligations",
+    "placeholder": "Ask a question… (Enter to send, Shift+Enter for new line)",
+    "send": "Send",
+    "emptyTitle": "What would you like to know?",
+    "emptyDesc": "I can answer questions about your documents, deadlines, and obligations.",
+    "suggestion1": "What deadlines do I have coming up?",
+    "suggestion2": "Summarise my most recent document",
+    "suggestion3": "Which documents mention a payment?",
+    "errorMessage": "Something went wrong. Please try again."
   },
   "timeline": {
     "title": "Deadline overview",

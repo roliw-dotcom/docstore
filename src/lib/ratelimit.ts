@@ -20,6 +20,13 @@ export const uploadLimiter = new Ratelimit({
   prefix: "rl:upload",
 });
 
+// Chat — LLM calls per message
+export const chatLimiter = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(40, "1 h"),
+  prefix: "rl:chat",
+});
+
 // Account deletion — belt-and-suspenders
 export const accountLimiter = new Ratelimit({
   redis,

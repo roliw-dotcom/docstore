@@ -51,6 +51,7 @@ export default function Navbar({ user }: { user?: User | null }) {
   const authLinks = [
     { href: "/dashboard",                  label: t("documents"), exact: true },
     { href: "/dashboard/follow-ups",       label: t("followUps"), exact: false },
+    { href: "/dashboard/chat",             label: t("chat"),      exact: false },
     { href: "/dashboard/upload",           label: t("upload"),    exact: false },
     { href: "/dashboard/settings/billing", label: t("billing"),   exact: false },
   ];
