@@ -115,7 +115,15 @@
     "noFollowUpsHint": "Lade Dokumente hoch und verarbeite sie, um automatisch Aktionspunkte zu extrahieren.",
     "pending": "Ausstehend",
     "completed": "Abgeschlossen",
-    "allCaughtUp": "Alles erledigt!"
+    "allCaughtUp": "Alles erledigt!",
+    "exportCalendar": ".ics exportieren"
+  },
+  "timeline": {
+    "title": "Fristenübersicht",
+    "overdue": "Überfällig",
+    "thisWeek": "Diese Woche",
+    "thisMonth": "Nächste 30 Tage",
+    "later": "Später"
   },
   "billing": {
     "title": "Abrechnung",

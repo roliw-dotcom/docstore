@@ -115,7 +115,15 @@
     "noFollowUpsHint": "Upload and process documents to automatically extract action items.",
     "pending": "Pending",
     "completed": "Completed",
-    "allCaughtUp": "All caught up!"
+    "allCaughtUp": "All caught up!",
+    "exportCalendar": "Export .ics"
+  },
+  "timeline": {
+    "title": "Deadline overview",
+    "overdue": "Overdue",
+    "thisWeek": "This week",
+    "thisMonth": "Next 30 days",
+    "later": "Later"
   },
   "billing": {
     "title": "Billing",
