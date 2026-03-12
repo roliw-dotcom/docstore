@@ -169,11 +169,22 @@
     "pending": "Pending",
     "error": "Error"
   },
+  "collections": {
+    "label": "Folders",
+    "new": "New folder",
+    "namePlaceholder": "Folder name…",
+    "create": "Create",
+    "cancel": "Cancel",
+    "delete": "Delete folder",
+    "assign": "Move to folder",
+    "none": "No folder"
+  },
   "documentList": {
     "noDocuments": "No documents yet",
     "noDocumentsHint": "Upload your first PDF to get started.",
     "searchPlaceholder": "Search by filename, keyword, category or summary…",
     "all": "All",
+    "category": "Category",
     "resultsCount": "{filtered} of {total} documents",
     "noResults": "No documents match your search."
   },

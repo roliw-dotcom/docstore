@@ -16,17 +16,29 @@ export async function PATCH(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { filename } = await request.json();
-  if (!filename || typeof filename !== "string" || !filename.trim()) {
-    return NextResponse.json({ error: "Invalid filename" }, { status: 400 });
+  const body = await request.json();
+
+  // Support renaming (filename) and assigning a collection (collection_id)
+  const update: Record<string, unknown> = {};
+  if ("filename" in body) {
+    if (!body.filename || typeof body.filename !== "string" || !body.filename.trim()) {
+      return NextResponse.json({ error: "Invalid filename" }, { status: 400 });
+    }
+    update.filename = body.filename.trim();
+  }
+  if ("collection_id" in body) {
+    update.collection_id = body.collection_id ?? null; // allow null to unassign
+  }
+  if (Object.keys(update).length === 0) {
+    return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
   }
 
   const { data, error } = await supabase
     .from("documents")
-    .update({ filename: filename.trim() })
+    .update(update)
     .eq("id", id)
     .eq("user_id", user.id)
-    .select("id, filename")
+    .select("id, filename, collection_id")
     .single();
 
   if (error) {

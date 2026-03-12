@@ -1,8 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
+import { useRouter } from "@/navigation";
 import DocumentCard from "@/components/document-card";
 import { useTranslations } from "next-intl";
+
+const PALETTE = ["#E67E22","#3498DB","#2ECC71","#9B59B6","#E74C3C","#1ABC9C","#F39C12","#E91E63"];
+
+export interface Collection {
+  id: string;
+  name: string;
+  color: string;
+}
 
 interface DocumentWithMeta {
   id: string;
@@ -10,6 +19,7 @@ interface DocumentWithMeta {
   status: string;
   file_size: number | null;
   created_at: string;
+  collection_id: string | null;
   doc_metadata: {
     keywords: string[];
     categories: string[];
@@ -17,10 +27,22 @@ interface DocumentWithMeta {
   } | null;
 }
 
-export default function DocumentList({ documents }: { documents: DocumentWithMeta[] }) {
+export default function DocumentList({
+  documents,
+  collections: initialCollections,
+}: {
+  documents: DocumentWithMeta[];
+  collections: Collection[];
+}) {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeCollection, setActiveCollection] = useState<string | null>(null);
+  const [collections, setCollections] = useState<Collection[]>(initialCollections);
+  const [creating, setCreating] = useState(false);
+  const [newName, setNewName] = useState("");
+  const router = useRouter();
   const t = useTranslations("documentList");
+  const tc = useTranslations("collections");
 
   const allCategories = useMemo(() => {
     const set = new Set<string>();
@@ -32,6 +54,7 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
     const q = search.toLowerCase();
     return documents.filter((d) => {
       const meta = d.doc_metadata;
+      if (activeCollection && d.collection_id !== activeCollection) return false;
       if (activeCategory && !meta?.categories?.includes(activeCategory)) return false;
       if (!q) return true;
       return (
@@ -41,7 +64,32 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
         meta?.categories?.some((c) => c.toLowerCase().includes(q))
       );
     });
-  }, [documents, search, activeCategory]);
+  }, [documents, search, activeCategory, activeCollection]);
+
+  const createCollection = useCallback(async () => {
+    const name = newName.trim();
+    if (!name) return;
+    const color = PALETTE[collections.length % PALETTE.length];
+    const res = await fetch("/api/collections", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, color }),
+    });
+    if (res.ok) {
+      const { collection } = await res.json();
+      setCollections((prev) => [...prev, collection]);
+      setNewName("");
+      setCreating(false);
+      router.refresh();
+    }
+  }, [newName, collections.length, router]);
+
+  const deleteCollection = useCallback(async (id: string) => {
+    await fetch(`/api/collections/${id}`, { method: "DELETE" });
+    setCollections((prev) => prev.filter((c) => c.id !== id));
+    if (activeCollection === id) setActiveCollection(null);
+    router.refresh();
+  }, [activeCollection, router]);
 
   if (documents.length === 0) {
     return (
@@ -53,8 +101,24 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
     );
   }
 
+  const pillStyle = (active: boolean, color?: string) => ({
+    fontSize: "0.8rem",
+    padding: "4px 12px",
+    borderRadius: "20px",
+    border: "1px solid",
+    cursor: "pointer" as const,
+    transition: "all 0.15s",
+    background: active ? (color ?? "#E67E22") : "transparent",
+    borderColor: active ? (color ?? "#E67E22") : "rgba(255,255,255,0.2)",
+    color: active ? "white" : "#8AAEC7",
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+  });
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+
       {/* Search */}
       <input
         placeholder={t("searchPlaceholder")}
@@ -73,40 +137,86 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
         }}
       />
 
+      {/* Collections */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
+        <span style={{ fontSize: "0.65rem", fontFamily: "monospace", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginRight: "2px" }}>
+          {tc("label")}
+        </span>
+        <button onClick={() => setActiveCollection(null)} style={pillStyle(activeCollection === null)}>
+          {t("all")}
+        </button>
+        {collections.map((col) => (
+          <div key={col.id} style={{ display: "flex", alignItems: "center", gap: "0" }}>
+            <button
+              onClick={() => setActiveCollection(activeCollection === col.id ? null : col.id)}
+              style={pillStyle(activeCollection === col.id, col.color)}
+            >
+              <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: col.color, flexShrink: 0, opacity: activeCollection === col.id ? 0.8 : 1 }} />
+              {col.name}
+            </button>
+            <button
+              onClick={() => deleteCollection(col.id)}
+              title={tc("delete")}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.2)", fontSize: "0.7rem", padding: "0 2px 0 1px", lineHeight: 1 }}
+            >
+              ×
+            </button>
+          </div>
+        ))}
+
+        {creating ? (
+          <form
+            onSubmit={(e) => { e.preventDefault(); createCollection(); }}
+            style={{ display: "flex", gap: "6px", alignItems: "center" }}
+          >
+            <input
+              autoFocus
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              onKeyDown={(e) => e.key === "Escape" && setCreating(false)}
+              placeholder={tc("namePlaceholder")}
+              style={{
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.2)",
+                borderRadius: "20px",
+                padding: "3px 12px",
+                color: "white",
+                fontSize: "0.8rem",
+                outline: "none",
+                width: "130px",
+              }}
+            />
+            <button type="submit" style={{ fontSize: "0.75rem", color: "#E67E22", background: "none", border: "none", cursor: "pointer", fontWeight: 600 }}>
+              {tc("create")}
+            </button>
+            <button type="button" onClick={() => setCreating(false)} style={{ fontSize: "0.75rem", color: "#6A90AA", background: "none", border: "none", cursor: "pointer" }}>
+              {tc("cancel")}
+            </button>
+          </form>
+        ) : (
+          <button
+            onClick={() => setCreating(true)}
+            style={{ fontSize: "0.78rem", color: "#6A90AA", background: "none", border: "1px dashed rgba(255,255,255,0.15)", borderRadius: "20px", padding: "4px 12px", cursor: "pointer" }}
+          >
+            + {tc("new")}
+          </button>
+        )}
+      </div>
+
       {/* Category pills */}
       {allCategories.length > 0 && (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-          <button
-            onClick={() => setActiveCategory(null)}
-            style={{
-              fontSize: "0.8rem",
-              padding: "4px 14px",
-              borderRadius: "20px",
-              border: "1px solid",
-              cursor: "pointer",
-              transition: "all 0.15s",
-              background: activeCategory === null ? "#E67E22" : "transparent",
-              borderColor: activeCategory === null ? "#E67E22" : "rgba(255,255,255,0.2)",
-              color: activeCategory === null ? "white" : "#8AAEC7",
-            }}
-          >
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
+          <span style={{ fontSize: "0.65rem", fontFamily: "monospace", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginRight: "2px" }}>
+            {t("category")}
+          </span>
+          <button onClick={() => setActiveCategory(null)} style={pillStyle(activeCategory === null)}>
             {t("all")}
           </button>
           {allCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-              style={{
-                fontSize: "0.8rem",
-                padding: "4px 14px",
-                borderRadius: "20px",
-                border: "1px solid",
-                cursor: "pointer",
-                transition: "all 0.15s",
-                background: activeCategory === cat ? "#E67E22" : "transparent",
-                borderColor: activeCategory === cat ? "#E67E22" : "rgba(255,255,255,0.2)",
-                color: activeCategory === cat ? "white" : "#8AAEC7",
-              }}
+              style={pillStyle(activeCategory === cat)}
             >
               {cat}
             </button>
@@ -126,7 +236,7 @@ export default function DocumentList({ documents }: { documents: DocumentWithMet
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((doc) => (
-            <DocumentCard key={doc.id} doc={doc} />
+            <DocumentCard key={doc.id} doc={doc} collections={collections} />
           ))}
         </div>
       )}

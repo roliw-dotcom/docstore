@@ -15,10 +15,16 @@ export default async function DashboardPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data: documents } = await supabase
-    .from("documents")
-    .select(`*, doc_metadata(keywords, categories, summary)`)
-    .order("created_at", { ascending: false });
+  const [{ data: documents }, { data: collections }] = await Promise.all([
+    supabase
+      .from("documents")
+      .select(`*, doc_metadata(keywords, categories, summary)`)
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("collections")
+      .select("*")
+      .order("created_at", { ascending: true }),
+  ]);
 
   const docCount = (documents ?? []).length;
   const hasProcessing = (documents ?? []).some(
@@ -43,7 +49,7 @@ export default async function DashboardPage() {
 
       <AutoRefresh active={hasProcessing} />
 
-      <DocumentList documents={documents ?? []} />
+      <DocumentList documents={documents ?? []} collections={collections ?? []} />
     </div>
   );
 }

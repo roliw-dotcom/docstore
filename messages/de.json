@@ -169,11 +169,22 @@
     "pending": "Ausstehend",
     "error": "Fehler"
   },
+  "collections": {
+    "label": "Ordner",
+    "new": "Neuer Ordner",
+    "namePlaceholder": "Ordnername…",
+    "create": "Erstellen",
+    "cancel": "Abbrechen",
+    "delete": "Ordner löschen",
+    "assign": "In Ordner verschieben",
+    "none": "Kein Ordner"
+  },
   "documentList": {
     "noDocuments": "Noch keine Dokumente",
     "noDocumentsHint": "Lade dein erstes PDF hoch, um loszulegen.",
     "searchPlaceholder": "Nach Dateiname, Schlagwort, Kategorie oder Zusammenfassung suchen…",
     "all": "Alle",
+    "category": "Kategorie",
     "resultsCount": "{filtered} von {total} Dokumenten",
     "noResults": "Keine Dokumente entsprechen deiner Suche."
   },
