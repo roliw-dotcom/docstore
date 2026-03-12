@@ -11,12 +11,12 @@ const DE = () => (
 
     <h2>1. Geltungsbereich</h2>
     <p>
-      Diese Nutzungsbedingungen regeln die Nutzung der Softwareplattform bainder (nachfolgend „Dienst").
+      Diese Nutzungsbedingungen regeln die Nutzung der Softwareplattform bAInder (nachfolgend „Dienst").
     </p>
     <p>Mit der Registrierung eines Kontos erklärst du dich mit diesen Bedingungen einverstanden.</p>
 
     <h2>2. Beschreibung des Dienstes</h2>
-    <p>bainder ist eine webbasierte Software zur Organisation und Analyse von Dokumenten.</p>
+    <p>bAInder ist eine webbasierte Software zur Organisation und Analyse von Dokumenten.</p>
     <p>Der Dienst ermöglicht unter anderem:</p>
     <ul>
       <li>Upload und Speicherung von Dokumenten</li>
@@ -37,14 +37,14 @@ const DE = () => (
 
     <h2>4. Hochgeladene Inhalte</h2>
     <p>Du behältst alle Rechte an den Dokumenten, die du hochlädst.</p>
-    <p>Mit dem Upload gewährst du bainder das notwendige Recht, diese Inhalte zu:</p>
+    <p>Mit dem Upload gewährst du bAInder das notwendige Recht, diese Inhalte zu:</p>
     <ul>
       <li>speichern</li>
       <li>analysieren</li>
       <li>verarbeiten</li>
     </ul>
     <p>ausschließlich zum Zweck der Bereitstellung des Dienstes.</p>
-    <p>bainder verwendet deine Dokumente nicht zum Training von KI-Modellen.</p>
+    <p>bAInder verwendet deine Dokumente nicht zum Training von KI-Modellen.</p>
     <p>Du bist dafür verantwortlich sicherzustellen, dass du berechtigt bist, die hochgeladenen Inhalte zu verarbeiten.</p>
 
     <h2>5. Abonnements und Zahlungen</h2>
@@ -63,7 +63,7 @@ const DE = () => (
 
     <h2>7. Haftungsbeschränkung</h2>
     <p>Der Dienst wird „wie verfügbar" bereitgestellt.</p>
-    <p>bainder haftet nur für Schäden, die auf vorsätzlichem oder grob fahrlässigem Verhalten beruhen.</p>
+    <p>bAInder haftet nur für Schäden, die auf vorsätzlichem oder grob fahrlässigem Verhalten beruhen.</p>
     <p>Für indirekte Schäden, Datenverlust oder entgangenen Gewinn wird keine Haftung übernommen, soweit gesetzlich zulässig.</p>
 
     <h2>8. Kündigung</h2>
@@ -87,7 +87,7 @@ const DE = () => (
     <h2>11. Kontakt</h2>
     <p>
       Bei Fragen zu diesen Nutzungsbedingungen kontaktiere uns bitte unter:{" "}
-      <a href="mailto:hello@bainder.net">hello@bainder.net</a>
+      <a href="mailto:hello@bAInder.net">hello@bAInder.net</a>
     </p>
   </div>
 );
@@ -99,12 +99,12 @@ const EN = () => (
 
     <h2>1. Scope</h2>
     <p>
-      These Terms of Service govern the use of the bainder software platform (the &ldquo;Service&rdquo;).
+      These Terms of Service govern the use of the bAInder software platform (the &ldquo;Service&rdquo;).
     </p>
     <p>By creating an account you agree to these Terms.</p>
 
     <h2>2. Service Description</h2>
-    <p>bainder is a web-based software for organising and analysing documents.</p>
+    <p>bAInder is a web-based software for organising and analysing documents.</p>
     <p>The Service includes, among other things:</p>
     <ul>
       <li>Document upload and storage</li>
@@ -125,14 +125,14 @@ const EN = () => (
 
     <h2>4. Uploaded Content</h2>
     <p>You retain all rights to the documents you upload.</p>
-    <p>By uploading, you grant bainder the necessary right to:</p>
+    <p>By uploading, you grant bAInder the necessary right to:</p>
     <ul>
       <li>store</li>
       <li>analyse</li>
       <li>process</li>
     </ul>
     <p>your content, solely for the purpose of providing the Service.</p>
-    <p>bainder does not use your documents to train AI models.</p>
+    <p>bAInder does not use your documents to train AI models.</p>
     <p>You are responsible for ensuring that you are authorised to process the content you upload.</p>
 
     <h2>5. Subscriptions and Payments</h2>
@@ -151,7 +151,7 @@ const EN = () => (
 
     <h2>7. Limitation of Liability</h2>
     <p>The Service is provided &ldquo;as available&rdquo;.</p>
-    <p>bainder is only liable for damages resulting from intentional or grossly negligent conduct.</p>
+    <p>bAInder is only liable for damages resulting from intentional or grossly negligent conduct.</p>
     <p>No liability is accepted for indirect damages, data loss, or loss of profit, to the extent permitted by law.</p>
 
     <h2>8. Termination</h2>
@@ -175,7 +175,7 @@ const EN = () => (
     <h2>11. Contact</h2>
     <p>
       For questions about these Terms, please contact us at:{" "}
-      <a href="mailto:hello@bainder.net">hello@bainder.net</a>
+      <a href="mailto:hello@bAInder.net">hello@bAInder.net</a>
     </p>
   </div>
 );
