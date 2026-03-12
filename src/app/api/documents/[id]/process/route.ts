@@ -5,6 +5,19 @@ import { processLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 
+// Resize image buffer to fit within Claude's ~4.5MB image limit
+async function prepareImageBuffer(buffer: Buffer, mimeType: string): Promise<{ buffer: Buffer; mimeType: string }> {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const sharp = require("sharp") as typeof import("sharp");
+  if (buffer.length <= 4.5 * 1024 * 1024) return { buffer, mimeType };
+  // Resize to max 2000px on the longest side and convert to jpeg
+  const resized = await sharp(buffer)
+    .resize(2000, 2000, { fit: "inside", withoutEnlargement: true })
+    .jpeg({ quality: 85 })
+    .toBuffer();
+  return { buffer: resized, mimeType: "image/jpeg" };
+}
+
 // pdf-parse must be require()'d — dynamic import triggers its test-file loader
 // serverExternalPackages in next.config.ts ensures it runs as a native Node module
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -114,11 +127,13 @@ Return ONLY the raw JSON object — no markdown fences, no explanation.`;
     let message;
 
     if (isImage) {
-      // ── 2a. Image: send directly to Claude Vision ──────────────────────
+      // ── 2a. Image: resize if needed, then send to Claude Vision ────────
       const validImageTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"] as const;
       type ValidImageType = typeof validImageTypes[number];
-      const mediaType: ValidImageType = validImageTypes.includes(doc.mime_type as ValidImageType)
-        ? (doc.mime_type as ValidImageType)
+
+      const { buffer: imgBuffer, mimeType: imgMimeType } = await prepareImageBuffer(buffer, doc.mime_type);
+      const mediaType: ValidImageType = validImageTypes.includes(imgMimeType as ValidImageType)
+        ? (imgMimeType as ValidImageType)
         : "image/jpeg";
 
       message = await anthropic.messages.create({
@@ -130,7 +145,7 @@ Return ONLY the raw JSON object — no markdown fences, no explanation.`;
             content: [
               {
                 type: "image",
-                source: { type: "base64", media_type: mediaType, data: buffer.toString("base64") },
+                source: { type: "base64", media_type: mediaType, data: imgBuffer.toString("base64") },
               },
               { type: "text", text: PROMPT },
             ],
