@@ -100,6 +100,7 @@ export async function POST(
   - "description": optional brief details or context
   - "due_date": ISO date string (YYYY-MM-DD) if a specific date is mentioned, otherwise null
 
+Respond in the same language as the document.
 Return ONLY the raw JSON object — no markdown fences, no explanation.`;
 
     let pageCount = 1;
