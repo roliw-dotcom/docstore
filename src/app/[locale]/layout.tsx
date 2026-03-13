@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { CookieBanner } from "@/components/cookie-banner";
 import Navbar from "@/components/navbar";
+import GoogleAnalytics from "@/components/google-analytics";
 import { createClient } from "@/lib/supabase/server";
 import "../globals.css";
 
@@ -46,6 +47,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={`${dmSerifDisplay.variable} ${inter.variable} font-sans antialiased`}>
+        <GoogleAnalytics />
         <NextIntlClientProvider messages={messages}>
           <Navbar user={user} />
           {children}
