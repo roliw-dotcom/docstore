@@ -226,6 +226,27 @@
     "accept": "Got it",
     "privacyPolicy": "Privacy Policy"
   },
+  "accountSettings": {
+    "title": "Account",
+    "subtitle": "Manage your profile, email, and password",
+    "profileSection": "Profile",
+    "displayName": "Display name",
+    "displayNamePlaceholder": "Your name",
+    "emailSection": "Email address",
+    "emailAddress": "Email",
+    "emailHint": "A confirmation link will be sent to the new address.",
+    "emailConfirmationSent": "Confirmation sent to {email} — click the link to confirm.",
+    "passwordSection": "Password",
+    "passwordDesc": "We'll send a password reset link to your current email address.",
+    "sendPasswordReset": "Send reset link",
+    "saveEmail": "Update email",
+    "save": "Save",
+    "saving": "Saving…",
+    "sending": "Sending…",
+    "saved": "Saved.",
+    "errorGeneric": "Something went wrong.",
+    "passwordResetSent": "Reset link sent — check your inbox."
+  },
   "account": {
     "dangerZone": "Danger zone",
     "deleteAccount": "Delete account",

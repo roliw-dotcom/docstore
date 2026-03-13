@@ -226,6 +226,27 @@
     "accept": "Verstanden",
     "privacyPolicy": "Datenschutzerklärung"
   },
+  "accountSettings": {
+    "title": "Konto",
+    "subtitle": "Profil, E-Mail und Passwort verwalten",
+    "profileSection": "Profil",
+    "displayName": "Anzeigename",
+    "displayNamePlaceholder": "Dein Name",
+    "emailSection": "E-Mail-Adresse",
+    "emailAddress": "E-Mail",
+    "emailHint": "Ein Bestätigungslink wird an die neue Adresse gesendet.",
+    "emailConfirmationSent": "Bestätigung gesendet an {email} — klicke auf den Link zur Bestätigung.",
+    "passwordSection": "Passwort",
+    "passwordDesc": "Wir senden einen Link zum Zurücksetzen des Passworts an deine aktuelle E-Mail-Adresse.",
+    "sendPasswordReset": "Reset-Link senden",
+    "saveEmail": "E-Mail aktualisieren",
+    "save": "Speichern",
+    "saving": "Wird gespeichert…",
+    "sending": "Wird gesendet…",
+    "saved": "Gespeichert.",
+    "errorGeneric": "Etwas ist schiefgelaufen.",
+    "passwordResetSent": "Reset-Link gesendet — bitte prüfe dein Postfach."
+  },
   "account": {
     "dangerZone": "Gefahrenzone",
     "deleteAccount": "Konto löschen",

@@ -95,9 +95,13 @@ export default function Navbar({ user }: { user?: User | null }) {
               </div>
               <div className="flex items-center gap-3">
                 {localeBtn}
-                <span style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hidden lg:block">
+                <Link
+                  href="/dashboard/settings/account"
+                  style={{ fontSize: "0.8rem", color: "#6A90AA" }}
+                  className="hidden lg:block hover:text-white transition-colors"
+                >
                   {user.email}
-                </span>
+                </Link>
                 <button
                   onClick={handleSignOut}
                   style={{

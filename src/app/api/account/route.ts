@@ -1,7 +1,53 @@
 import { createClient } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { accountLimiter, checkRateLimit } from "@/lib/ratelimit";
+import { getStripe } from "@/lib/stripe";
+
+export async function PATCH(request: NextRequest) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const body = await request.json();
+  const { display_name, email } = body;
+
+  // ── Update display name ────────────────────────────────────────────────────
+  if (typeof display_name === "string") {
+    const { error } = await supabase
+      .from("profiles")
+      .update({ display_name: display_name.trim() || null })
+      .eq("id", user.id);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  // ── Update email ───────────────────────────────────────────────────────────
+  if (typeof email === "string" && email.trim() && email !== user.email) {
+    // Supabase sends a confirmation link to the new address
+    const { error: authError } = await supabase.auth.updateUser({ email: email.trim() });
+    if (authError) return NextResponse.json({ error: authError.message }, { status: 400 });
+
+    // Sync to Stripe if the user has a customer record
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("stripe_customer_id")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.stripe_customer_id) {
+      try {
+        await getStripe().customers.update(profile.stripe_customer_id, { email: email.trim() });
+      } catch (err) {
+        // Non-fatal — Stripe sync failure shouldn't block the email change
+        console.error("[account/patch] Stripe email sync failed:", err);
+      }
+    }
+
+    return NextResponse.json({ emailConfirmationSent: true });
+  }
+
+  return NextResponse.json({ success: true });
+}
 
 export async function DELETE() {
   const supabase = await createClient();
