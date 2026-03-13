@@ -8,8 +8,8 @@ const handleI18n = createMiddleware(routing);
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // API routes and auth callback: skip all middlewares
-  if (pathname.startsWith("/api") || pathname.startsWith("/auth")) {
+  // API routes, auth callback, and standalone landing pages: skip all middlewares
+  if (pathname.startsWith("/api") || pathname.startsWith("/auth") || pathname.startsWith("/lp")) {
     return NextResponse.next();
   }
 
