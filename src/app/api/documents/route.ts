@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import { getUserTier } from "@/lib/get-user-tier";
+import { getWorkspaceId } from "@/lib/get-workspace";
 import { uploadLimiter, checkRateLimit } from "@/lib/ratelimit";
 
 export async function POST(request: NextRequest) {
@@ -33,6 +34,11 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  const workspaceId = await getWorkspaceId(supabase, user.id);
+  if (!workspaceId) {
+    return NextResponse.json({ error: "Workspace not found" }, { status: 500 });
+  }
+
   const body = await request.json();
   const { docId, filename, storagePath, fileSize, mimeType } = body;
 
@@ -45,6 +51,7 @@ export async function POST(request: NextRequest) {
     .insert({
       id: docId,
       user_id: user.id,
+      workspace_id: workspaceId,
       filename,
       storage_path: storagePath,
       file_size: fileSize ?? null,

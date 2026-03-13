@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { processLimiter, checkRateLimit } from "@/lib/ratelimit";
+import { getWorkspaceId } from "@/lib/get-workspace";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 
@@ -281,9 +282,11 @@ Return ONLY the raw JSON object — no markdown fences, no explanation.`;
 
     const followUps = Array.isArray(metadata.follow_ups) ? metadata.follow_ups : [];
     if (followUps.length > 0) {
+      const workspaceId = await getWorkspaceId(supabase, doc.user_id);
       const rows = followUps.map((fu) => ({
         doc_id: id,
         user_id: doc.user_id,
+        workspace_id: workspaceId,
         title: fu.title,
         description: fu.description ?? null,
         due_date: fu.due_date ?? null,

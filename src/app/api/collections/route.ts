@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
+import { getWorkspaceId } from "@/lib/get-workspace";
 
 export async function GET() {
   const supabase = await createClient();
@@ -21,6 +22,9 @@ export async function POST(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
+  const workspaceId = await getWorkspaceId(supabase, user.id);
+  if (!workspaceId) return NextResponse.json({ error: "Workspace not found" }, { status: 500 });
+
   const { name, color } = await request.json();
   if (!name || typeof name !== "string" || !name.trim()) {
     return NextResponse.json({ error: "Invalid name" }, { status: 400 });
@@ -28,7 +32,7 @@ export async function POST(request: NextRequest) {
 
   const { data, error } = await supabase
     .from("collections")
-    .insert({ user_id: user.id, name: name.trim(), color: color ?? "#6A90AA" })
+    .insert({ user_id: user.id, workspace_id: workspaceId, name: name.trim(), color: color ?? "#6A90AA" })
     .select()
     .single();
 

@@ -20,8 +20,7 @@ export async function GET(
     .from("documents")
     .select("storage_path, mime_type, filename")
     .eq("id", id)
-    .eq("user_id", user.id)
-    .single();
+    .single(); // RLS enforces workspace membership
 
   if (!doc) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
