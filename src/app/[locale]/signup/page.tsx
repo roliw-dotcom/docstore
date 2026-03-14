@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "@/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
-import { trackConversion } from "@/components/google-analytics";
+import { trackConversion, trackAdsConversion } from "@/components/google-analytics";
 
 const cardStyle: React.CSSProperties = {
   background: "rgba(255,255,255,0.06)",
@@ -58,6 +58,7 @@ export default function SignupPage() {
       setLoading(false);
     } else {
       trackConversion("sign_up", { method: "email" });
+      trackAdsConversion(process.env.NEXT_PUBLIC_GADS_SIGNUP_LABEL ?? "");
       setSuccess(true);
     }
   }
