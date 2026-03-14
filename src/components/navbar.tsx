@@ -98,7 +98,7 @@ export default function Navbar({ user }: { user?: User | null }) {
                 <Link
                   href="/dashboard/settings/account"
                   style={{ fontSize: "0.8rem", color: "#6A90AA" }}
-                  className="hidden lg:block hover:text-white transition-colors"
+                  className="hidden md:block hover:text-white transition-colors"
                 >
                   {user.email}
                 </Link>
@@ -176,7 +176,13 @@ export default function Navbar({ user }: { user?: User | null }) {
                   );
                 })}
                 <div style={{ paddingTop: "13px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
-                  <span style={{ fontSize: "0.8rem", color: "#6A90AA", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{user.email}</span>
+                  <Link
+                    href="/dashboard/settings/account"
+                    onClick={() => setMobileOpen(false)}
+                    style={{ fontSize: "0.8rem", color: "#6A90AA", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                  >
+                    {user.email}
+                  </Link>
                   <button
                     onClick={handleSignOut}
                     style={{ fontSize: "0.8rem", color: "#6A90AA", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "6px", padding: "8px 16px", background: "transparent", cursor: "pointer", flexShrink: 0 }}
