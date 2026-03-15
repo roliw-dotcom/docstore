@@ -192,13 +192,16 @@ export default async function RootPage({
           </p>
         </div>
 
-        {/* Right: binder art — fully visible, no overlay */}
+        {/* Right: animated app card demo */}
         <div style={{
-          position: "relative",
-          overflow: "hidden",
+          background: "#0F2337",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           minHeight: "480px",
+          padding: "40px 24px",
         }}>
-          <BinderChaosStack />
+          <AppCardAnimated />
         </div>
       </section>
 
