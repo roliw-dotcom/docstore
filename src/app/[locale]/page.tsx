@@ -130,14 +130,14 @@ export default async function RootPage({
         {/* Left: binder art + text overlay */}
         <div style={{ position: "relative", overflow: "hidden" }}>
           <BinderChaosStack />
-          {/* Dark overlay for text legibility */}
+          {/* Dark overlay for text legibility — must be above all binders (zIndex 8) */}
           <div style={{
-            position: "absolute", inset: 0, zIndex: 3,
-            background: "linear-gradient(100deg, rgba(10,20,35,0.93) 0%, rgba(10,20,35,0.93) 45%, rgba(10,20,35,0.40) 75%, rgba(10,20,35,0.05) 100%)",
+            position: "absolute", inset: 0, zIndex: 10,
+            background: "linear-gradient(100deg, rgba(10,20,35,0.95) 0%, rgba(10,20,35,0.95) 55%, rgba(10,20,35,0.55) 78%, rgba(10,20,35,0.05) 100%)",
           }} />
           {/* Content */}
           <div style={{
-            position: "relative", zIndex: 4,
+            position: "relative", zIndex: 11,
             padding: "clamp(32px, 6vw, 56px) clamp(20px, 6vw, 50px)",
             display: "flex", flexDirection: "column", justifyContent: "center",
             minHeight: "480px",
