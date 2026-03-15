@@ -10,10 +10,10 @@ const steps = {
     { top: "Reminders", bottom: "scheduled"  },
   ],
   de: [
-    { top: "Hochladen",  bottom: "deines Vertrags"     },
-    { top: "KI liest",   bottom: "das Kleingedruckte"  },
-    { top: "Fristen",    bottom: "erkannt"              },
-    { top: "Erinnerung", bottom: "geplant"              },
+    { top: "Hochladen",  bottom: "deines Vertrags"    },
+    { top: "KI liest",   bottom: "das Kleingedruckte" },
+    { top: "Fristen",    bottom: "erkannt"             },
+    { top: "Erinnerung", bottom: "geplant"             },
   ],
 };
 
@@ -55,20 +55,30 @@ export default function HowItWorks({ locale = "en" }: HowItWorksProps) {
       borderRadius: "16px",
       padding: "28px 24px",
     }}>
-      {/* Mobile: 2×2 grid */}
-      <div className="grid grid-cols-2 gap-8 md:hidden">
+
+      {/* ── Mobile: vertical pipeline ── */}
+      <div className="flex flex-col md:hidden" style={{ gap: 0 }}>
         {nodes.map((node, i) => (
-          <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-            {node}
-            <div style={{ textAlign: "center" }}>
-              <p style={{ margin: 0, fontSize: "0.95rem", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{labels[i].top}</p>
-              <p style={{ margin: 0, fontSize: "0.88rem", color: "#6A90AA", lineHeight: 1.3 }}>{labels[i].bottom}</p>
+          <div key={i} style={{ display: "flex", alignItems: "stretch", gap: "20px" }}>
+            {/* Left column: icon + vertical line */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "52px", flexShrink: 0 }}>
+              <div style={{ zIndex: 1 }}>{node}</div>
+              {i < nodes.length - 1 && (
+                <div style={{ width: "3px", flex: 1, background: "#1A3550", minHeight: "24px" }} />
+              )}
+            </div>
+            {/* Right column: label */}
+            <div style={{ display: "flex", alignItems: "center", paddingBottom: i < nodes.length - 1 ? "24px" : 0 }}>
+              <div>
+                <p style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{labels[i].top}</p>
+                <p style={{ margin: 0, fontSize: "0.9rem", color: "#6A90AA", lineHeight: 1.3 }}>{labels[i].bottom}</p>
+              </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Desktop: single row with connecting line */}
+      {/* ── Desktop: horizontal pipeline ── */}
       <div className="hidden md:flex" style={{ alignItems: "flex-start", justifyContent: "space-between", position: "relative" }}>
         <div style={{ position: "absolute", top: "26px", left: "26px", right: "26px", height: "3px", background: "#1A3550", zIndex: 0 }} />
         {nodes.map((node, i) => (
@@ -81,6 +91,7 @@ export default function HowItWorks({ locale = "en" }: HowItWorksProps) {
           </div>
         ))}
       </div>
+
     </div>
   );
 }
