@@ -30,17 +30,45 @@ const nodes = [
       <line x1="16" y1="36" x2="28" y2="36" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
     </svg>
   ),
-  // 2 — Dot
+  // 2 — AI reads fine print (magnifying glass + AI badge)
   (
-    <div style={{ width: "52px", height: "52px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: "#1A3550", border: "4px solid #2E6A9E" }} />
-    </div>
+    <svg viewBox="0 0 64 64" width="52" height="52" fill="none">
+      {/* Lens */}
+      <circle cx="26" cy="26" r="18" fill="#1565C0"/>
+      {/* Text lines inside lens */}
+      <line x1="17" y1="20" x2="34" y2="20" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      <line x1="17" y1="26" x2="32" y2="26" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      <line x1="17" y1="32" x2="28" y2="32" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      {/* Handle */}
+      <line x1="39" y1="39" x2="52" y2="52" stroke="#0D47A1" strokeWidth="6" strokeLinecap="round"/>
+      {/* AI badge */}
+      <circle cx="52" cy="12" r="10" fill="#E67E22"/>
+      <text x="52" y="16" textAnchor="middle" fontSize="8" fontWeight="bold" fill="white" fontFamily="Arial, sans-serif">AI</text>
+    </svg>
   ),
-  // 3 — Dot
+  // 3 — Deadlines detected (calendar + AI badge)
   (
-    <div style={{ width: "52px", height: "52px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: "#1A3550", border: "4px solid #2E6A9E" }} />
-    </div>
+    <svg viewBox="0 0 64 64" width="52" height="52" fill="none">
+      {/* Calendar body */}
+      <rect x="6" y="12" width="40" height="34" rx="4" fill="#1565C0"/>
+      {/* Header */}
+      <rect x="6" y="12" width="40" height="12" rx="4" fill="#0D47A1"/>
+      <rect x="6" y="19" width="40" height="5" fill="#0D47A1"/>
+      {/* Pin tabs */}
+      <rect x="15" y="6" width="5" height="10" rx="2.5" fill="#1A3A6A"/>
+      <rect x="32" y="6" width="5" height="10" rx="2.5" fill="#1A3A6A"/>
+      {/* Date grid */}
+      <circle cx="16" cy="33" r="3" fill="rgba(255,255,255,0.35)"/>
+      <circle cx="26" cy="33" r="3" fill="rgba(255,255,255,0.35)"/>
+      <circle cx="36" cy="33" r="3" fill="rgba(255,255,255,0.35)"/>
+      <circle cx="16" cy="42" r="3" fill="rgba(255,255,255,0.35)"/>
+      {/* Highlighted deadline */}
+      <circle cx="26" cy="42" r="5" fill="#E74C3C"/>
+      <circle cx="36" cy="42" r="3" fill="rgba(255,255,255,0.35)"/>
+      {/* AI badge */}
+      <circle cx="52" cy="12" r="10" fill="#E67E22"/>
+      <text x="52" y="16" textAnchor="middle" fontSize="8" fontWeight="bold" fill="white" fontFamily="Arial, sans-serif">AI</text>
+    </svg>
   ),
   // 4 — Checkmark
   (
