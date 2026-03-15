@@ -195,52 +195,48 @@ export default function LandingPageShell({
             borderRadius: "16px",
             padding: "36px 40px",
           }}>
-            {/* Pipeline row */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", position: "relative", marginBottom: "20px" }}>
-              {/* connecting line behind nodes */}
-              <div style={{ position: "absolute", top: "50%", left: "24px", right: "24px", height: "2.5px", background: "#1A3550", transform: "translateY(-50%)", zIndex: 0 }} />
+            {/* Pipeline: each step is a column (icon + label), connected by a line */}
+            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", position: "relative" }}>
+              {/* connecting line — sits at icon center (22px from top) */}
+              <div style={{ position: "absolute", top: "22px", left: "22px", right: "22px", height: "2.5px", background: "#1A3550", zIndex: 0 }} />
 
-              {/* Node 1 — Document */}
-              <div style={{ zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "0" }}>
-                <svg viewBox="0 0 44 44" width="44" height="44" fill="none">
-                  <rect x="8" y="4" width="20" height="26" rx="2" fill="#1565C0"/>
-                  <path d="M24 4 L28 8 L24 8 Z" fill="#0D47A1"/>
-                  <line x1="12" y1="14" x2="23" y2="14" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-                  <line x1="12" y1="19" x2="23" y2="19" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-                  <line x1="12" y1="24" x2="20" y2="24" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-                </svg>
-              </div>
-
-              {/* Node 2 — filled dot */}
-              <div style={{ zIndex: 1 }}>
-                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1A3550", border: "3px solid #2E6A9E" }} />
-              </div>
-
-              {/* Node 3 — filled dot */}
-              <div style={{ zIndex: 1 }}>
-                <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1A3550", border: "3px solid #2E6A9E" }} />
-              </div>
-
-              {/* Node 4 — Checkmark circle */}
-              <div style={{ zIndex: 1 }}>
-                <svg viewBox="0 0 44 44" width="44" height="44" fill="none">
-                  <circle cx="22" cy="22" r="18" fill="#1565C0"/>
-                  <polyline points="13,22 18,28 31,14" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </div>
-
-            {/* Labels row */}
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
               {[
-                { top: "Upload", bottom: "contract" },
-                { top: "AI reads", bottom: "fine print" },
-                { top: "Deadlines", bottom: "detected" },
-                { top: "Reminders", bottom: "scheduled" },
+                {
+                  node: (
+                    <svg viewBox="0 0 44 44" width="44" height="44" fill="none">
+                      <rect x="8" y="4" width="20" height="26" rx="2" fill="#1565C0"/>
+                      <path d="M24 4 L28 8 L24 8 Z" fill="#0D47A1"/>
+                      <line x1="12" y1="14" x2="23" y2="14" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                      <line x1="12" y1="19" x2="23" y2="19" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                      <line x1="12" y1="24" x2="20" y2="24" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                    </svg>
+                  ),
+                  top: "Upload", bottom: "contract",
+                },
+                {
+                  node: <div style={{ width: "44px", height: "44px", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1A3550", border: "3px solid #2E6A9E" }} /></div>,
+                  top: "AI reads", bottom: "fine print",
+                },
+                {
+                  node: <div style={{ width: "44px", height: "44px", display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#1A3550", border: "3px solid #2E6A9E" }} /></div>,
+                  top: "Deadlines", bottom: "detected",
+                },
+                {
+                  node: (
+                    <svg viewBox="0 0 44 44" width="44" height="44" fill="none">
+                      <circle cx="22" cy="22" r="18" fill="#1565C0"/>
+                      <polyline points="13,22 18,28 31,14" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ),
+                  top: "Reminders", bottom: "scheduled",
+                },
               ].map((s, i) => (
-                <div key={i} style={{ textAlign: "center", width: "25%" }}>
-                  <p style={{ margin: 0, fontSize: "0.82rem", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{s.top}</p>
-                  <p style={{ margin: 0, fontSize: "0.78rem", color: "#6A90AA", lineHeight: 1.3 }}>{s.bottom}</p>
+                <div key={i} style={{ zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "25%" }}>
+                  {s.node}
+                  <div style={{ textAlign: "center" }}>
+                    <p style={{ margin: 0, fontSize: "0.82rem", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{s.top}</p>
+                    <p style={{ margin: 0, fontSize: "0.78rem", color: "#6A90AA", lineHeight: 1.3 }}>{s.bottom}</p>
+                  </div>
                 </div>
               ))}
             </div>
