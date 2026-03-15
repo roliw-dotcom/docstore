@@ -127,84 +127,87 @@ export default async function RootPage({
       {/* ── Hero ── */}
       <section className="grid grid-cols-1 md:grid-cols-2" style={{ minHeight: "480px" }}>
 
-        {/* Left: clean dark background + text */}
+        {/* Left: binders background + text on top */}
         <div style={{
-          background: "#0A1929",
+          position: "relative",
+          overflow: "hidden",
           padding: "clamp(32px, 6vw, 56px) clamp(20px, 6vw, 50px)",
           display: "flex", flexDirection: "column", justifyContent: "center",
           minHeight: "480px",
         }}>
-          <p style={{
-            fontFamily: "monospace",
-            fontSize: "0.68rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "#E67E22",
-            marginBottom: "20px",
-          }}>
-            {t("heroTagline")}
-          </p>
-          <h1 style={{
-            fontFamily: "var(--font-dm-serif)",
-            fontSize: "clamp(1.8rem, 3vw, 2.55rem)",
-            lineHeight: 1.13,
-            color: "white",
-            marginBottom: "22px",
-          }}>
-            {t("heroTitle")}
-          </h1>
-          <p style={{
-            color: "#8AAEC7",
-            fontSize: "0.9rem",
-            lineHeight: 1.72,
-            marginBottom: "34px",
-            maxWidth: "400px",
-          }}>
-            {t("heroDesc")}
-          </p>
-          <div style={{ display: "flex", gap: "14px", alignItems: "center", flexWrap: "wrap" }}>
-            <Link href="/signup">
-              <button style={{
-                background: "#E67E22",
-                color: "white",
-                padding: "13px 26px",
-                borderRadius: "7px",
-                fontSize: "0.86rem",
-                fontWeight: 600,
-                border: "none",
-                cursor: "pointer",
-              }}>
-                {t("getStartedFree")} →
-              </button>
-            </Link>
-            <Link href="/login" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.8rem" }}>
-              {t("signInArrow")}
-            </Link>
+          <BinderChaosStack />
+          {/* dark overlay so text stays readable */}
+          <div style={{ position: "absolute", inset: 0, background: "rgba(10,25,41,0.72)", zIndex: 1 }} />
+          <div style={{ position: "relative", zIndex: 2 }}>
+            <p style={{
+              fontFamily: "monospace",
+              fontSize: "0.68rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#E67E22",
+              marginBottom: "20px",
+            }}>
+              {t("heroTagline")}
+            </p>
+            <h1 style={{
+              fontFamily: "var(--font-dm-serif)",
+              fontSize: "clamp(1.8rem, 3vw, 2.55rem)",
+              lineHeight: 1.13,
+              color: "white",
+              marginBottom: "22px",
+            }}>
+              {t("heroTitle")}
+            </h1>
+            <p style={{
+              color: "#8AAEC7",
+              fontSize: "0.9rem",
+              lineHeight: 1.72,
+              marginBottom: "34px",
+              maxWidth: "400px",
+            }}>
+              {t("heroDesc")}
+            </p>
+            <div style={{ display: "flex", gap: "14px", alignItems: "center", flexWrap: "wrap" }}>
+              <Link href="/signup">
+                <button style={{
+                  background: "#E67E22",
+                  color: "white",
+                  padding: "13px 26px",
+                  borderRadius: "7px",
+                  fontSize: "0.86rem",
+                  fontWeight: 600,
+                  border: "none",
+                  cursor: "pointer",
+                }}>
+                  {t("getStartedFree")} →
+                </button>
+              </Link>
+              <Link href="/login" style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.8rem" }}>
+                {t("signInArrow")}
+              </Link>
+            </div>
+            <p style={{
+              marginTop: "14px",
+              fontSize: "0.7rem",
+              color: "rgba(255,255,255,0.28)",
+              fontFamily: "monospace",
+              letterSpacing: "0.05em",
+            }}>
+              {t("freeNote")}
+            </p>
           </div>
-          <p style={{
-            marginTop: "14px",
-            fontSize: "0.7rem",
-            color: "rgba(255,255,255,0.28)",
-            fontFamily: "monospace",
-            letterSpacing: "0.05em",
-          }}>
-            {t("freeNote")}
-          </p>
         </div>
 
-        {/* Right: binders background + animated card on top */}
+        {/* Right: animated app card on plain dark background */}
         <div style={{
-          position: "relative",
-          overflow: "hidden",
-          minHeight: "480px",
+          background: "#0F2337",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          minHeight: "480px",
+          padding: "40px 24px",
         }}>
-          <BinderChaosStack />
-          <div style={{ position: "relative", zIndex: 10, padding: "40px 24px" }}>
-            <AppCardAnimated />
-          </div>
+          <AppCardAnimated />
         </div>
       </section>
 
