@@ -137,8 +137,8 @@ export default async function RootPage({
         }}>
           <BinderChaosStack />
           {/* dark overlay so text stays readable */}
-          <div style={{ position: "absolute", inset: 0, background: "rgba(10,25,41,0.72)", zIndex: 1 }} />
-          <div style={{ position: "relative", zIndex: 2 }}>
+          <div style={{ position: "absolute", inset: 0, background: "rgba(10,25,41,0.78)", zIndex: 9 }} />
+          <div style={{ position: "relative", zIndex: 10 }}>
             <p style={{
               fontFamily: "monospace",
               fontSize: "0.68rem",
