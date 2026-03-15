@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="12" fill="#0F2337"/>
+  <text
+    x="32" y="45"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="30"
+    text-anchor="middle"
+    dominant-baseline="auto"
+  >
+    <tspan fill="white" font-weight="400">b</tspan><tspan fill="#E67E22" font-weight="700" font-family="Arial, Helvetica, sans-serif">AI</tspan>
+  </text>
+</svg>
