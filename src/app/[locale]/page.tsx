@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { Link } from "@/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations } from "next-intl/server";
+import HowItWorks from "@/components/how-it-works";
 
 // ── CSS Binder Chaos Stack ──────────────────────────────────────────────────
 function BinderChaosStack() {
@@ -222,6 +223,22 @@ export default async function RootPage({
       }}>
         &ldquo;{t("taglineQuote")}&rdquo;
       </div>
+
+      {/* ── How it works ── */}
+      <section style={{ background: "#0F2337", padding: "64px 24px" }}>
+        <div className="max-w-3xl mx-auto">
+          <h2 style={{
+            fontFamily: "var(--font-dm-serif)",
+            fontSize: "clamp(1.4rem, 3vw, 1.9rem)",
+            color: "white",
+            textAlign: "center",
+            marginBottom: "36px",
+          }}>
+            {locale === "de" ? "So funktioniert es" : "How it works"}
+          </h2>
+          <HowItWorks locale={locale} />
+        </div>
+      </section>
 
       {/* ── Features ── */}
       <section style={{ background: "#0F2337", padding: "80px 0" }}>
