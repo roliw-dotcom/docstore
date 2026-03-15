@@ -192,16 +192,19 @@ export default async function RootPage({
           </p>
         </div>
 
-        {/* Right: animated app card demo */}
+        {/* Right: binders background + animated card on top */}
         <div style={{
-          background: "#0F2337",
+          position: "relative",
+          overflow: "hidden",
+          minHeight: "480px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          minHeight: "480px",
-          padding: "40px 24px",
         }}>
-          <AppCardAnimated />
+          <BinderChaosStack />
+          <div style={{ position: "relative", zIndex: 10, padding: "40px 24px" }}>
+            <AppCardAnimated />
+          </div>
         </div>
       </section>
 
