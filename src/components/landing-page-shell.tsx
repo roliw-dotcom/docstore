@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "@/components/logo";
 
 interface Bullet {
   text: string;
@@ -42,9 +43,7 @@ export default function LandingPageShell({
       {/* Minimal header */}
       <header style={{ padding: "20px 24px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div style={{ maxWidth: hasScreenshot ? "1100px" : "680px", margin: "0 auto" }}>
-          <span style={{ fontFamily: "var(--font-dm-serif)", fontSize: "1.4rem", color: "white" }}>
-            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
-          </span>
+          <Logo width={120} variant="light" />
         </div>
       </header>
 

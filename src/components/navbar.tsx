@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { Menu, X } from "lucide-react";
+import Logo from "@/components/logo";
 
 export default function Navbar({ user }: { user?: User | null }) {
   const router = useRouter();
@@ -62,11 +63,8 @@ export default function Navbar({ user }: { user?: User | null }) {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <Link
-            href={user ? "/dashboard" : "/"}
-            className="font-serif text-2xl tracking-tight text-white flex-shrink-0"
-          >
-            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
+          <Link href={user ? "/dashboard" : "/"} style={{ flexShrink: 0, lineHeight: 0 }}>
+            <Logo width={130} variant="light" />
           </Link>
 
           {/* Desktop nav */}
