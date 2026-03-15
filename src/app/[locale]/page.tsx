@@ -133,7 +133,7 @@ export default async function RootPage({
           {/* Dark overlay for text legibility */}
           <div style={{
             position: "absolute", inset: 0, zIndex: 3,
-            background: "linear-gradient(100deg, rgba(10,20,35,0.78) 0%, rgba(10,20,35,0.50) 55%, rgba(10,20,35,0.10) 100%)",
+            background: "linear-gradient(100deg, rgba(10,20,35,0.93) 0%, rgba(10,20,35,0.93) 45%, rgba(10,20,35,0.40) 75%, rgba(10,20,35,0.05) 100%)",
           }} />
           {/* Content */}
           <div style={{
