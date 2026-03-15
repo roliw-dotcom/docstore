@@ -176,6 +176,94 @@ export default function LandingPageShell({
         </div>
       </main>
 
+      {/* How it works */}
+      <section style={{ padding: "0 24px 72px" }}>
+        <div style={{ maxWidth: hasScreenshot ? "1100px" : "720px", margin: "0 auto" }}>
+          <h2 style={{
+            fontFamily: "var(--font-dm-serif)",
+            fontSize: "clamp(1.4rem, 3vw, 1.9rem)",
+            color: "white",
+            textAlign: "center",
+            marginBottom: "28px",
+          }}>
+            How it works
+          </h2>
+
+          <div style={{
+            background: "rgba(255,255,255,0.04)",
+            border: "1px solid rgba(255,255,255,0.09)",
+            borderRadius: "16px",
+            padding: "28px 32px",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            gap: "24px",
+          }}>
+            {[
+              {
+                label: <><strong>Upload</strong> contract</>,
+                icon: (
+                  <svg viewBox="0 0 40 40" width="38" height="38" fill="none">
+                    <rect x="7" y="4" width="18" height="24" rx="2" fill="#1E6FA8" opacity="0.9"/>
+                    <path d="M21 4 L25 8 L21 8 Z" fill="#155E91"/>
+                    <line x1="11" y1="13" x2="21" y2="13" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                    <line x1="11" y1="17" x2="21" y2="17" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                    <circle cx="29" cy="30" r="8" fill="#0F4C75"/>
+                    <path d="M29 34 L29 27 M26 30 L29 27 L32 30" stroke="#5BC8F5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                ),
+              },
+              {
+                label: <>AI reads <strong>fine print</strong></>,
+                icon: (
+                  <svg viewBox="0 0 40 40" width="38" height="38" fill="none">
+                    <circle cx="20" cy="20" r="14" fill="#0F4C75"/>
+                    <path d="M14 24 C14 18 17 14 20 14 C23 14 26 18 26 24" stroke="#5BC8F5" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                    <circle cx="16" cy="22" r="2" fill="#5BC8F5"/>
+                    <circle cx="24" cy="22" r="2" fill="#5BC8F5"/>
+                    <path d="M17 27 C17 27 18.5 29 20 29 C21.5 29 23 27 23 27" stroke="#5BC8F5" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
+                    <path d="M12 16 C9 13 9 9 12 8" stroke="#1E6FA8" strokeWidth="1.8" strokeLinecap="round"/>
+                    <path d="M28 16 C31 13 31 9 28 8" stroke="#1E6FA8" strokeWidth="1.8" strokeLinecap="round"/>
+                  </svg>
+                ),
+              },
+              {
+                label: <><strong>Deadlines</strong> detected</>,
+                icon: (
+                  <svg viewBox="0 0 40 40" width="38" height="38" fill="none">
+                    <rect x="7" y="10" width="26" height="22" rx="3" fill="#0F4C75"/>
+                    <line x1="7" y1="16" x2="33" y2="16" stroke="#5BC8F5" strokeWidth="1.5"/>
+                    <rect x="13" y="6" width="3" height="7" rx="1.5" fill="#1E6FA8"/>
+                    <rect x="24" y="6" width="3" height="7" rx="1.5" fill="#1E6FA8"/>
+                    <circle cx="26" cy="28" r="6" fill="#1E6FA8"/>
+                    <path d="M22.5 28 L25 30.5 L29.5 25.5" stroke="#5BC8F5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                ),
+              },
+              {
+                label: <><strong>Reminders</strong> scheduled</>,
+                icon: (
+                  <svg viewBox="0 0 40 40" width="38" height="38" fill="none">
+                    <path d="M20 6 C13 6 10 12 10 18 L10 24 L8 27 L32 27 L30 24 L30 18 C30 12 27 6 20 6 Z" fill="#0F4C75"/>
+                    <path d="M10 18 L10 24 L8 27 L32 27 L30 24 L30 18" stroke="#1E6FA8" strokeWidth="1"/>
+                    <path d="M17 27 C17 28.7 18.3 30 20 30 C21.7 30 23 28.7 23 27" fill="#1E6FA8"/>
+                    <circle cx="20" cy="6" r="2.5" fill="#5BC8F5"/>
+                    <line x1="15" y1="18" x2="25" y2="18" stroke="#5BC8F5" strokeWidth="1.8" strokeLinecap="round"/>
+                    <line x1="15" y1="22" x2="22" y2="22" stroke="#5BC8F5" strokeWidth="1.8" strokeLinecap="round"/>
+                  </svg>
+                ),
+              },
+            ].map((step, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                <div style={{ flexShrink: 0 }}>{step.icon}</div>
+                <p style={{ fontSize: "0.88rem", color: "#C0D8E8", lineHeight: 1.4, margin: 0 }}>
+                  {step.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Minimal footer */}
       <footer style={{ padding: "20px 24px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div style={{ maxWidth: "680px", margin: "0 auto", display: "flex", gap: "20px", flexWrap: "wrap" }}>
