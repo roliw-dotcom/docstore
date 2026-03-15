@@ -51,7 +51,26 @@
     "signingIn": "Anmeldung läuft...",
     "signIn": "Anmelden",
     "noAccount": "Kein Konto?",
-    "createOne": "Erstelle eines"
+    "createOne": "Erstelle eines",
+    "forgotPassword": "Passwort vergessen?"
+  },
+  "forgotPassword": {
+    "description": "Passwort zurücksetzen",
+    "email": "E-Mail",
+    "emailPlaceholder": "du@example.com",
+    "sendResetLink": "Reset-Link senden",
+    "sending": "Wird gesendet…",
+    "sentMessage": "Reset-Link gesendet an {email} — bitte prüfe dein Postfach.",
+    "backToSignIn": "Zurück zur Anmeldung"
+  },
+  "resetPassword": {
+    "description": "Neues Passwort festlegen",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "passwordPlaceholder": "Mindestens 6 Zeichen",
+    "setNewPassword": "Neues Passwort speichern",
+    "saving": "Wird gespeichert…",
+    "passwordMismatch": "Passwörter stimmen nicht überein."
   },
   "signup": {
     "description": "Konto erstellen",

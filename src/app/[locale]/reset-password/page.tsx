@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "@/navigation";
-import { Link } from "@/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useTranslations } from "next-intl";
 
@@ -34,27 +33,31 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "6px",
 };
 
-export default function LoginPage() {
-  const router = useRouter();
+export default function ResetPasswordPage() {
   const supabase = createClient();
-  const t = useTranslations("login");
+  const router = useRouter();
+  const t = useTranslations("resetPassword");
 
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [confirm, setConfirm] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  async function handleLogin(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (password !== confirm) {
+      setError(t("passwordMismatch"));
+      return;
+    }
     setLoading(true);
     setError(null);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    const { error } = await supabase.auth.updateUser({ password });
+    setLoading(false);
     if (error) {
       setError(error.message);
-      setLoading(false);
     } else {
       router.push("/dashboard");
-      router.refresh();
     }
   }
 
@@ -68,36 +71,33 @@ export default function LoginPage() {
           <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("description")}</p>
         </div>
 
-        <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {error && (
             <div style={{ padding: "10px 14px", fontSize: "0.825rem", color: "#FCA5A5", background: "rgba(239,68,68,0.12)", border: "1px solid rgba(239,68,68,0.25)", borderRadius: "6px" }}>
               {error}
             </div>
           )}
           <div>
-            <label style={labelStyle}>{t("email")}</label>
-            <input
-              type="email"
-              placeholder={t("emailPlaceholder")}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              style={inputStyle}
-            />
-          </div>
-          <div>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-              <label style={{ ...labelStyle, marginBottom: 0 }}>{t("password")}</label>
-              <Link href="/forgot-password" style={{ fontSize: "0.75rem", color: "#6A90AA" }}>
-                {t("forgotPassword")}
-              </Link>
-            </div>
+            <label style={labelStyle}>{t("newPassword")}</label>
             <input
               type="password"
               placeholder={t("passwordPlaceholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              minLength={6}
+              style={inputStyle}
+            />
+          </div>
+          <div>
+            <label style={labelStyle}>{t("confirmPassword")}</label>
+            <input
+              type="password"
+              placeholder={t("passwordPlaceholder")}
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+              required
+              minLength={6}
               style={inputStyle}
             />
           </div>
@@ -116,16 +116,9 @@ export default function LoginPage() {
               marginTop: "4px",
             }}
           >
-            {loading ? t("signingIn") : t("signIn")}
+            {loading ? t("saving") : t("setNewPassword")}
           </button>
         </form>
-
-        <p style={{ marginTop: "20px", fontSize: "0.825rem", textAlign: "center", color: "#6A90AA" }}>
-          {t("noAccount")}{" "}
-          <Link href="/signup" style={{ color: "#E67E22" }}>
-            {t("createOne")}
-          </Link>
-        </p>
       </div>
     </div>
   );
