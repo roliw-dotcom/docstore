@@ -3,6 +3,7 @@ import { Link } from "@/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations } from "next-intl/server";
 import HowItWorks from "@/components/how-it-works";
+import AppCardAnimated from "@/components/app-card-animated";
 
 // ── CSS Binder Chaos Stack ──────────────────────────────────────────────────
 function BinderChaosStack() {
@@ -206,7 +207,7 @@ export default async function RootPage({
           padding: "40px",
           background: "rgba(8,20,32,0.96)",
         }}>
-          <AppCard />
+          <AppCardAnimated />
         </div>
       </section>
 
