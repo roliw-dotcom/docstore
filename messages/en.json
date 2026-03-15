@@ -70,7 +70,11 @@
     "passwordPlaceholder": "Min. 6 characters",
     "setNewPassword": "Set new password",
     "saving": "Saving…",
-    "passwordMismatch": "Passwords do not match."
+    "passwordMismatch": "Passwords do not match.",
+    "verifying": "Verifying link…",
+    "invalidLink": "This link is invalid or has expired.",
+    "requestNewLink": "Request a new reset link",
+    "success": "Password updated — redirecting…"
   },
   "signup": {
     "description": "Create your account",

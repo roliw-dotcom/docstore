@@ -70,7 +70,11 @@
     "passwordPlaceholder": "Mindestens 6 Zeichen",
     "setNewPassword": "Neues Passwort speichern",
     "saving": "Wird gespeichert…",
-    "passwordMismatch": "Passwörter stimmen nicht überein."
+    "passwordMismatch": "Passwörter stimmen nicht überein.",
+    "verifying": "Link wird geprüft…",
+    "invalidLink": "Dieser Link ist ungültig oder abgelaufen.",
+    "requestNewLink": "Neuen Reset-Link anfordern",
+    "success": "Passwort aktualisiert — Weiterleitung…"
   },
   "signup": {
     "description": "Konto erstellen",
