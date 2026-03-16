@@ -317,7 +317,7 @@ export default async function RootPage({
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "32px 0" }}>
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center gap-4 justify-between">
           <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.25)", fontFamily: "monospace" }}>
-            © {new Date().getFullYear()} bAInder
+            © {new Date().getFullYear()} bAIndly
           </span>
           <div className="flex flex-wrap justify-center gap-5 sm:gap-6">
             {[

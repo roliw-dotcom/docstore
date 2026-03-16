@@ -84,7 +84,7 @@ export default function LandingPageIndex() {
                 </div>
                 <p style={{ fontSize: "0.9rem", color: "white", margin: 0 }}>{p.title}</p>
                 <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.25)", margin: "4px 0 0", fontFamily: "monospace" }}>
-                  bainder.com{p.href}
+                  baindly.com{p.href}
                 </p>
               </div>
               <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>

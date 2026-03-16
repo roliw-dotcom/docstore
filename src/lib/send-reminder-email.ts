@@ -5,7 +5,7 @@ function buildIcs(title: string, description: string | null | undefined, dueDate
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//bAInder//bAInder//EN",
+    "PRODID:-//bAIndly//bAIndly//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",

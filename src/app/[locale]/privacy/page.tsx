@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — bAInder",
+  title: "Privacy Policy — bAIndly",
 };
 
 const EN = () => (
@@ -16,7 +16,7 @@ const EN = () => (
       [Street + Number]<br />
       [Postal Code, City]<br />
       [Country]<br /><br />
-      E-mail: <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
+      E-mail: <a href="mailto:privacy@baindly.com">privacy@baindly.com</a>
     </p>
     <p>For any questions regarding data protection, please contact us at the email address above.</p>
 
@@ -149,7 +149,7 @@ const EN = () => (
     </ul>
     <p>
       To exercise your rights, you may delete your account within the application or contact us at{" "}
-      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>.
+      <a href="mailto:privacy@baindly.com">privacy@baindly.com</a>.
     </p>
 
     <h2>8. Right to Lodge a Complaint</h2>
@@ -183,7 +183,7 @@ const EN = () => (
     <h2>11. Contact</h2>
     <p>
       For any questions regarding data protection or the processing of your data, please contact us at:{" "}
-      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
+      <a href="mailto:privacy@baindly.com">privacy@baindly.com</a>
     </p>
   </div>
 );
@@ -200,7 +200,7 @@ const DE = () => (
       [Straße + Hausnummer]<br />
       [PLZ, Stadt]<br />
       [Land]<br /><br />
-      E-Mail: <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
+      E-Mail: <a href="mailto:privacy@baindly.com">privacy@baindly.com</a>
     </p>
     <p>Bei Fragen zum Datenschutz kannst du uns jederzeit unter der oben genannten E-Mail-Adresse kontaktieren.</p>
 
@@ -334,7 +334,7 @@ const DE = () => (
     </ul>
     <p>
       Zur Ausübung deiner Rechte kannst du dein Konto in der Anwendung löschen oder uns unter{" "}
-      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a> kontaktieren.
+      <a href="mailto:privacy@baindly.com">privacy@baindly.com</a> kontaktieren.
     </p>
 
     <h2>8. Beschwerderecht</h2>
@@ -368,7 +368,7 @@ const DE = () => (
     <h2>11. Kontakt</h2>
     <p>
       Bei Fragen zum Datenschutz oder zur Verarbeitung deiner Daten kontaktiere uns bitte unter:{" "}
-      <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
+      <a href="mailto:privacy@baindly.com">privacy@baindly.com</a>
     </p>
   </div>
 );

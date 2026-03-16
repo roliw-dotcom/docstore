@@ -32,7 +32,7 @@ export async function GET() {
   const now = toIcsDatetime(new Date());
 
   const vevents = followUps.map((fu) => {
-    const uid = `${fu.id}@bainder`;
+    const uid = `${fu.id}@baindly`;
     const dtstart = toIcsDate(fu.due_date!);
     const dtend = toIcsDate(fu.due_date!); // same-day all-day event
     const summary = escapeIcs(fu.title);
@@ -56,10 +56,10 @@ export async function GET() {
   const ics = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//bAInder//bAInder//EN",
+    "PRODID:-//bAIndly//bAIndly//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    "X-WR-CALNAME:bAInder Deadlines",
+    "X-WR-CALNAME:bAIndly Deadlines",
     ...vevents,
     "END:VCALENDAR",
   ].join("\r\n");
@@ -67,7 +67,7 @@ export async function GET() {
   return new NextResponse(ics, {
     headers: {
       "Content-Type": "text/calendar; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="bainder-deadlines.ics"',
+      "Content-Disposition": 'attachment; filename="baindly-deadlines.ics"',
     },
   });
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Impressum — bAInder",
+  title: "Impressum — bAIndly",
 };
 
 const DE = () => (
@@ -17,8 +17,8 @@ const DE = () => (
       [Land]
     </p>
     <p>
-      E-Mail: <a href="mailto:hello@bainder.net">hello@bainder.net</a><br />
-      Datenschutz: <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
+      E-Mail: <a href="mailto:hello@baindly.com">hello@baindly.com</a><br />
+      Datenschutz: <a href="mailto:privacy@baindly.com">privacy@baindly.com</a>
     </p>
     <p>
       <strong>Vertretungsberechtigt:</strong><br />
@@ -76,8 +76,8 @@ const EN = () => (
       [Country]
     </p>
     <p>
-      E-mail: <a href="mailto:hello@bainder.net">hello@bainder.net</a><br />
-      Data protection: <a href="mailto:privacy@bainder.net">privacy@bainder.net</a>
+      E-mail: <a href="mailto:hello@baindly.com">hello@baindly.com</a><br />
+      Data protection: <a href="mailto:privacy@baindly.com">privacy@baindly.com</a>
     </p>
     <p>
       <strong>Authorised representative:</strong><br />

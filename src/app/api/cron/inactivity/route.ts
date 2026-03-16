@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   }
 
   const supabase = createServiceClient();
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://bainder.net";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://baindly.com";
 
   const now = new Date();
   const elevenMonthsAgo = new Date(now);

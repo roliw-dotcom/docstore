@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import LandingPageShell from "@/components/landing-page-shell";
 
 export const metadata: Metadata = {
-  title: "Kündigungsfrist verpasst? So vermeidest du es in Zukunft — bAInder",
+  title: "Kündigungsfrist verpasst? So vermeidest du es in Zukunft — bAIndly",
   description:
-    "bAInder liest deinen Mietvertrag und erinnert dich automatisch vor jeder Frist. Nie wieder Kündigungsfrist verpassen.",
+    "bAIndly liest deinen Mietvertrag und erinnert dich automatisch vor jeder Frist. Nie wieder Kündigungsfrist verpassen.",
 };
 
 export default function KuendigungsfristLandingPage() {
@@ -12,7 +12,7 @@ export default function KuendigungsfristLandingPage() {
     <LandingPageShell
       eyebrow="KI-Dokumentenschutz"
       headline="Nie wieder die Kündigungsfrist verpassen."
-      subheadline="Im deutschen Mietrecht gilt: 3 Monate schriftliche Kündigung, bis zum 3. Werktag des Monats. Eine verpasste Frist bedeutet 3 Monate zusätzliche Miete. bAInder liest deinen Vertrag und erinnert dich rechtzeitig."
+      subheadline="Im deutschen Mietrecht gilt: 3 Monate schriftliche Kündigung, bis zum 3. Werktag des Monats. Eine verpasste Frist bedeutet 3 Monate zusätzliche Miete. bAIndly liest deinen Vertrag und erinnert dich rechtzeitig."
       bullets={[
         { text: "KI erkennt automatisch Fristen, Kündigungsklauseln und Zahlungspflichten in deinem Mietvertrag" },
         { text: "E-Mail-Erinnerung 5 Tage vor jeder Frist — genug Zeit zum Handeln" },

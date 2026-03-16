@@ -22,9 +22,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "bAInder — Your AI that reads the fine print.",
+  title: "bAIndly — Your AI that reads the fine print.",
   description:
-    "bAInder reads your PDFs so you don't have to. AI extracts every deadline, obligation, and action item — and reminds you before anything is due.",
+    "bAIndly reads your PDFs so you don't have to. AI extracts every deadline, obligation, and action item — and reminds you before anything is due.",
 };
 
 export function generateStaticParams() {

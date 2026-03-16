@@ -16,7 +16,7 @@ export default function Logo({ width = 160, variant = "dark" }: LogoProps) {
       height={h}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="bAInder"
+      aria-label="bAIndly"
     >
       {/* ── Document icon ─────────────────────────── */}
       <path
@@ -53,7 +53,7 @@ export default function Logo({ width = 160, variant = "dark" }: LogoProps) {
         strokeLinejoin="round"
       />
 
-      {/* ── bAInder text ──────────────────────────── */}
+      {/* ── bAIndly text ──────────────────────────── */}
       <text
         y="62"
         fontFamily="'Inter', 'Helvetica Neue', Arial, sans-serif"
@@ -62,7 +62,7 @@ export default function Logo({ width = 160, variant = "dark" }: LogoProps) {
       >
         <tspan x="89" fill={textColor} fontWeight="400">b</tspan>
         <tspan fill="#E67E22" fontWeight="700">AI</tspan>
-        <tspan fill={textColor} fontWeight="400">nder</tspan>
+        <tspan fill={textColor} fontWeight="400">ndly</tspan>
       </text>
     </svg>
   );

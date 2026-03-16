@@ -48,7 +48,7 @@ export default async function FollowUpsPage({
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <a
             href="/api/follow-ups/ics"
-            download="bainder-deadlines.ics"
+            download="baindly-deadlines.ics"
             style={{
               fontSize: "0.75rem",
               color: "#6A90AA",

@@ -33,7 +33,7 @@ export default function LandingPageShell({
   trustLine,
   quote,
   screenshotSrc,
-  screenshotAlt = "bAInder dashboard",
+  screenshotAlt = "bAIndly dashboard",
 }: LandingPageShellProps) {
   const hasScreenshot = Boolean(screenshotSrc);
 
@@ -44,7 +44,7 @@ export default function LandingPageShell({
       <header style={{ padding: "20px 24px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
         <div style={{ maxWidth: hasScreenshot ? "1100px" : "680px", margin: "0 auto" }}>
           <span style={{ fontFamily: "var(--font-dm-serif)", fontSize: "1.4rem", color: "white" }}>
-            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
+            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>ndly
           </span>
         </div>
       </header>

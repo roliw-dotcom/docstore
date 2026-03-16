@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
   }).join("\n");
 
   const systemPrompt = [
-    `You are bAInder's document assistant. Today is ${today}.`,
+    `You are bAIndly's document assistant. Today is ${today}.`,
     ``,
     `The user has ${(documents ?? []).length} document(s) in their library:`,
     docContext || "No documents yet.",

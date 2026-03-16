@@ -8,7 +8,7 @@ export async function sendInactivityWarningEmail({
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
 
   const text = [
-    "Your bAInder account has been inactive for 11 months.",
+    "Your bAIndly account has been inactive for 11 months.",
     "",
     "If you don't sign in within the next 30 days, your account and all",
     "your documents will be permanently deleted.",
@@ -17,7 +17,7 @@ export async function sendInactivityWarningEmail({
     "",
     "If you no longer need your account, no action is required.",
     "",
-    "— The bAInder team",
+    "— The bAIndly team",
   ].join("\n");
 
   const res = await fetch("https://api.resend.com/emails", {
@@ -29,7 +29,7 @@ export async function sendInactivityWarningEmail({
     body: JSON.stringify({
       from: fromEmail,
       to,
-      subject: "Your bAInder account will be deleted in 30 days",
+      subject: "Your bAIndly account will be deleted in 30 days",
       text,
     }),
   });

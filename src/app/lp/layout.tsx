@@ -16,7 +16,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "bAInder",
+  title: "bAIndly",
 };
 
 export default function LpLayout({ children }: { children: React.ReactNode }) {
