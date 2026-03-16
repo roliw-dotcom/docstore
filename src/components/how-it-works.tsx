@@ -4,18 +4,18 @@ interface HowItWorksProps {
 
 const steps = {
   en: [
-    { top: "Upload",    bottom: "contract"    },
+    { top: "Upload",    bottom: "document"    },
     { top: "AI reads",  bottom: "fine print"  },
-    { top: "Deadlines", bottom: "detected"    },
+    { top: "AI detects", bottom: "deadlines"  },
     { top: "Reminders", bottom: "scheduled"   },
-    { top: "Manage",    bottom: "& chat"      },
+    { top: "Ask & Manage", bottom: "documents" },
   ],
   de: [
-    { top: "Hochladen",  bottom: "deines Vertrags"    },
+    { top: "Hochladen",  bottom: "deines Dokuments"   },
     { top: "KI liest",   bottom: "das Kleingedruckte" },
-    { top: "Fristen",    bottom: "erkannt"             },
+    { top: "KI erkennt", bottom: "Fristen"              },
     { top: "Erinnerung", bottom: "geplant"             },
-    { top: "Verwalten",  bottom: "& chatten"           },
+    { top: "Fragen & Verwalten", bottom: "von Dokumenten" },
   ],
 };
 
