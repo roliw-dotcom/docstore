@@ -86,7 +86,7 @@ export default function SignupPage() {
       <div style={cardStyle}>
         <div style={{ marginBottom: "28px" }}>
           <div className="font-serif text-2xl text-white mb-1">
-            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
+            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>ndly
           </div>
           <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("description")}</p>
         </div>

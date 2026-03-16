@@ -66,7 +66,7 @@ export default function Navbar({ user }: { user?: User | null }) {
             href={user ? "/dashboard" : "/"}
             className="font-serif text-2xl tracking-tight text-white flex-shrink-0"
           >
-            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>nder
+            b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>ndly
           </Link>
 
           {/* Desktop nav */}
