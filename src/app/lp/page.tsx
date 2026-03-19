@@ -31,6 +31,18 @@ const pages = [
     lang: "DE",
     keyword: "Mietvertrag KI",
   },
+  {
+    href: "/lp/family-documents",
+    title: "Family Life Comes With a Lot of Paperwork. None of It Should Slip Through.",
+    lang: "EN",
+    keyword: "family document organiser",
+  },
+  {
+    href: "/lp/familien-dokumente",
+    title: "Familienleben bedeutet jede Menge Papierkram. Nichts davon sollte untergehen.",
+    lang: "DE",
+    keyword: "Familiendokumente organisieren",
+  },
 ];
 
 export default function LandingPageIndex() {
