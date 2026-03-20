@@ -36,25 +36,28 @@ function BinderChaosStack() {
       {/* Warm lamp glow from top-right */}
       <div className="absolute" style={{ width: "60%", height: "60%", top: "-10%", right: "-10%", background: "radial-gradient(ellipse, rgba(200,140,60,0.13) 0%, transparent 70%)", zIndex: 1 }} />
 
-      {/* Shelf surface */}
-      <div className="absolute bottom-0 left-0 right-0" style={{ height: "18%", background: "linear-gradient(0deg, #1A120A 0%, #251A0E 60%, transparent 100%)", zIndex: 2 }} />
-      {/* Shelf reflection line */}
-      <div className="absolute" style={{ bottom: "18%", left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent 0%, rgba(180,130,60,0.18) 30%, rgba(200,150,70,0.28) 50%, rgba(180,130,60,0.18) 70%, transparent 100%)", zIndex: 3 }} />
-      {/* Subtle shelf surface sheen */}
-      <div className="absolute" style={{ bottom: "14%", left: "10%", right: "10%", height: "3%", background: "radial-gradient(ellipse, rgba(200,150,60,0.06) 0%, transparent 70%)", zIndex: 3 }} />
+      {/* Shelf surface — solid dark wood plank */}
+      <div className="absolute bottom-0 left-0 right-0" style={{ height: "20%", background: "linear-gradient(0deg, #1C1208 0%, #2A1C0E 55%, #3A2614 100%)", zIndex: 2 }} />
+      {/* Top edge of shelf — bright highlight line */}
+      <div className="absolute" style={{ bottom: "20%", left: 0, right: 0, height: "3px", background: "linear-gradient(90deg, transparent 0%, rgba(180,130,60,0.5) 20%, rgba(220,170,80,0.75) 50%, rgba(180,130,60,0.5) 80%, transparent 100%)", zIndex: 3 }} />
+      {/* Surface sheen / reflection */}
+      <div className="absolute" style={{ bottom: "14%", left: "5%", right: "5%", height: "5%", background: "radial-gradient(ellipse at 50% 0%, rgba(220,170,80,0.12) 0%, transparent 70%)", zIndex: 3 }} />
+      {/* Wood grain lines */}
+      <div className="absolute" style={{ bottom: "16%", left: "8%", right: "8%", height: "1px", background: "rgba(0,0,0,0.25)", zIndex: 3 }} />
+      <div className="absolute" style={{ bottom: "12%", left: "15%", right: "20%", height: "1px", background: "rgba(0,0,0,0.18)", zIndex: 3 }} />
 
       {/* Binders — varied leather colors */}
-      <Binder color="#C4822A" spine="#7A4E18" pageEdge="#F0EAD6" width="70%" height="14%" bottom="32%" left="15%" rotate="2.5deg"  zIndex={4} />
-      <Binder color="#2A5A6B" spine="#1A3A47" pageEdge="#E8EEF0" width="64%" height="13%" bottom="44%" left="18%" rotate="-2deg"  zIndex={5} />
-      <Binder color="#6B2430" spine="#44161E" pageEdge="#F0E8E8" width="72%" height="15%" bottom="55%" left="13%" rotate="3.5deg"  zIndex={6} />
-      <Binder color="#3A5A3A" spine="#243A24" pageEdge="#E8F0E8" width="58%" height="13%" bottom="68%" left="21%" rotate="-2.5deg" zIndex={7} />
-      <Binder color="#C4882A" spine="#7A5418" pageEdge="#F0EAD6" width="66%" height="14%" bottom="79%" left="16%" rotate="1.5deg"  zIndex={8} />
-      <Binder color="#3A3A6B" spine="#242450" pageEdge="#E8E8F0" width="48%" height="13%" bottom="27%" left="6%"  rotate="-8deg"   zIndex={9} />
+      <Binder color="#C4822A" spine="#7A4E18" pageEdge="#F0EAD6" width="70%" height="14%" bottom="36%" left="15%" rotate="2.5deg"  zIndex={4} />
+      <Binder color="#2A5A6B" spine="#1A3A47" pageEdge="#E8EEF0" width="64%" height="13%" bottom="48%" left="18%" rotate="-2deg"  zIndex={5} />
+      <Binder color="#6B2430" spine="#44161E" pageEdge="#F0E8E8" width="72%" height="15%" bottom="59%" left="13%" rotate="3.5deg"  zIndex={6} />
+      <Binder color="#3A5A3A" spine="#243A24" pageEdge="#E8F0E8" width="58%" height="13%" bottom="72%" left="21%" rotate="-2.5deg" zIndex={7} />
+      <Binder color="#C4882A" spine="#7A5418" pageEdge="#F0EAD6" width="66%" height="14%" bottom="83%" left="16%" rotate="1.5deg"  zIndex={8} />
+      <Binder color="#3A3A6B" spine="#242450" pageEdge="#E8E8F0" width="48%" height="13%" bottom="30%" left="6%"  rotate="-8deg"   zIndex={9} />
 
       {/* Paper strips / loose sheets */}
-      <div className="absolute" style={{ width: "52%", height: "2%", background: "rgba(240,236,220,0.4)", bottom: "56.5%", left: "20%", transform: "rotate(3.5deg)", zIndex: 10, borderRadius: "1px" }} />
-      <div className="absolute" style={{ width: "42%", height: "1.8%", background: "rgba(232,236,240,0.3)", bottom: "69.5%", left: "24%", transform: "rotate(-2.5deg)", zIndex: 10, borderRadius: "1px" }} />
-      <div className="absolute" style={{ width: "34%", height: "1.8%", background: "rgba(232,240,232,0.22)", bottom: "80.5%", left: "19%", transform: "rotate(1.5deg)", zIndex: 10, borderRadius: "1px" }} />
+      <div className="absolute" style={{ width: "52%", height: "2%", background: "rgba(240,236,220,0.4)", bottom: "60.5%", left: "20%", transform: "rotate(3.5deg)", zIndex: 10, borderRadius: "1px" }} />
+      <div className="absolute" style={{ width: "42%", height: "1.8%", background: "rgba(232,236,240,0.3)", bottom: "73.5%", left: "24%", transform: "rotate(-2.5deg)", zIndex: 10, borderRadius: "1px" }} />
+      <div className="absolute" style={{ width: "34%", height: "1.8%", background: "rgba(232,240,232,0.22)", bottom: "84.5%", left: "19%", transform: "rotate(1.5deg)", zIndex: 10, borderRadius: "1px" }} />
     </div>
   );
 }
