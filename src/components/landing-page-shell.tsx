@@ -174,7 +174,9 @@ export default function LandingPageShell({
                   letterSpacing: "0.01em",
                   boxShadow: "0 4px 24px rgba(230,126,34,0.38)",
                   fontFamily: "var(--font-inter, sans-serif)",
-                }}>
+                }}
+                className="btn-cta"
+              >
                   {ctaText} →
                 </button>
               </Link>

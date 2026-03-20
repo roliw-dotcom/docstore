@@ -129,7 +129,7 @@ export default function Navbar({ user }: { user?: User | null }) {
               </Link>
               {localeBtn}
               <Link href="/signup">
-                <button style={{ background: "#E67E22", color: "white", padding: "7px 16px", borderRadius: "6px", fontSize: "0.78rem", fontWeight: 600, border: "none", cursor: "pointer" }}>
+                <button className="btn-cta" style={{ background: "#E67E22", color: "white", padding: "7px 16px", borderRadius: "6px", fontSize: "0.78rem", fontWeight: 600, border: "none", cursor: "pointer" }}>
                   {t("getStarted")}
                 </button>
               </Link>

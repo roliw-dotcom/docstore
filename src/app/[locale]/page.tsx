@@ -202,7 +202,9 @@ export default async function RootPage({
                   border: "none",
                   cursor: "pointer",
                   boxShadow: "0 4px 20px rgba(230,126,34,0.35)",
-                }}>
+                }}
+                className="btn-cta"
+              >
                   {t("getStartedFree")} →
                 </button>
               </Link>
@@ -396,7 +398,9 @@ export default async function RootPage({
                   cursor: "pointer",
                   whiteSpace: "nowrap",
                   boxShadow: "0 4px 20px rgba(230,126,34,0.3)",
-                }}>
+                }}
+                className="btn-cta"
+              >
                   {t("getStartedFree")} →
                 </button>
               </Link>

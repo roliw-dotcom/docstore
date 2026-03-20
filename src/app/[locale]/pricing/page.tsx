@@ -155,6 +155,7 @@ export default function PricingPage() {
                   fontFamily: "var(--font-inter, Inter, sans-serif)",
                   boxShadow: "0 4px 24px rgba(230,126,34,0.38)",
                 }}
+                className="btn-cta"
               >
                 {t("upgradeToPro")}
               </button>
