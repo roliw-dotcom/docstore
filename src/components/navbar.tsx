@@ -79,6 +79,7 @@ export default function Navbar({ user }: { user?: User | null }) {
                     <Link
                       key={href}
                       href={href}
+                      className="nav-link"
                       style={{
                         fontSize: "0.82rem",
                         color: active ? "white" : "#6A90AA",

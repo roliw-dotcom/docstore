@@ -138,3 +138,53 @@
     transform: translateY(0);
   }
 }
+
+/* ── Micro-interactions ─────────────────────────────────────────── */
+
+/* Primary CTA buttons */
+.btn-cta {
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+.btn-cta:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(230,126,34,0.45) !important;
+}
+.btn-cta:active {
+  transform: translateY(0);
+  filter: brightness(0.98);
+}
+
+/* Ghost / secondary buttons */
+.btn-ghost {
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease !important;
+}
+.btn-ghost:hover {
+  border-color: rgba(230,126,34,0.6) !important;
+  color: white !important;
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(230,126,34,0.12) !important;
+}
+
+/* Nav links */
+.nav-link {
+  transition: color 0.15s ease !important;
+}
+.nav-link:hover {
+  color: white !important;
+}
+
+/* Input focus glow */
+input:focus,
+textarea:focus {
+  border-color: rgba(230,126,34,0.55) !important;
+  box-shadow: 0 0 0 3px rgba(230,126,34,0.1) !important;
+  outline: none !important;
+}

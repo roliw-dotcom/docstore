@@ -165,7 +165,7 @@ export default function DocumentCard({
         flexDirection: "column",
         gap: "10px",
       }}
-      className="hover:border-[rgba(230,126,34,0.35)] hover:bg-[rgba(255,255,255,0.06)]"
+      className="card-hover hover:border-[rgba(230,126,34,0.35)] hover:bg-[rgba(255,255,255,0.06)]"
     >
       {/* Title + status */}
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "8px" }}>
