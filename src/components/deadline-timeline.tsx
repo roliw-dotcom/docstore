@@ -65,7 +65,7 @@ function TimelineBar({ followUps }: { followUps: FollowUp[] }) {
   return (
     <div style={{ position: "relative", height: "40px", marginBottom: "8px" }}>
       {/* baseline */}
-      <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: "1px", background: "rgba(0,0,0,0.1)" }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: "1px", background: "rgba(255,255,255,0.08)" }} />
 
       {/* today marker */}
       {today >= rangeStart && today <= rangeEnd && (() => {
@@ -81,7 +81,7 @@ function TimelineBar({ followUps }: { followUps: FollowUp[] }) {
         due.setHours(0, 0, 0, 0);
         const diffDays = Math.ceil((due.getTime() - today.getTime()) / 86400000);
         const pct = ((due.getTime() - rangeStart.getTime()) / totalRange) * 100;
-        const color = diffDays < 0 ? "#DC2626" : diffDays <= 5 ? "#C86A10" : "#9CA3AF";
+        const color = diffDays < 0 ? "#FCA5A5" : diffDays <= 5 ? "#F5A623" : "#6A90AA";
         const formatted = due.toLocaleDateString(locale === "de" ? "de-DE" : "en-US", { month: "short", day: "numeric" });
 
         return (
@@ -97,7 +97,7 @@ function TimelineBar({ followUps }: { followUps: FollowUp[] }) {
               height: "10px",
               borderRadius: "50%",
               background: color,
-              border: "2px solid #F4F6F8",
+              border: "2px solid #0F2337",
               cursor: "default",
               zIndex: 1,
             }}
@@ -132,7 +132,7 @@ function GroupSection({
         return (
           <div key={fu.id} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: color, flexShrink: 0 }} />
-            <span style={{ fontSize: "0.82rem", color: "#1A1A2E", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <span style={{ fontSize: "0.82rem", color: "white", flex: 1, minWidth: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {fu.title}
             </span>
             {formatted && (
@@ -155,25 +155,25 @@ export default function DeadlineTimeline({ followUps }: { followUps: FollowUp[] 
 
   return (
     <div style={{
-      background: "#FFFFFF",
-      border: "1px solid rgba(0,0,0,0.08)",
+      background: "rgba(255,255,255,0.03)",
+      border: "1px solid rgba(255,255,255,0.08)",
       borderRadius: "10px",
       padding: "16px 20px",
       display: "flex",
       flexDirection: "column",
       gap: "16px",
     }}>
-      <p style={{ fontSize: "0.7rem", fontFamily: "monospace", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6B7280" }}>
+      <p style={{ fontSize: "0.7rem", fontFamily: "monospace", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6A90AA" }}>
         {t("title")}
       </p>
 
       <TimelineBar followUps={pending} />
 
       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-        <GroupSection label={t("overdue")}   color="#DC2626" items={overdue} />
-        <GroupSection label={t("thisWeek")}  color="#C86A10" items={thisWeek} />
-        <GroupSection label={t("thisMonth")} color="#6B7280" items={thisMonth} />
-        <GroupSection label={t("later")}     color="rgba(0,0,0,0.3)" items={later} />
+        <GroupSection label={t("overdue")}   color="#FCA5A5" items={overdue} />
+        <GroupSection label={t("thisWeek")}  color="#F5A623" items={thisWeek} />
+        <GroupSection label={t("thisMonth")} color="#6A90AA" items={thisMonth} />
+        <GroupSection label={t("later")}     color="rgba(255,255,255,0.3)" items={later} />
       </div>
     </div>
   );

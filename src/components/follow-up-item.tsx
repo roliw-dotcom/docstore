@@ -34,20 +34,20 @@ function DueDatePill({ dueDate }: { dueDate: string | null | undefined }) {
 
   if (diffDays < 0) {
     return (
-      <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(220,38,38,0.1)", color: "#DC2626", fontWeight: 500 }}>
+      <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(239,68,68,0.15)", color: "#FCA5A5", fontWeight: 500 }}>
         {t("overdue", { date: formatted })}
       </span>
     );
   }
   if (diffDays <= 5) {
     return (
-      <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(230,126,34,0.12)", color: "#C86A10", fontWeight: 500 }}>
+      <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(230,126,34,0.15)", color: "#F5A623", fontWeight: 500 }}>
         {t("dueSoon", { date: formatted })}
       </span>
     );
   }
   return (
-    <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(0,0,0,0.06)", color: "#6B7280" }}>
+    <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(255,255,255,0.08)", color: "#8AAEC7" }}>
       {t("dueDate", { date: formatted })}
     </span>
   );
@@ -84,16 +84,16 @@ export default function FollowUpItem({ followUp }: { followUp: FollowUp }) {
       />
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "8px" }}>
-          <span style={{ fontSize: "0.875rem", fontWeight: 500, color: completed ? "#9CA3AF" : "#1A1A2E", textDecoration: completed ? "line-through" : "none" }}>
+          <span style={{ fontSize: "0.875rem", fontWeight: 500, color: completed ? "#6A90AA" : "white", textDecoration: completed ? "line-through" : "none" }}>
             {followUp.title}
           </span>
           {followUp.reminded && (
-            <Bell style={{ width: "12px", height: "12px", color: "#9CA3AF", flexShrink: 0 }} />
+            <Bell style={{ width: "12px", height: "12px", color: "#6A90AA", flexShrink: 0 }} />
           )}
           <DueDatePill dueDate={followUp.due_date} />
         </div>
         {followUp.description && (
-          <p style={{ fontSize: "0.775rem", color: "#6B7280", marginTop: "2px", lineHeight: 1.55 }}>{followUp.description}</p>
+          <p style={{ fontSize: "0.775rem", color: "#6A90AA", marginTop: "2px", lineHeight: 1.55 }}>{followUp.description}</p>
         )}
       </div>
     </div>

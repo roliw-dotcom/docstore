@@ -131,30 +131,30 @@ export default function UploadPage() {
   return (
     <div style={{ maxWidth: "640px", display: "flex", flexDirection: "column", gap: "20px" }}>
       <div>
-        <h1 className="font-serif text-2xl" style={{ color: "#1A1A2E" }}>{t("title")}</h1>
-        <p style={{ fontSize: "0.875rem", color: "#6B7280", marginTop: "4px" }}>{t("subtitle")}</p>
+        <h1 className="font-serif text-2xl text-white">{t("title")}</h1>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA", marginTop: "4px" }}>{t("subtitle")}</p>
       </div>
 
       {!allDone && (
         <div
           {...getRootProps()}
           style={{
-            border: `2px dashed ${isDragActive ? "#E67E22" : "rgba(0,0,0,0.15)"}`,
+            border: `2px dashed ${isDragActive ? "#E67E22" : "rgba(255,255,255,0.15)"}`,
             borderRadius: "12px",
             padding: "clamp(28px, 5vw, 48px) 20px",
             textAlign: "center",
             cursor: running ? "not-allowed" : "pointer",
-            background: isDragActive ? "rgba(230,126,34,0.06)" : "#FFFFFF",
+            background: isDragActive ? "rgba(230,126,34,0.06)" : "rgba(255,255,255,0.02)",
             transition: "all 0.15s",
             opacity: running ? 0.5 : 1,
           }}
         >
           <input {...getInputProps()} />
           <p style={{ fontSize: "2.5rem", marginBottom: "12px" }}>📄</p>
-          <p style={{ fontSize: "0.95rem", fontWeight: 500, color: isDragActive ? "#E67E22" : "#374151", marginBottom: "4px" }}>
+          <p style={{ fontSize: "0.95rem", fontWeight: 500, color: isDragActive ? "#E67E22" : "rgba(255,255,255,0.7)", marginBottom: "4px" }}>
             {isDragActive ? t("dropHere") : t("dragDrop")}
           </p>
-          <p style={{ fontSize: "0.8rem", color: "#6B7280" }}>{t("fileTypes")}</p>
+          <p style={{ fontSize: "0.8rem", color: "#6A90AA" }}>{t("fileTypes")}</p>
         </div>
       )}
 
@@ -168,8 +168,8 @@ export default function UploadPage() {
                 alignItems: "center",
                 justifyContent: "space-between",
                 gap: "12px",
-                background: "#FFFFFF",
-                border: "1px solid rgba(0,0,0,0.08)",
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: "8px",
                 padding: "12px 16px",
               }}
@@ -177,16 +177,16 @@ export default function UploadPage() {
               <div style={{ display: "flex", alignItems: "center", gap: "10px", minWidth: 0 }}>
                 <StatusIcon status={item.status} />
                 <div style={{ minWidth: 0 }}>
-                  <p style={{ fontSize: "0.875rem", fontWeight: 500, color: "#1A1A2E", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  <p style={{ fontSize: "0.875rem", fontWeight: 500, color: "white", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                     {item.file.name}
                   </p>
-                  {item.error && <p style={{ fontSize: "0.75rem", color: "#DC2626" }}>{item.error}</p>}
-                  {item.status === "uploading" && <p style={{ fontSize: "0.75rem", color: "#2563EB" }}>{t("uploadingStatus")}</p>}
-                  {item.status === "done" && <p style={{ fontSize: "0.75rem", color: "#16A34A" }}>{t("uploadedStatus")}</p>}
+                  {item.error && <p style={{ fontSize: "0.75rem", color: "#FCA5A5" }}>{item.error}</p>}
+                  {item.status === "uploading" && <p style={{ fontSize: "0.75rem", color: "#93C5FD" }}>{t("uploadingStatus")}</p>}
+                  {item.status === "done" && <p style={{ fontSize: "0.75rem", color: "#4ADE80" }}>{t("uploadedStatus")}</p>}
                 </div>
               </div>
               {(item.status === "pending" || item.status === "error") && !running && (
-                <button onClick={() => removeFile(item.id)} style={{ color: "rgba(0,0,0,0.25)", fontSize: "1.25rem", background: "none", border: "none", cursor: "pointer", lineHeight: 1, flexShrink: 0 }}>×</button>
+                <button onClick={() => removeFile(item.id)} style={{ color: "rgba(255,255,255,0.25)", fontSize: "1.25rem", background: "none", border: "none", cursor: "pointer", lineHeight: 1, flexShrink: 0 }}>×</button>
               )}
             </li>
           ))}
@@ -210,23 +210,23 @@ export default function UploadPage() {
                 {t("viewDocuments")}
               </button>
             </Link>
-            <button onClick={reset} style={{ background: "transparent", color: "#6B7280", border: "1px solid rgba(0,0,0,0.15)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", cursor: "pointer" }}>
+            <button onClick={reset} style={{ background: "transparent", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", cursor: "pointer" }}>
               {t("uploadMore")}
             </button>
           </>
         )}
         {!allDone && files.length > 0 && !running && (
-          <button onClick={reset} style={{ background: "transparent", color: "#6B7280", border: "1px solid rgba(0,0,0,0.15)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", cursor: "pointer" }}>
+          <button onClick={reset} style={{ background: "transparent", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", cursor: "pointer" }}>
             {t("clearAll")}
           </button>
         )}
       </div>
 
       {allDone && (
-        <div style={{ padding: "14px 16px", background: "rgba(22,163,74,0.07)", border: "1px solid rgba(22,163,74,0.2)", borderRadius: "8px", fontSize: "0.875rem" }}>
-          {doneCount > 0 && <p style={{ color: "#16A34A" }}>{t("uploadedSuccess", { count: doneCount })}</p>}
-          {errorCount > 0 && <p style={{ color: "#DC2626", marginTop: "4px" }}>{t("uploadedFailed", { count: errorCount })}</p>}
-          <p style={{ color: "#6B7280", marginTop: "4px" }}>{t("processingNote")}</p>
+        <div style={{ padding: "14px 16px", background: "rgba(39,174,96,0.08)", border: "1px solid rgba(39,174,96,0.2)", borderRadius: "8px", fontSize: "0.875rem" }}>
+          {doneCount > 0 && <p style={{ color: "#4ADE80" }}>{t("uploadedSuccess", { count: doneCount })}</p>}
+          {errorCount > 0 && <p style={{ color: "#FCA5A5", marginTop: "4px" }}>{t("uploadedFailed", { count: errorCount })}</p>}
+          <p style={{ color: "#6A90AA", marginTop: "4px" }}>{t("processingNote")}</p>
         </div>
       )}
     </div>
@@ -234,8 +234,8 @@ export default function UploadPage() {
 }
 
 function StatusIcon({ status }: { status: FileStatus }) {
-  if (status === "pending")   return <span style={{ color: "rgba(0,0,0,0.25)", fontSize: "1.1rem" }}>○</span>;
-  if (status === "uploading") return <span style={{ color: "#2563EB", fontSize: "1.1rem" }} className="animate-pulse">●</span>;
-  if (status === "done")      return <span style={{ color: "#16A34A", fontSize: "1.1rem" }}>✓</span>;
-  return <span style={{ color: "#DC2626", fontSize: "1.1rem" }}>✗</span>;
+  if (status === "pending")   return <span style={{ color: "rgba(255,255,255,0.25)", fontSize: "1.1rem" }}>○</span>;
+  if (status === "uploading") return <span style={{ color: "#93C5FD", fontSize: "1.1rem" }} className="animate-pulse">●</span>;
+  if (status === "done")      return <span style={{ color: "#4ADE80", fontSize: "1.1rem" }}>✓</span>;
+  return <span style={{ color: "#FCA5A5", fontSize: "1.1rem" }}>✗</span>;
 }

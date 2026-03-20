@@ -72,8 +72,8 @@ export default function BillingPage() {
     : null;
 
   const cardStyle: React.CSSProperties = {
-    background: "#FFFFFF",
-    border: "1px solid rgba(0,0,0,0.08)",
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(255,255,255,0.08)",
     borderRadius: "12px",
     padding: "24px",
     display: "flex",
@@ -84,23 +84,23 @@ export default function BillingPage() {
   return (
     <div style={{ maxWidth: "480px", display: "flex", flexDirection: "column", gap: "24px" }}>
       <div>
-        <h1 className="font-serif text-2xl" style={{ color: "#1A1A2E" }}>{t("title")}</h1>
-        <p style={{ fontSize: "0.875rem", color: "#6B7280", marginTop: "4px" }}>{t("subtitle")}</p>
+        <h1 className="font-serif text-2xl text-white">{t("title")}</h1>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA", marginTop: "4px" }}>{t("subtitle")}</p>
       </div>
 
       {success && (
-        <div style={{ borderRadius: "8px", border: "1px solid rgba(22,163,74,0.25)", background: "rgba(22,163,74,0.07)", padding: "12px 16px", fontSize: "0.875rem", color: "#16A34A" }}>
+        <div style={{ borderRadius: "8px", border: "1px solid rgba(39,174,96,0.3)", background: "rgba(39,174,96,0.1)", padding: "12px 16px", fontSize: "0.875rem", color: "#4ADE80" }}>
           {t("subscriptionActivated")}
         </div>
       )}
 
       <div style={cardStyle}>
         {loading ? (
-          <p style={{ fontSize: "0.875rem", color: "#6B7280" }}>{t("loading")}</p>
+          <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("loading")}</p>
         ) : (
           <>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <span style={{ fontSize: "0.875rem", fontWeight: 500, color: "#374151" }}>{t("currentPlan")}</span>
+              <span style={{ fontSize: "0.875rem", fontWeight: 500, color: "rgba(255,255,255,0.7)" }}>{t("currentPlan")}</span>
               <span style={{
                 fontSize: "0.65rem",
                 fontFamily: "monospace",
@@ -108,15 +108,15 @@ export default function BillingPage() {
                 textTransform: "uppercase",
                 padding: "4px 10px",
                 borderRadius: "20px",
-                background: profile?.tier === "pro" ? "rgba(230,126,34,0.12)" : "rgba(0,0,0,0.06)",
-                color: profile?.tier === "pro" ? "#C86A10" : "#6B7280",
+                background: profile?.tier === "pro" ? "rgba(230,126,34,0.15)" : "rgba(255,255,255,0.08)",
+                color: profile?.tier === "pro" ? "#F5A623" : "#8AAEC7",
               }}>
                 {profile?.tier ?? "free"}
               </span>
             </div>
 
             {profile?.tier === "pro" && renewalDate && (
-              <p style={{ fontSize: "0.875rem", color: "#6B7280" }}>{t("renewsOn", { date: renewalDate })}</p>
+              <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("renewsOn", { date: renewalDate })}</p>
             )}
 
             {profile?.tier === "free" ? (
@@ -127,36 +127,36 @@ export default function BillingPage() {
                 >
                   {t("upgradeToPro")}
                 </button>
-                <p style={{ marginTop: "8px", fontSize: "0.75rem", color: "rgba(0,0,0,0.35)" }}>{t("unlimitedDocs")}</p>
+                <p style={{ marginTop: "8px", fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>{t("unlimitedDocs")}</p>
               </div>
             ) : (
               <div>
                 <button
                   onClick={handlePortal}
-                  style={{ background: "transparent", color: "#6B7280", border: "1px solid rgba(0,0,0,0.14)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", fontWeight: 500, cursor: "pointer" }}
+                  style={{ background: "transparent", color: "#8AAEC7", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "7px", padding: "10px 20px", fontSize: "0.875rem", fontWeight: 500, cursor: "pointer" }}
                 >
                   {t("manageBilling")}
                 </button>
-                <p style={{ marginTop: "8px", fontSize: "0.75rem", color: "rgba(0,0,0,0.35)" }}>{t("updatePayment")}</p>
+                <p style={{ marginTop: "8px", fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>{t("updatePayment")}</p>
               </div>
             )}
           </>
         )}
       </div>
 
-      <Link href="/dashboard" style={{ fontSize: "0.875rem", color: "#6B7280" }} className="transition-colors">
+      <Link href="/dashboard" style={{ fontSize: "0.875rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
         {t("backToDocuments")}
       </Link>
 
       {/* Danger Zone */}
-      <div style={{ ...cardStyle, border: "1px solid rgba(220,38,38,0.2)", background: "rgba(220,38,38,0.03)" }}>
-        <h2 style={{ fontSize: "0.875rem", fontWeight: 600, color: "#DC2626" }}>{ta("dangerZone")}</h2>
-        <p style={{ fontSize: "0.875rem", color: "#6B7280" }}>{ta("confirmDesc")}</p>
+      <div style={{ ...cardStyle, border: "1px solid rgba(239,68,68,0.25)", background: "rgba(239,68,68,0.05)" }}>
+        <h2 style={{ fontSize: "0.875rem", fontWeight: 600, color: "#FCA5A5" }}>{ta("dangerZone")}</h2>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{ta("confirmDesc")}</p>
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <button
               disabled={deleting}
-              style={{ alignSelf: "flex-start", background: "rgba(220,38,38,0.08)", color: "#DC2626", border: "1px solid rgba(220,38,38,0.25)", borderRadius: "7px", padding: "9px 18px", fontSize: "0.875rem", fontWeight: 600, cursor: deleting ? "not-allowed" : "pointer", opacity: deleting ? 0.6 : 1 }}
+              style={{ alignSelf: "flex-start", background: "rgba(239,68,68,0.15)", color: "#FCA5A5", border: "1px solid rgba(239,68,68,0.3)", borderRadius: "7px", padding: "9px 18px", fontSize: "0.875rem", fontWeight: 600, cursor: deleting ? "not-allowed" : "pointer", opacity: deleting ? 0.6 : 1 }}
             >
               {deleting ? ta("deleting") : ta("deleteAccount")}
             </button>

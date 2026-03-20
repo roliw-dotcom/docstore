@@ -32,10 +32,10 @@ function StatusBadge({ status }: { status: string }) {
     ready: t("ready"), processing: t("processing"), pending: t("pending"), error: t("error"),
   };
   const colorMap: Record<string, { bg: string; color: string }> = {
-    ready:      { bg: "rgba(22,163,74,0.1)",   color: "#16A34A" },
-    processing: { bg: "rgba(37,99,235,0.1)",   color: "#2563EB" },
-    pending:    { bg: "rgba(0,0,0,0.06)",       color: "#6B7280" },
-    error:      { bg: "rgba(220,38,38,0.1)",   color: "#DC2626" },
+    ready:      { bg: "rgba(39,174,96,0.15)",  color: "#4ADE80" },
+    processing: { bg: "rgba(59,130,246,0.15)",  color: "#93C5FD" },
+    pending:    { bg: "rgba(255,255,255,0.08)", color: "#8AAEC7" },
+    error:      { bg: "rgba(239,68,68,0.15)",   color: "#FCA5A5" },
   };
   const c = colorMap[status] ?? colorMap.pending;
   return (
@@ -88,14 +88,14 @@ function CollectionPicker({
         title={tc("assign")}
         style={{
           background: "none",
-          border: "1px solid rgba(0,0,0,0.12)",
+          border: "1px solid rgba(255,255,255,0.1)",
           borderRadius: "5px",
           cursor: "pointer",
           padding: "2px 7px",
           display: "flex",
           alignItems: "center",
           gap: "5px",
-          color: current ? current.color : "rgba(0,0,0,0.3)",
+          color: current ? current.color : "rgba(255,255,255,0.25)",
           fontSize: "0.7rem",
           transition: "border-color 0.15s",
         }}
@@ -109,17 +109,17 @@ function CollectionPicker({
           position: "absolute",
           bottom: "calc(100% + 4px)",
           left: 0,
-          background: "#FFFFFF",
-          border: "1px solid rgba(0,0,0,0.12)",
+          background: "#0F2337",
+          border: "1px solid rgba(255,255,255,0.12)",
           borderRadius: "8px",
           padding: "4px",
           minWidth: "160px",
           zIndex: 10,
-          boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.5)",
         }}>
           <button
             onClick={() => assign(null)}
-            style={{ width: "100%", textAlign: "left", background: collectionId === null ? "rgba(0,0,0,0.05)" : "none", border: "none", borderRadius: "5px", padding: "7px 10px", cursor: "pointer", fontSize: "0.8rem", color: "#6B7280" }}
+            style={{ width: "100%", textAlign: "left", background: collectionId === null ? "rgba(255,255,255,0.06)" : "none", border: "none", borderRadius: "5px", padding: "7px 10px", cursor: "pointer", fontSize: "0.8rem", color: "#6A90AA" }}
           >
             {tc("none")}
           </button>
@@ -127,7 +127,7 @@ function CollectionPicker({
             <button
               key={col.id}
               onClick={() => assign(col.id)}
-              style={{ width: "100%", textAlign: "left", background: collectionId === col.id ? "rgba(0,0,0,0.05)" : "none", border: "none", borderRadius: "5px", padding: "7px 10px", cursor: "pointer", fontSize: "0.8rem", color: "#1A1A2E", display: "flex", alignItems: "center", gap: "8px" }}
+              style={{ width: "100%", textAlign: "left", background: collectionId === col.id ? "rgba(255,255,255,0.06)" : "none", border: "none", borderRadius: "5px", padding: "7px 10px", cursor: "pointer", fontSize: "0.8rem", color: "white", display: "flex", alignItems: "center", gap: "8px" }}
             >
               <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: col.color, flexShrink: 0 }} />
               {col.name}
@@ -154,22 +154,22 @@ export default function DocumentCard({
     <div
       onClick={() => router.push(`/dashboard/documents/${doc.id}`)}
       style={{
-        background: "#FFFFFF",
-        border: "1px solid rgba(0,0,0,0.08)",
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.08)",
         borderRadius: "10px",
         padding: "16px",
         height: "100%",
         cursor: "pointer",
-        transition: "border-color 0.15s, box-shadow 0.15s",
+        transition: "border-color 0.15s, background 0.15s",
         display: "flex",
         flexDirection: "column",
         gap: "10px",
       }}
-      className="hover:border-[rgba(230,126,34,0.4)] hover:shadow-md"
+      className="hover:border-[rgba(230,126,34,0.35)] hover:bg-[rgba(255,255,255,0.06)]"
     >
       {/* Title + status */}
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "8px" }}>
-        <p style={{ fontSize: "0.875rem", fontWeight: 500, color: "#1A1A2E", lineHeight: 1.4, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
+        <p style={{ fontSize: "0.875rem", fontWeight: 500, color: "white", lineHeight: 1.4, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
           {doc.filename}
         </p>
         <StatusBadge status={doc.status} />
@@ -179,7 +179,7 @@ export default function DocumentCard({
       {meta?.categories && meta.categories.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
           {meta.categories.map((c) => (
-            <span key={c} style={{ fontSize: "0.65rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(230,126,34,0.1)", color: "#C86A10", border: "1px solid rgba(230,126,34,0.25)" }}>
+            <span key={c} style={{ fontSize: "0.65rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(230,126,34,0.12)", color: "#F5A623", border: "1px solid rgba(230,126,34,0.2)" }}>
               {c}
             </span>
           ))}
@@ -188,7 +188,7 @@ export default function DocumentCard({
 
       {/* Summary */}
       {meta?.summary && (
-        <p style={{ fontSize: "0.8rem", color: "#6B7280", lineHeight: 1.55, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", flex: 1 }}>
+        <p style={{ fontSize: "0.8rem", color: "#6A90AA", lineHeight: 1.55, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", flex: 1 }}>
           {meta.summary}
         </p>
       )}
@@ -197,7 +197,7 @@ export default function DocumentCard({
       {meta?.keywords && meta.keywords.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
           {meta.keywords.slice(0, 6).map((kw) => (
-            <span key={kw} style={{ fontSize: "0.65rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(0,0,0,0.05)", color: "#6B7280" }}>
+            <span key={kw} style={{ fontSize: "0.65rem", padding: "2px 8px", borderRadius: "20px", background: "rgba(255,255,255,0.06)", color: "#6A90AA" }}>
               {kw}
             </span>
           ))}
@@ -206,7 +206,7 @@ export default function DocumentCard({
 
       {/* Footer */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto" }}>
-        <span style={{ fontSize: "0.72rem", color: "rgba(0,0,0,0.3)", fontFamily: "monospace" }}>
+        <span style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.25)", fontFamily: "monospace" }}>
           {new Date(doc.created_at).toLocaleDateString()} · {formatBytes(doc.file_size)}
         </span>
         {collections.length > 0 && (

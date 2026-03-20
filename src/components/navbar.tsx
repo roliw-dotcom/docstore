@@ -32,8 +32,8 @@ export default function Navbar({ user }: { user?: User | null }) {
       style={{
         fontSize: "0.7rem",
         fontWeight: 500,
-        color: "#6B7280",
-        border: "1px solid rgba(0,0,0,0.14)",
+        color: "#6A90AA",
+        border: "1px solid rgba(255,255,255,0.12)",
         borderRadius: "4px",
         padding: "4px 8px",
         background: "transparent",
@@ -57,15 +57,14 @@ export default function Navbar({ user }: { user?: User | null }) {
   ];
 
   return (
-    <nav style={{ background: "#FFFFFF", borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+    <nav style={{ background: "#080F1A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
           <Link
             href={user ? "/dashboard" : "/"}
-            className="font-serif text-2xl tracking-tight flex-shrink-0"
-            style={{ color: "#1A1A2E" }}
+            className="font-serif text-2xl tracking-tight text-white flex-shrink-0"
           >
             b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>ndly
           </Link>
@@ -82,7 +81,7 @@ export default function Navbar({ user }: { user?: User | null }) {
                       href={href}
                       style={{
                         fontSize: "0.82rem",
-                        color: active ? "#1A1A2E" : "#6B7280",
+                        color: active ? "white" : "#6A90AA",
                         borderBottom: active ? "2px solid #E67E22" : "2px solid transparent",
                         paddingBottom: "2px",
                         transition: "color 0.15s",
@@ -98,8 +97,8 @@ export default function Navbar({ user }: { user?: User | null }) {
                 {localeBtn}
                 <Link
                   href="/dashboard/settings/account"
-                  style={{ fontSize: "0.8rem", color: "#6B7280" }}
-                  className="hidden md:block transition-colors"
+                  style={{ fontSize: "0.8rem", color: "#6A90AA" }}
+                  className="hidden md:block hover:text-white transition-colors"
                 >
                   {user.email}
                 </Link>
@@ -107,8 +106,8 @@ export default function Navbar({ user }: { user?: User | null }) {
                   onClick={handleSignOut}
                   style={{
                     fontSize: "0.8rem",
-                    color: "#6B7280",
-                    border: "1px solid rgba(0,0,0,0.14)",
+                    color: "#6A90AA",
+                    border: "1px solid rgba(255,255,255,0.12)",
                     borderRadius: "6px",
                     padding: "6px 14px",
                     background: "transparent",
@@ -121,10 +120,10 @@ export default function Navbar({ user }: { user?: User | null }) {
             </div>
           ) : (
             <div className="hidden md:flex items-center gap-5">
-              <Link href="/pricing" style={{ fontSize: "0.8rem", color: "#6B7280" }} className="transition-colors">
+              <Link href="/pricing" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
                 {t("pricing")}
               </Link>
-              <Link href="/login" style={{ fontSize: "0.8rem", color: "#6B7280" }} className="transition-colors">
+              <Link href="/login" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
                 {t("signIn")}
               </Link>
               {localeBtn}
@@ -141,7 +140,7 @@ export default function Navbar({ user }: { user?: User | null }) {
             {localeBtn}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              style={{ color: "#6B7280", background: "none", border: "none", cursor: "pointer", padding: "8px", display: "flex", alignItems: "center" }}
+              style={{ color: "#6A90AA", background: "none", border: "none", cursor: "pointer", padding: "8px", display: "flex", alignItems: "center" }}
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -152,7 +151,7 @@ export default function Navbar({ user }: { user?: User | null }) {
 
       {/* Mobile dropdown */}
       {mobileOpen && (
-        <div style={{ background: "#FFFFFF", borderTop: "1px solid rgba(0,0,0,0.08)" }} className="md:hidden">
+        <div style={{ background: "#080F1A", borderTop: "1px solid rgba(255,255,255,0.06)" }} className="md:hidden">
           <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col">
             {user ? (
               <>
@@ -165,10 +164,10 @@ export default function Navbar({ user }: { user?: User | null }) {
                       onClick={() => setMobileOpen(false)}
                       style={{
                         fontSize: "0.9rem",
-                        color: active ? "#1A1A2E" : "#6B7280",
+                        color: active ? "white" : "#8AAEC7",
                         fontWeight: active ? 600 : 400,
                         padding: "13px 0",
-                        borderBottom: "1px solid rgba(0,0,0,0.06)",
+                        borderBottom: "1px solid rgba(255,255,255,0.05)",
                         display: "block",
                       }}
                     >
@@ -180,13 +179,13 @@ export default function Navbar({ user }: { user?: User | null }) {
                   <Link
                     href="/dashboard/settings/account"
                     onClick={() => setMobileOpen(false)}
-                    style={{ fontSize: "0.8rem", color: "#6B7280", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                    style={{ fontSize: "0.8rem", color: "#6A90AA", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
                   >
                     {user.email}
                   </Link>
                   <button
                     onClick={handleSignOut}
-                    style={{ fontSize: "0.8rem", color: "#6B7280", border: "1px solid rgba(0,0,0,0.14)", borderRadius: "6px", padding: "8px 16px", background: "transparent", cursor: "pointer", flexShrink: 0 }}
+                    style={{ fontSize: "0.8rem", color: "#6A90AA", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "6px", padding: "8px 16px", background: "transparent", cursor: "pointer", flexShrink: 0 }}
                   >
                     {t("signOut")}
                   </button>
@@ -194,10 +193,10 @@ export default function Navbar({ user }: { user?: User | null }) {
               </>
             ) : (
               <>
-                <Link href="/pricing" onClick={() => setMobileOpen(false)} style={{ fontSize: "0.9rem", color: "#6B7280", padding: "13px 0", borderBottom: "1px solid rgba(0,0,0,0.06)", display: "block" }}>
+                <Link href="/pricing" onClick={() => setMobileOpen(false)} style={{ fontSize: "0.9rem", color: "#8AAEC7", padding: "13px 0", borderBottom: "1px solid rgba(255,255,255,0.05)", display: "block" }}>
                   {t("pricing")}
                 </Link>
-                <Link href="/login" onClick={() => setMobileOpen(false)} style={{ fontSize: "0.9rem", color: "#6B7280", padding: "13px 0", borderBottom: "1px solid rgba(0,0,0,0.06)", display: "block" }}>
+                <Link href="/login" onClick={() => setMobileOpen(false)} style={{ fontSize: "0.9rem", color: "#8AAEC7", padding: "13px 0", borderBottom: "1px solid rgba(255,255,255,0.05)", display: "block" }}>
                   {t("signIn")}
                 </Link>
                 <div style={{ paddingTop: "12px" }}>

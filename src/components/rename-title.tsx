@@ -70,10 +70,10 @@ export default function RenameTitle({
           onKeyDown={handleKeyDown}
           onBlur={save}
           disabled={saving}
-          style={{ background: "#FFFFFF", border: "1px solid #E67E22", borderRadius: "4px", padding: "2px 8px", color: "#1A1A2E", fontSize: "1.25rem", fontWeight: 700, width: "100%", outline: "none" }}
+          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid #E67E22", borderRadius: "4px", padding: "2px 8px", color: "white", fontSize: "1.25rem", fontWeight: 700, width: "100%", outline: "none" }}
         />
-        {error && <p className="text-xs" style={{ color: "#DC2626" }}>{error}</p>}
-        <p className="text-xs" style={{ color: "#6B7280" }}>{t("saveHint")}</p>
+        {error && <p className="text-xs" style={{ color: "#FCA5A5" }}>{error}</p>}
+        <p className="text-xs" style={{ color: "#6A90AA" }}>{t("saveHint")}</p>
       </div>
     );
   }
@@ -84,8 +84,8 @@ export default function RenameTitle({
       className="group flex items-center gap-2 text-left"
       title={t("clickToRename")}
     >
-      <h1 className="text-xl font-bold truncate" style={{ color: "#1A1A2E" }}>{value}</h1>
-      <span className="text-sm flex-shrink-0" style={{ color: "rgba(0,0,0,0.3)" }}>
+      <h1 className="text-xl font-bold truncate" style={{ color: "white" }}>{value}</h1>
+      <span className="text-sm flex-shrink-0" style={{ color: "rgba(255,255,255,0.3)" }}>
         ✏️
       </span>
     </button>

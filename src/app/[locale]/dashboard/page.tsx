@@ -37,7 +37,7 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="font-serif text-2xl" style={{ color: "#1A1A2E" }}>{t("myDocuments")}</h1>
+        <h1 className="font-serif text-2xl text-white">{t("myDocuments")}</h1>
         <Link href="/dashboard/upload">
           <button style={{ background: "#E67E22", color: "white", border: "none", borderRadius: "6px", padding: "10px 18px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>
             {t("uploadDocument")}

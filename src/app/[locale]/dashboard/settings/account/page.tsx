@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/alert-dialog";
 
 const cardStyle: React.CSSProperties = {
-  background: "#FFFFFF",
-  border: "1px solid rgba(0,0,0,0.08)",
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.08)",
   borderRadius: "12px",
   padding: "24px",
   display: "flex",
@@ -25,17 +25,17 @@ const labelStyle: React.CSSProperties = {
   fontFamily: "monospace",
   letterSpacing: "0.1em",
   textTransform: "uppercase",
-  color: "rgba(0,0,0,0.4)",
+  color: "rgba(255,255,255,0.4)",
   marginBottom: "6px",
 };
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
-  background: "#F9FAFB",
-  border: "1px solid rgba(0,0,0,0.12)",
+  background: "rgba(255,255,255,0.06)",
+  border: "1px solid rgba(255,255,255,0.12)",
   borderRadius: "7px",
   padding: "10px 14px",
-  color: "#1A1A2E",
+  color: "white",
   fontSize: "0.875rem",
   outline: "none",
 };
@@ -55,7 +55,7 @@ const saveBtn: React.CSSProperties = {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div style={cardStyle}>
-      <h2 style={{ fontSize: "0.875rem", fontWeight: 600, color: "#374151", margin: 0 }}>{title}</h2>
+      <h2 style={{ fontSize: "0.875rem", fontWeight: 600, color: "rgba(255,255,255,0.7)", margin: 0 }}>{title}</h2>
       {children}
     </div>
   );
@@ -63,7 +63,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function Feedback({ msg, ok }: { msg: string; ok: boolean }) {
   return (
-    <p style={{ fontSize: "0.8rem", color: ok ? "#16A34A" : "#DC2626", marginTop: "2px" }}>{msg}</p>
+    <p style={{ fontSize: "0.8rem", color: ok ? "#4ADE80" : "#FCA5A5", marginTop: "2px" }}>{msg}</p>
   );
 }
 
@@ -180,8 +180,8 @@ export default function AccountSettingsPage() {
   return (
     <div style={{ maxWidth: "480px", display: "flex", flexDirection: "column", gap: "24px" }}>
       <div>
-        <h1 className="font-serif text-2xl" style={{ color: "#1A1A2E" }}>{t("title")}</h1>
-        <p style={{ fontSize: "0.875rem", color: "#6B7280", marginTop: "4px" }}>{t("subtitle")}</p>
+        <h1 className="font-serif text-2xl text-white">{t("title")}</h1>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA", marginTop: "4px" }}>{t("subtitle")}</p>
       </div>
 
       {/* Profile */}
@@ -217,7 +217,7 @@ export default function AccountSettingsPage() {
           />
           {emailFeedback && <Feedback {...emailFeedback} />}
           {!emailFeedback && (
-            <p style={{ fontSize: "0.75rem", color: "rgba(0,0,0,0.35)", marginTop: "6px" }}>
+            <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.25)", marginTop: "6px" }}>
               {t("emailHint")}
             </p>
           )}
@@ -233,7 +233,7 @@ export default function AccountSettingsPage() {
 
       {/* Password */}
       <Section title={t("passwordSection")}>
-        <p style={{ fontSize: "0.875rem", color: "#6B7280" }}>{t("passwordDesc")}</p>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{t("passwordDesc")}</p>
         {passwordFeedback && <Feedback {...passwordFeedback} />}
         <button
           onClick={sendPasswordReset}
@@ -241,8 +241,8 @@ export default function AccountSettingsPage() {
           style={{
             alignSelf: "flex-start",
             background: "transparent",
-            color: "#6B7280",
-            border: "1px solid rgba(0,0,0,0.14)",
+            color: "#8AAEC7",
+            border: "1px solid rgba(255,255,255,0.15)",
             borderRadius: "7px",
             padding: "9px 20px",
             fontSize: "0.875rem",
@@ -256,14 +256,14 @@ export default function AccountSettingsPage() {
       </Section>
 
       {/* Danger zone */}
-      <div style={{ ...cardStyle, border: "1px solid rgba(220,38,38,0.2)", background: "rgba(220,38,38,0.03)" }}>
-        <h2 style={{ fontSize: "0.875rem", fontWeight: 600, color: "#DC2626", margin: 0 }}>{ta("dangerZone")}</h2>
-        <p style={{ fontSize: "0.875rem", color: "#6B7280" }}>{ta("confirmDesc")}</p>
+      <div style={{ ...cardStyle, border: "1px solid rgba(239,68,68,0.25)", background: "rgba(239,68,68,0.05)" }}>
+        <h2 style={{ fontSize: "0.875rem", fontWeight: 600, color: "#FCA5A5", margin: 0 }}>{ta("dangerZone")}</h2>
+        <p style={{ fontSize: "0.875rem", color: "#6A90AA" }}>{ta("confirmDesc")}</p>
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <button
               disabled={deleting}
-              style={{ alignSelf: "flex-start", background: "rgba(220,38,38,0.08)", color: "#DC2626", border: "1px solid rgba(220,38,38,0.25)", borderRadius: "7px", padding: "9px 18px", fontSize: "0.875rem", fontWeight: 600, cursor: deleting ? "not-allowed" : "pointer", opacity: deleting ? 0.6 : 1 }}
+              style={{ alignSelf: "flex-start", background: "rgba(239,68,68,0.15)", color: "#FCA5A5", border: "1px solid rgba(239,68,68,0.3)", borderRadius: "7px", padding: "9px 18px", fontSize: "0.875rem", fontWeight: 600, cursor: deleting ? "not-allowed" : "pointer", opacity: deleting ? 0.6 : 1 }}
             >
               {deleting ? ta("deleting") : ta("deleteAccount")}
             </button>
