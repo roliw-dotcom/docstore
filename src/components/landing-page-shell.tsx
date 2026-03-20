@@ -53,7 +53,7 @@ export default function LandingPageShell({
             b<span style={{ color: "#E67E22", fontFamily: "var(--font-inter, sans-serif)", fontWeight: 700 }}>AI</span>ndly
           </span>
           <Link href={ctaHref}>
-            <button style={{
+            <button className="btn-ghost" style={{
               background: "transparent",
               color: "#E67E22",
               border: "1px solid rgba(230,126,34,0.4)",

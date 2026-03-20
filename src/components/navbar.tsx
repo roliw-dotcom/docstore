@@ -121,10 +121,10 @@ export default function Navbar({ user }: { user?: User | null }) {
             </div>
           ) : (
             <div className="hidden md:flex items-center gap-5">
-              <Link href="/pricing" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
+              <Link href="/pricing" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="nav-link hover:text-white transition-colors">
                 {t("pricing")}
               </Link>
-              <Link href="/login" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="hover:text-white transition-colors">
+              <Link href="/login" style={{ fontSize: "0.8rem", color: "#6A90AA" }} className="nav-link hover:text-white transition-colors">
                 {t("signIn")}
               </Link>
               {localeBtn}

@@ -99,7 +99,7 @@ export default function PricingPage() {
                 </li>
               </ul>
               <Link href="/signup">
-                <button style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "white", borderRadius: "7px", padding: "11px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-inter, Inter, sans-serif)" }}>
+                <button className="btn-ghost" style={{ width: "100%", background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "white", borderRadius: "7px", padding: "11px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", fontFamily: "var(--font-inter, Inter, sans-serif)" }}>
                   {t("getStartedFree")}
                 </button>
               </Link>
