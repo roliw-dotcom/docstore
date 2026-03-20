@@ -6,17 +6,23 @@ import HowItWorks from "@/components/how-it-works";
 import AppCardAnimated from "@/components/app-card-animated";
 
 // ── CSS Binder Chaos Stack ──────────────────────────────────────────────────
-function Binder({ color, spine, width, height, bottom, left, rotate, zIndex }: {
-  color: string; spine: string; width: string; height: string;
+function Binder({ color, spine, pageEdge, width, height, bottom, left, rotate, zIndex }: {
+  color: string; spine: string; pageEdge: string; width: string; height: string;
   bottom: string; left: string; rotate: string; zIndex: number;
 }) {
   return (
     <>
-      <div className="absolute" style={{ width, height, background: color, bottom, left, transform: `rotate(${rotate})`, borderRadius: "3px 10px 10px 3px", zIndex, boxShadow: "inset 0 2px 0 rgba(255,255,255,0.12), 0 4px 12px rgba(0,0,0,0.4)" }} />
-      <div className="absolute" style={{ width: "5%", height, background: spine, bottom, left, transform: `rotate(${rotate})`, borderRadius: "3px 0 0 3px", zIndex }} />
-      <div className="absolute" style={{ width: "28%", height: `calc(${height} * 0.38)`, background: "rgba(255,255,255,0.13)", bottom: `calc(${bottom} + ${height} * 0.31)`, left: `calc(${left} + 7%)`, transform: `rotate(${rotate})`, borderRadius: "2px", zIndex: zIndex + 1 }} />
-      <div className="absolute" style={{ width: "1.8%", height: "1.8%", background: spine, borderRadius: "50%", bottom: `calc(${bottom} + ${height} * 0.25)`, left: `calc(${left} + 1.5%)`, transform: `rotate(${rotate})`, zIndex: zIndex + 1, boxShadow: "inset 0 1px 2px rgba(0,0,0,0.5)" }} />
-      <div className="absolute" style={{ width: "1.8%", height: "1.8%", background: spine, borderRadius: "50%", bottom: `calc(${bottom} + ${height} * 0.55)`, left: `calc(${left} + 1.5%)`, transform: `rotate(${rotate})`, zIndex: zIndex + 1, boxShadow: "inset 0 1px 2px rgba(0,0,0,0.5)" }} />
+      {/* Main body */}
+      <div className="absolute" style={{ width, height, background: color, bottom, left, transform: `rotate(${rotate})`, borderRadius: "3px 10px 10px 3px", zIndex, boxShadow: `inset 0 2px 0 rgba(255,255,255,0.1), inset -2px 0 8px rgba(0,0,0,0.25), 0 6px 18px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.4)` }} />
+      {/* Spine */}
+      <div className="absolute" style={{ width: "6%", height, background: spine, bottom, left, transform: `rotate(${rotate})`, borderRadius: "3px 0 0 3px", zIndex, boxShadow: "inset -2px 0 4px rgba(0,0,0,0.3)" }} />
+      {/* Page edge — white sliver on the right */}
+      <div className="absolute" style={{ width: "3%", height: `calc(${height} * 0.94)`, background: pageEdge, bottom: `calc(${bottom} + ${height} * 0.03)`, left: `calc(${left} + ${width} - 3%)`, transform: `rotate(${rotate})`, borderRadius: "0 8px 8px 0", zIndex, opacity: 0.85 }} />
+      {/* Label paper */}
+      <div className="absolute" style={{ width: "30%", height: `calc(${height} * 0.36)`, background: "rgba(255,255,255,0.11)", bottom: `calc(${bottom} + ${height} * 0.32)`, left: `calc(${left} + 8%)`, transform: `rotate(${rotate})`, borderRadius: "2px", zIndex: zIndex + 1, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15)" }} />
+      {/* Ring dots */}
+      <div className="absolute" style={{ width: "1.8%", height: "1.8%", background: spine, borderRadius: "50%", bottom: `calc(${bottom} + ${height} * 0.25)`, left: `calc(${left} + 1.8%)`, transform: `rotate(${rotate})`, zIndex: zIndex + 1, boxShadow: "inset 0 1px 3px rgba(0,0,0,0.6)" }} />
+      <div className="absolute" style={{ width: "1.8%", height: "1.8%", background: spine, borderRadius: "50%", bottom: `calc(${bottom} + ${height} * 0.55)`, left: `calc(${left} + 1.8%)`, transform: `rotate(${rotate})`, zIndex: zIndex + 1, boxShadow: "inset 0 1px 3px rgba(0,0,0,0.6)" }} />
     </>
   );
 }
@@ -24,17 +30,31 @@ function Binder({ color, spine, width, height, bottom, left, rotate, zIndex }: {
 function BinderChaosStack() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      <div className="absolute inset-0" style={{ background: "linear-gradient(145deg, #1E1408 0%, #2E2010 40%, #120E04 70%, #201408 100%)" }} />
-      <div className="absolute bottom-0 left-0 right-0" style={{ height: "22%", background: "linear-gradient(0deg, #2A1C08, #1A1006)", zIndex: 1 }} />
-      <Binder color="#D4891A" spine="#8A5510" width="72%" height="14%" bottom="32%" left="14%" rotate="2.5deg"  zIndex={2} />
-      <Binder color="#B8741A" spine="#7A4A10" width="66%" height="13%" bottom="44%" left="17%" rotate="-2deg"  zIndex={3} />
-      <Binder color="#E8A020" spine="#A06418" width="74%" height="15%" bottom="55%" left="12%" rotate="4deg"   zIndex={4} />
-      <Binder color="#C47C18" spine="#844E0E" width="60%" height="13%" bottom="68%" left="20%" rotate="-3deg"  zIndex={5} />
-      <Binder color="#F0A820" spine="#AA6C14" width="68%" height="14%" bottom="79%" left="15%" rotate="1.5deg" zIndex={6} />
-      <Binder color="#B06818" spine="#784210" width="50%" height="13%" bottom="26%" left="5%"  rotate="-9deg"  zIndex={7} />
-      <div className="absolute" style={{ width: "55%", height: "2.5%", background: "rgba(255,248,230,0.45)", bottom: "56%", left: "19%", transform: "rotate(4deg)", zIndex: 8 }} />
-      <div className="absolute" style={{ width: "44%", height: "2%",   background: "rgba(255,248,230,0.35)", bottom: "69%", left: "23%", transform: "rotate(-3deg)", zIndex: 8 }} />
-      <div className="absolute" style={{ width: "36%", height: "2%",   background: "rgba(255,248,230,0.25)", bottom: "80%", left: "18%", transform: "rotate(1.5deg)", zIndex: 8 }} />
+      {/* Background */}
+      <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, #0D1008 0%, #181410 45%, #0E0C08 70%, #141008 100%)" }} />
+
+      {/* Warm lamp glow from top-right */}
+      <div className="absolute" style={{ width: "60%", height: "60%", top: "-10%", right: "-10%", background: "radial-gradient(ellipse, rgba(200,140,60,0.13) 0%, transparent 70%)", zIndex: 1 }} />
+
+      {/* Shelf surface */}
+      <div className="absolute bottom-0 left-0 right-0" style={{ height: "18%", background: "linear-gradient(0deg, #1A120A 0%, #251A0E 60%, transparent 100%)", zIndex: 2 }} />
+      {/* Shelf reflection line */}
+      <div className="absolute" style={{ bottom: "18%", left: 0, right: 0, height: "1px", background: "linear-gradient(90deg, transparent 0%, rgba(180,130,60,0.18) 30%, rgba(200,150,70,0.28) 50%, rgba(180,130,60,0.18) 70%, transparent 100%)", zIndex: 3 }} />
+      {/* Subtle shelf surface sheen */}
+      <div className="absolute" style={{ bottom: "14%", left: "10%", right: "10%", height: "3%", background: "radial-gradient(ellipse, rgba(200,150,60,0.06) 0%, transparent 70%)", zIndex: 3 }} />
+
+      {/* Binders — varied leather colors */}
+      <Binder color="#C4822A" spine="#7A4E18" pageEdge="#F0EAD6" width="70%" height="14%" bottom="32%" left="15%" rotate="2.5deg"  zIndex={4} />
+      <Binder color="#2A5A6B" spine="#1A3A47" pageEdge="#E8EEF0" width="64%" height="13%" bottom="44%" left="18%" rotate="-2deg"  zIndex={5} />
+      <Binder color="#6B2430" spine="#44161E" pageEdge="#F0E8E8" width="72%" height="15%" bottom="55%" left="13%" rotate="3.5deg"  zIndex={6} />
+      <Binder color="#3A5A3A" spine="#243A24" pageEdge="#E8F0E8" width="58%" height="13%" bottom="68%" left="21%" rotate="-2.5deg" zIndex={7} />
+      <Binder color="#C4882A" spine="#7A5418" pageEdge="#F0EAD6" width="66%" height="14%" bottom="79%" left="16%" rotate="1.5deg"  zIndex={8} />
+      <Binder color="#3A3A6B" spine="#242450" pageEdge="#E8E8F0" width="48%" height="13%" bottom="27%" left="6%"  rotate="-8deg"   zIndex={9} />
+
+      {/* Paper strips / loose sheets */}
+      <div className="absolute" style={{ width: "52%", height: "2%", background: "rgba(240,236,220,0.4)", bottom: "56.5%", left: "20%", transform: "rotate(3.5deg)", zIndex: 10, borderRadius: "1px" }} />
+      <div className="absolute" style={{ width: "42%", height: "1.8%", background: "rgba(232,236,240,0.3)", bottom: "69.5%", left: "24%", transform: "rotate(-2.5deg)", zIndex: 10, borderRadius: "1px" }} />
+      <div className="absolute" style={{ width: "34%", height: "1.8%", background: "rgba(232,240,232,0.22)", bottom: "80.5%", left: "19%", transform: "rotate(1.5deg)", zIndex: 10, borderRadius: "1px" }} />
     </div>
   );
 }
