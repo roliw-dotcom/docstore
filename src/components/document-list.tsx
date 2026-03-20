@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useCallback } from "react";
-import { useRouter } from "@/navigation";
+import { useRouter, Link } from "@/navigation";
 import DocumentCard from "@/components/document-card";
 import { useTranslations } from "next-intl";
 
@@ -93,10 +93,111 @@ export default function DocumentList({
 
   if (documents.length === 0) {
     return (
-      <div style={{ textAlign: "center", padding: "80px 0", color: "#6A90AA" }}>
-        <p style={{ fontSize: "2.5rem", marginBottom: "16px" }}>📄</p>
-        <p style={{ fontSize: "1rem", fontWeight: 500, color: "rgba(255,255,255,0.5)" }}>{t("noDocuments")}</p>
-        <p style={{ fontSize: "0.875rem", marginTop: "4px" }}>{t("noDocumentsHint")}</p>
+      <div style={{ maxWidth: "540px", margin: "48px auto 0" }}>
+        <div style={{
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: "16px",
+          padding: "clamp(28px, 5vw, 44px)",
+          textAlign: "center",
+        }}>
+          {/* Icon */}
+          <div style={{
+            width: "52px",
+            height: "52px",
+            borderRadius: "14px",
+            background: "rgba(230,126,34,0.12)",
+            border: "1px solid rgba(230,126,34,0.22)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto 20px",
+            fontSize: "1.4rem",
+          }}>
+            ✦
+          </div>
+
+          <h2 style={{
+            fontFamily: "var(--font-dm-serif)",
+            fontSize: "1.25rem",
+            color: "white",
+            marginBottom: "8px",
+          }}>
+            {t("noDocuments")}
+          </h2>
+          <p style={{
+            fontSize: "0.875rem",
+            color: "#6A90AA",
+            marginBottom: "36px",
+            lineHeight: 1.65,
+          }}>
+            {t("noDocumentsHint")}
+          </p>
+
+          {/* Steps */}
+          <div style={{
+            textAlign: "left",
+            display: "flex",
+            flexDirection: "column",
+            gap: "16px",
+            marginBottom: "32px",
+          }}>
+            {[
+              { n: "1", title: "Upload any document", body: "PDF, DOCX, lease, insurance, school letter — anything up to 20 MB" },
+              { n: "2", title: "AI reads every clause", body: "Deadlines, obligations, and action items extracted automatically" },
+              { n: "3", title: "Get reminded on time", body: "Email reminder 5 days before every deadline, so nothing slips" },
+            ].map(({ n, title, body }) => (
+              <div key={n} style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
+                <span style={{
+                  width: "26px",
+                  height: "26px",
+                  borderRadius: "50%",
+                  background: "rgba(230,126,34,0.13)",
+                  border: "1px solid rgba(230,126,34,0.28)",
+                  color: "#E67E22",
+                  fontSize: "0.7rem",
+                  fontWeight: 700,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                  fontFamily: "monospace",
+                }}>
+                  {n}
+                </span>
+                <div>
+                  <p style={{ fontSize: "0.875rem", color: "white", fontWeight: 500, marginBottom: "2px" }}>{title}</p>
+                  <p style={{ fontSize: "0.78rem", color: "#6A90AA", lineHeight: 1.55 }}>{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <Link href="/dashboard/upload">
+            <button style={{
+              background: "#E67E22",
+              color: "white",
+              border: "none",
+              borderRadius: "7px",
+              padding: "12px 26px",
+              fontSize: "0.875rem",
+              fontWeight: 600,
+              cursor: "pointer",
+              boxShadow: "0 4px 16px rgba(230,126,34,0.28)",
+            }}>
+              Upload your first document →
+            </button>
+          </Link>
+
+          <p style={{
+            fontSize: "0.7rem",
+            color: "rgba(255,255,255,0.18)",
+            marginTop: "14px",
+            fontFamily: "monospace",
+          }}>
+            PDF · DOCX · XLSX · Images · Text files
+          </p>
+        </div>
       </div>
     );
   }
@@ -235,8 +336,16 @@ export default function DocumentList({
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map((doc) => (
-            <DocumentCard key={doc.id} doc={doc} collections={collections} />
+          {filtered.map((doc, idx) => (
+            <div
+              key={doc.id}
+              style={{
+                animation: "cardEnter 0.35s ease both",
+                animationDelay: `${Math.min(idx * 0.05, 0.4)}s`,
+              }}
+            >
+              <DocumentCard doc={doc} collections={collections} />
+            </div>
           ))}
         </div>
       )}
