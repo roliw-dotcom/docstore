@@ -75,7 +75,7 @@ export default function ChatInterface() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 120px)", minHeight: "400px" }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 200px)", minHeight: "400px" }}>
 
       {/* Message area */}
       <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "16px", padding: "8px 0 16px" }}>
