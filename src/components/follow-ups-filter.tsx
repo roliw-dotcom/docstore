@@ -21,9 +21,9 @@ export default function FollowUpsFilter({ current }: { current?: string }) {
     fontSize: "0.8rem",
     padding: "6px 14px",
     borderRadius: "6px",
-    border: "1px solid rgba(255,255,255,0.15)",
+    border: "1px solid rgba(0,0,0,0.14)",
     background: "transparent",
-    color: "#6A90AA",
+    color: "#6B7280",
     transition: "all 0.15s",
   };
 

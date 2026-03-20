@@ -93,9 +93,9 @@ export default function DocumentList({
 
   if (documents.length === 0) {
     return (
-      <div style={{ textAlign: "center", padding: "80px 0", color: "#6A90AA" }}>
+      <div style={{ textAlign: "center", padding: "80px 0", color: "#9CA3AF" }}>
         <p style={{ fontSize: "2.5rem", marginBottom: "16px" }}>📄</p>
-        <p style={{ fontSize: "1rem", fontWeight: 500, color: "rgba(255,255,255,0.5)" }}>{t("noDocuments")}</p>
+        <p style={{ fontSize: "1rem", fontWeight: 500, color: "#6B7280" }}>{t("noDocuments")}</p>
         <p style={{ fontSize: "0.875rem", marginTop: "4px" }}>{t("noDocumentsHint")}</p>
       </div>
     );
@@ -108,9 +108,9 @@ export default function DocumentList({
     border: "1px solid",
     cursor: "pointer" as const,
     transition: "all 0.15s",
-    background: active ? (color ?? "#E67E22") : "transparent",
-    borderColor: active ? (color ?? "#E67E22") : "rgba(255,255,255,0.2)",
-    color: active ? "white" : "#8AAEC7",
+    background: active ? (color ?? "#E67E22") : "#FFFFFF",
+    borderColor: active ? (color ?? "#E67E22") : "rgba(0,0,0,0.15)",
+    color: active ? "white" : "#6B7280",
     display: "flex",
     alignItems: "center",
     gap: "6px",
@@ -127,11 +127,11 @@ export default function DocumentList({
         style={{
           width: "100%",
           maxWidth: "480px",
-          background: "rgba(255,255,255,0.06)",
-          border: "1px solid rgba(255,255,255,0.1)",
+          background: "#FFFFFF",
+          border: "1px solid rgba(0,0,0,0.12)",
           borderRadius: "7px",
           padding: "9px 14px",
-          color: "white",
+          color: "#1A1A2E",
           fontSize: "0.875rem",
           outline: "none",
         }}
@@ -139,7 +139,7 @@ export default function DocumentList({
 
       {/* Collections */}
       <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
-        <span style={{ fontSize: "0.65rem", fontFamily: "monospace", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginRight: "2px" }}>
+        <span style={{ fontSize: "0.65rem", fontFamily: "monospace", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", marginRight: "2px" }}>
           {tc("label")}
         </span>
         <button onClick={() => setActiveCollection(null)} style={pillStyle(activeCollection === null)}>
@@ -157,7 +157,7 @@ export default function DocumentList({
             <button
               onClick={() => deleteCollection(col.id)}
               title={tc("delete")}
-              style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.2)", fontSize: "0.7rem", padding: "0 2px 0 1px", lineHeight: 1 }}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(0,0,0,0.25)", fontSize: "0.7rem", padding: "0 2px 0 1px", lineHeight: 1 }}
             >
               ×
             </button>
@@ -176,11 +176,11 @@ export default function DocumentList({
               onKeyDown={(e) => e.key === "Escape" && setCreating(false)}
               placeholder={tc("namePlaceholder")}
               style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.2)",
+                background: "#FFFFFF",
+                border: "1px solid rgba(0,0,0,0.15)",
                 borderRadius: "20px",
                 padding: "3px 12px",
-                color: "white",
+                color: "#1A1A2E",
                 fontSize: "0.8rem",
                 outline: "none",
                 width: "130px",
@@ -189,14 +189,14 @@ export default function DocumentList({
             <button type="submit" style={{ fontSize: "0.75rem", color: "#E67E22", background: "none", border: "none", cursor: "pointer", fontWeight: 600 }}>
               {tc("create")}
             </button>
-            <button type="button" onClick={() => setCreating(false)} style={{ fontSize: "0.75rem", color: "#6A90AA", background: "none", border: "none", cursor: "pointer" }}>
+            <button type="button" onClick={() => setCreating(false)} style={{ fontSize: "0.75rem", color: "#6B7280", background: "none", border: "none", cursor: "pointer" }}>
               {tc("cancel")}
             </button>
           </form>
         ) : (
           <button
             onClick={() => setCreating(true)}
-            style={{ fontSize: "0.78rem", color: "#6A90AA", background: "none", border: "1px dashed rgba(255,255,255,0.15)", borderRadius: "20px", padding: "4px 12px", cursor: "pointer" }}
+            style={{ fontSize: "0.78rem", color: "#6B7280", background: "none", border: "1px dashed rgba(0,0,0,0.2)", borderRadius: "20px", padding: "4px 12px", cursor: "pointer" }}
           >
             + {tc("new")}
           </button>
@@ -206,7 +206,7 @@ export default function DocumentList({
       {/* Category pills */}
       {allCategories.length > 0 && (
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
-          <span style={{ fontSize: "0.65rem", fontFamily: "monospace", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginRight: "2px" }}>
+          <span style={{ fontSize: "0.65rem", fontFamily: "monospace", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", marginRight: "2px" }}>
             {t("category")}
           </span>
           <button onClick={() => setActiveCategory(null)} style={pillStyle(activeCategory === null)}>
@@ -225,12 +225,12 @@ export default function DocumentList({
       )}
 
       {/* Count */}
-      <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>
+      <p style={{ fontSize: "0.8rem", color: "rgba(0,0,0,0.35)", fontFamily: "monospace" }}>
         {t("resultsCount", { filtered: filtered.length, total: documents.length })}
       </p>
 
       {filtered.length === 0 ? (
-        <div style={{ textAlign: "center", padding: "48px 0", color: "#6A90AA" }}>
+        <div style={{ textAlign: "center", padding: "48px 0", color: "#9CA3AF" }}>
           <p>{t("noResults")}</p>
         </div>
       ) : (
