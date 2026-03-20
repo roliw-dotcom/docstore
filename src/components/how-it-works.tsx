@@ -115,8 +115,8 @@ export default function HowItWorks({ locale = "en" }: HowItWorksProps) {
             </div>
             <div style={{ display: "flex", alignItems: "center", paddingBottom: i < nodes.length - 1 ? "24px" : 0 }}>
               <div>
-                <p style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{labels[i].top}</p>
-                <p style={{ margin: 0, fontSize: "0.9rem", color: "#6A90AA", lineHeight: 1.3 }}>{labels[i].bottom}</p>
+                <p style={{ margin: 0, fontSize: "1rem", fontWeight: 700, color: "white", lineHeight: 1.3, fontFamily: "var(--font-dm-serif)" }}>{labels[i].top}</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#6A90AA", lineHeight: 1.3, fontFamily: "var(--font-inter, sans-serif)" }}>{labels[i].bottom}</p>
               </div>
             </div>
           </div>
@@ -130,8 +130,8 @@ export default function HowItWorks({ locale = "en" }: HowItWorksProps) {
           <div key={i} style={{ zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px", width: "20%" }}>
             {node}
             <div style={{ textAlign: "center" }}>
-              <p style={{ margin: 0, fontSize: "0.88rem", fontWeight: 700, color: "white", lineHeight: 1.3 }}>{labels[i].top}</p>
-              <p style={{ margin: 0, fontSize: "0.82rem", color: "#6A90AA", lineHeight: 1.3 }}>{labels[i].bottom}</p>
+              <p style={{ margin: 0, fontSize: "0.88rem", fontWeight: 700, color: "white", lineHeight: 1.3, fontFamily: "var(--font-dm-serif)" }}>{labels[i].top}</p>
+              <p style={{ margin: 0, fontSize: "0.8rem", color: "#6A90AA", lineHeight: 1.3, fontFamily: "var(--font-inter, sans-serif)" }}>{labels[i].bottom}</p>
             </div>
           </div>
         ))}
