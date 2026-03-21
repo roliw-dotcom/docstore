@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useRouter, usePathname } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import type { User } from "@supabase/supabase-js";
@@ -14,6 +14,13 @@ export default function Navbar({ user }: { user?: User | null }) {
   const supabase = createClient();
   const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   async function handleSignOut() {
     await supabase.auth.signOut();
@@ -57,7 +64,16 @@ export default function Navbar({ user }: { user?: User | null }) {
   ];
 
   return (
-    <nav style={{ background: "#080F1A", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+    <nav style={{
+  background: scrolled ? "rgba(6,12,22,0.82)" : "#080F1A",
+  backdropFilter: scrolled ? "blur(14px)" : "none",
+  WebkitBackdropFilter: scrolled ? "blur(14px)" : "none",
+  borderBottom: "1px solid rgba(255,255,255,0.06)",
+  position: "sticky",
+  top: 0,
+  zIndex: 50,
+  transition: "background 0.3s ease, backdrop-filter 0.3s ease",
+}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 

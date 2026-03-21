@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getTranslations } from "next-intl/server";
 import HowItWorks from "@/components/how-it-works";
 import ProductMockup from "@/components/product-mockup";
+import FadeIn from "@/components/fade-in";
 
 // ── CSS Binder Chaos Stack ──────────────────────────────────────────────────
 function Binder({ color, spine, pageEdge, width, height, bottom, left, rotate, zIndex }: {
@@ -238,6 +239,29 @@ export default async function RootPage({
 
       </section>
 
+      {/* ── Stats bar ── */}
+      <FadeIn>
+        <div style={{
+          background: "#081520",
+          borderTop: "1px solid rgba(255,255,255,0.04)",
+          borderBottom: "1px solid rgba(255,255,255,0.04)",
+          padding: "36px 24px",
+        }}>
+          <div className="max-w-3xl mx-auto grid grid-cols-3 gap-6 text-center">
+            {[
+              { number: "12,000+", label: "Documents processed" },
+              { number: "€3.2M",   label: "In missed penalties caught" },
+              { number: "< 5 min", label: "To your first insight" },
+            ].map(({ number, label }) => (
+              <div key={label}>
+                <p style={{ fontFamily: "var(--font-dm-serif)", fontSize: "clamp(1.4rem, 3vw, 2rem)", color: "white", marginBottom: "6px" }}>{number}</p>
+                <p style={{ fontSize: "0.7rem", color: "#6A90AA", fontFamily: "monospace", letterSpacing: "0.06em", textTransform: "uppercase" }}>{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </FadeIn>
+
       {/* ── Social proof ── */}
       <section style={{
         background: "#0A1929",
@@ -245,83 +269,89 @@ export default async function RootPage({
         borderBottom: "1px solid rgba(255,255,255,0.04)",
         padding: "60px 24px",
       }}>
-        <div className="max-w-5xl mx-auto">
-          <p style={{
-            textAlign: "center",
-            fontSize: "0.68rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "#E67E22",
-            fontFamily: "monospace",
-            marginBottom: "44px",
-          }}>
-            {locale === "de" ? "Was Nutzer sagen" : "What users say"}
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {quotes.map(({ quote, who }, i) => (
-              <div key={i}>
-                <div style={{ width: 28, height: 2, background: "#E67E22", marginBottom: 20, opacity: 0.45 }} />
-                <p style={{
-                  fontSize: "0.875rem",
-                  color: "#8AAEC7",
-                  lineHeight: 1.8,
-                  marginBottom: 18,
-                  fontStyle: "italic",
-                }}>
-                  &ldquo;{quote}&rdquo;
-                </p>
-                <p style={{
-                  fontSize: "0.7rem",
-                  color: "rgba(255,255,255,0.25)",
-                  fontFamily: "monospace",
-                }}>
-                  — {who}
-                </p>
-              </div>
-            ))}
+        <FadeIn>
+          <div className="max-w-5xl mx-auto">
+            <p style={{
+              textAlign: "center",
+              fontSize: "0.68rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#E67E22",
+              fontFamily: "monospace",
+              marginBottom: "44px",
+            }}>
+              {locale === "de" ? "Was Nutzer sagen" : "What users say"}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              {quotes.map(({ quote, who }, i) => (
+                <div key={i}>
+                  <div style={{ width: 28, height: 2, background: "#E67E22", marginBottom: 20, opacity: 0.45 }} />
+                  <p style={{
+                    fontSize: "0.875rem",
+                    color: "#8AAEC7",
+                    lineHeight: 1.8,
+                    marginBottom: 18,
+                    fontStyle: "italic",
+                  }}>
+                    &ldquo;{quote}&rdquo;
+                  </p>
+                  <p style={{
+                    fontSize: "0.7rem",
+                    color: "rgba(255,255,255,0.25)",
+                    fontFamily: "monospace",
+                  }}>
+                    — {who}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </FadeIn>
       </section>
 
       {/* ── Tagline bar ── */}
-      <div style={{
-        background: "rgba(8,20,32,0.98)",
-        borderTop: "1px solid rgba(230,126,34,0.18)",
-        padding: "13px 24px",
-        textAlign: "center",
-        fontSize: "0.8rem",
-        color: "#C4956A",
-        fontStyle: "italic",
-        fontFamily: "var(--font-dm-serif)",
-      }}>
-        &ldquo;{t("taglineQuote")}&rdquo;
-      </div>
+      <FadeIn delay={100}>
+        <div style={{
+          background: "rgba(8,20,32,0.98)",
+          borderTop: "1px solid rgba(230,126,34,0.18)",
+          padding: "13px 24px",
+          textAlign: "center",
+          fontSize: "0.8rem",
+          color: "#C4956A",
+          fontStyle: "italic",
+          fontFamily: "var(--font-dm-serif)",
+        }}>
+          &ldquo;{t("taglineQuote")}&rdquo;
+        </div>
+      </FadeIn>
 
       {/* ── How it works ── */}
       <section style={{ background: "#0F2337", padding: "72px 24px" }}>
-        <div className="max-w-3xl mx-auto">
-          <p style={{
-            fontFamily: "monospace",
-            fontSize: "0.68rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "#E67E22",
-            textAlign: "center",
-            marginBottom: "12px",
-          }}>
-            {locale === "de" ? "Der Prozess" : "The process"}
-          </p>
-          <h2 style={{
-            fontFamily: "var(--font-dm-serif)",
-            fontSize: "clamp(1.4rem, 3vw, 1.9rem)",
-            color: "white",
-            textAlign: "center",
-            marginBottom: "40px",
-          }}>
-            {locale === "de" ? "So funktioniert es" : "How it works"}
-          </h2>
-          <HowItWorks locale={locale} />
-        </div>
+        <FadeIn>
+          <div className="max-w-3xl mx-auto">
+            <p style={{
+              fontFamily: "monospace",
+              fontSize: "0.68rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#E67E22",
+              textAlign: "center",
+              marginBottom: "12px",
+            }}>
+              {locale === "de" ? "Der Prozess" : "The process"}
+            </p>
+            <h2 style={{
+              fontFamily: "var(--font-dm-serif)",
+              fontSize: "clamp(1.4rem, 3vw, 1.9rem)",
+              color: "white",
+              textAlign: "center",
+              marginBottom: "40px",
+            }}>
+              {locale === "de" ? "So funktioniert es" : "How it works"}
+            </h2>
+            <HowItWorks locale={locale} />
+          </div>
+        </FadeIn>
       </section>
 
       {/* ── Features ── */}
@@ -347,17 +377,19 @@ export default async function RootPage({
             {t("featureSectionTitle")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-12">
-            {featureItems.map(({ Icon, title, desc }) => (
-              <div key={title}>
-                <div style={{ marginBottom: "14px" }}><Icon /></div>
-                <div style={{ width: "28px", height: "2px", background: "#E67E22", marginBottom: "14px", opacity: 0.6 }} />
-                <h3 style={{ fontFamily: "var(--font-dm-serif)", fontSize: "1.05rem", color: "white", marginBottom: "8px" }}>
-                  {title}
-                </h3>
-                <p style={{ fontSize: "0.875rem", color: "#6A90AA", lineHeight: 1.7 }}>
-                  {desc}
-                </p>
-              </div>
+            {featureItems.map(({ Icon, title, desc }, i) => (
+              <FadeIn key={title} delay={i * 80}>
+                <div>
+                  <div style={{ marginBottom: "14px" }}><Icon /></div>
+                  <div style={{ width: "28px", height: "2px", background: "#E67E22", marginBottom: "14px", opacity: 0.6 }} />
+                  <h3 style={{ fontFamily: "var(--font-dm-serif)", fontSize: "1.05rem", color: "white", marginBottom: "8px" }}>
+                    {title}
+                  </h3>
+                  <p style={{ fontSize: "0.875rem", color: "#6A90AA", lineHeight: 1.7 }}>
+                    {desc}
+                  </p>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -366,49 +398,51 @@ export default async function RootPage({
       {/* ── CTA band ── */}
       <section style={{ background: "#0F2337", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <div className="max-w-6xl mx-auto px-6 py-20">
-          <div style={{
-            background: "rgba(230,126,34,0.07)",
-            border: "1px solid rgba(230,126,34,0.18)",
-            borderRadius: "16px",
-            padding: "clamp(32px, 5vw, 56px)",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "24px",
-          }}>
-            <div>
-              <h2 style={{ fontFamily: "var(--font-dm-serif)", fontSize: "clamp(1.5rem, 3vw, 2rem)", color: "white", marginBottom: "10px" }}>
-                {t("ctaTitle")}
-              </h2>
-              <p style={{ color: "#6A90AA", fontSize: "0.875rem", maxWidth: "420px", lineHeight: 1.7 }}>
-                {t("ctaDesc")}
-              </p>
+          <FadeIn>
+            <div style={{
+              background: "rgba(230,126,34,0.07)",
+              border: "1px solid rgba(230,126,34,0.18)",
+              borderRadius: "16px",
+              padding: "clamp(32px, 5vw, 56px)",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "24px",
+            }}>
+              <div>
+                <h2 style={{ fontFamily: "var(--font-dm-serif)", fontSize: "clamp(1.5rem, 3vw, 2rem)", color: "white", marginBottom: "10px" }}>
+                  {t("ctaTitle")}
+                </h2>
+                <p style={{ color: "#6A90AA", fontSize: "0.875rem", maxWidth: "420px", lineHeight: 1.7 }}>
+                  {t("ctaDesc")}
+                </p>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "10px" }}>
+                <Link href="/signup">
+                  <button style={{
+                    background: "#E67E22",
+                    color: "white",
+                    padding: "14px 32px",
+                    borderRadius: "7px",
+                    fontSize: "0.95rem",
+                    fontWeight: 600,
+                    border: "none",
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                    boxShadow: "0 4px 20px rgba(230,126,34,0.3)",
+                  }}
+                  className="btn-cta"
+                >
+                    {t("getStartedFree")} →
+                  </button>
+                </Link>
+                <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.25)", fontFamily: "monospace" }}>
+                  {t("freeNote")}
+                </p>
+              </div>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "10px" }}>
-              <Link href="/signup">
-                <button style={{
-                  background: "#E67E22",
-                  color: "white",
-                  padding: "14px 32px",
-                  borderRadius: "7px",
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  border: "none",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  boxShadow: "0 4px 20px rgba(230,126,34,0.3)",
-                }}
-                className="btn-cta"
-              >
-                  {t("getStartedFree")} →
-                </button>
-              </Link>
-              <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.25)", fontFamily: "monospace" }}>
-                {t("freeNote")}
-              </p>
-            </div>
-          </div>
+          </FadeIn>
         </div>
       </section>
 

@@ -17,7 +17,7 @@ export default function ProductMockup() {
         gap: "6px",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}>
-        {(["#555","#555","#555"] as const).map((c, i) => (
+        {(["#FF5F57","#FFBD2E","#28C840"] as const).map((c, i) => (
           <span key={i} style={{ width: 9, height: 9, borderRadius: "50%", background: c }} />
         ))}
         <div style={{
