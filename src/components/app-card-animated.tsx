@@ -8,7 +8,7 @@ const cardStyle: React.CSSProperties = {
   border: "1px solid rgba(255,255,255,0.1)",
   borderRadius: "14px",
   padding: "22px",
-  width: "270px",
+  width: "100%",
   boxShadow: "0 24px 56px rgba(0,0,0,0.35)",
 };
 
@@ -47,7 +47,7 @@ export default function AppCardAnimated() {
 
   return (
     <div style={cardStyle}>
-      <p style={{ fontFamily: "monospace", fontSize: "0.62rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#4A8AAA", marginBottom: "10px" }}>
+      <p style={{ fontFamily: "monospace", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#4A8AAA", marginBottom: "10px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
         Apartment Lease — Just uploaded
       </p>
       <p style={{ fontFamily: "var(--font-dm-serif)", fontSize: "0.96rem", color: "white", marginBottom: "14px", paddingBottom: "14px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
